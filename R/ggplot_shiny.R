@@ -84,9 +84,8 @@ ggplot_shiny <- function( dataset = NA ) {
                    h4("Create visualization"),
                    selectInput(inputId = "Type",
                                label = "Type of graph:",
-                               choices = c("Scatter", "Boxplot", "Histogram"),
-                                           # "Density", "Dot + Error", "Dotplot", "Violin"),
-                               selected = "Scatter"),
+                               choices = c("Scatter", "Boxplot", "Histogram"), #, "Density", "Dot + Error", "Dotplot", "Violin"),
+                               selected = "Histogram"),
                    selectInput("y_var", "Y-variable", choices = ""),
                    conditionalPanel(
                      condition = "input.Type!='Histogram'", # "input.Type!='Density' && input.Type!='Histogram'",
@@ -96,31 +95,31 @@ ggplot_shiny <- function( dataset = NA ) {
                    selectInput("facet_row", "Facet Row", choices = ""),
                    selectInput("facet_col", "Facet Column", choices = ""),
                    conditionalPanel(
-                     condition = "input.Type == 'Boxplot'", # "input.Type == 'Boxplot' || input.Type == 'Violin' || input.Type == 'Dot + Error'",
+                     condition = "input.Type == 'Boxplot' || input.Type == 'Violin' || input.Type == 'Dot + Error'",
                      checkboxInput(inputId = "jitter",
                                    label = strong("Show data points (jittered)"),
                                    value = FALSE)
                    ),
-                   conditionalPanel(
-                     condition = "input.Type == 'Boxplot'",
-                     checkboxInput(inputId = "notch",
-                                   label = strong("Notched box plot"),
-                                   value = FALSE)
-                   ),
                    # conditionalPanel(
-                   #   condition = "input.Type == 'Density' || input.Type == 'Histogram'",
-                   #   sliderInput("alpha", "Opacity:", min = 0, max = 1, value = 0.8)
+                   #   condition = "input.Type == 'Boxplot'",
+                   #   checkboxInput(inputId = "notch",
+                   #                 label = strong("Notched box plot"),
+                   #                 value = FALSE)
                    # ),
                    conditionalPanel(
-                     condition = "input.Type == 'Histogram'",  # "input.Type == 'Histogram' || input.Type=='Dotplot'",
+                     condition = "input.Type == 'Density' || input.Type == 'Histogram'",
+                     sliderInput("alpha", "Opacity:", min = 0, max = 1, value = 0.8)
+                   ),
+                   conditionalPanel(
+                     condition = "input.Type == 'Histogram' || input.Type=='Dotplot'",
                      numericInput("binwidth", "Binwidth:", value = 1)
                    ),
-                   # conditionalPanel(
-                   #   condition = "input.Type == 'Dotplot'",
-                   #   selectInput("dot_dir", "Direction stack:",
-                   #               choices = c("up", "down", "center", "centerwhole"),
-                   #               selected = "up")
-                   # ),
+                   conditionalPanel(
+                     condition = "input.Type == 'Dotplot'",
+                     selectInput("dot_dir", "Direction stack:",
+                                 choices = c("up", "down", "center", "centerwhole"),
+                                 selected = "up")
+                   ),
                    # conditionalPanel(
                    #   condition = "input.Type == 'Density' || input.Type == 'Violin'",
                    #   sliderInput(inputId = "adj_bw",
@@ -143,7 +142,8 @@ ggplot_shiny <- function( dataset = NA ) {
                                      label = strong("Show confidence interval"),
                                      value = FALSE)
                      )
-                   ) # ,
+                   )
+                   # ,
                    # conditionalPanel(
                    #   condition = "input.Type == 'Dot + Error'",
                    #   selectInput("CI", "Confidence Interval:",
@@ -558,20 +558,20 @@ ggplot_shiny <- function( dataset = NA ) {
         if (input$Type == "Histogram")
           paste("geom_histogram(position = 'identity', alpha = input$alpha, ",
                 "binwidth = input$binwidth)", sep = ""),
-        if (input$Type == "Density")
-          paste("geom_density(position = 'identity', alpha = input$alpha, ",
-                "adjust = input$adj_bw)", sep = ""),
+        # if (input$Type == "Density")
+        #   paste("geom_density(position = 'identity', alpha = input$alpha, ",
+        #         "adjust = input$adj_bw)", sep = ""),
         if (input$Type == "Boxplot")
-          "geom_boxplot(notch = input$notch)",
-        if (input$Type == "Violin")
-          "geom_violin(adjust = input$adj_bw)",
-        if (input$Type == "Dotplot")
-          paste("geom_dotplot(binaxis = 'y', binwidth = input$binwidth, ",
-                "stackdir = 'input$dot_dir')", sep = ""),
-        if (input$Type == "Dot + Error")
-          paste("geom_point(stat = 'summary', fun.y = 'mean') +\n  ",
-                "geom_errorbar(stat = 'summary', fun.data = 'mean_se', ", "
-                width=0, fun.args = list(mult = input$CI))", sep = ""),
+          "geom_boxplot()", # notch = input$notch)",
+        # if (input$Type == "Violin")
+        #   "geom_violin(adjust = input$adj_bw)",
+        # if (input$Type == "Dotplot")
+        #   paste("geom_dotplot(binaxis = 'y', binwidth = input$binwidth, ",
+        #         "stackdir = 'input$dot_dir')", sep = ""),
+        # if (input$Type == "Dot + Error")
+        #   paste("geom_point(stat = 'summary', fun.y = 'mean') +\n  ",
+        #         "geom_errorbar(stat = 'summary', fun.data = 'mean_se', ", "
+        #         width=0, fun.args = list(mult = input$CI))", sep = ""),
         if (input$Type == "Scatter")
           "geom_point()",
         if (input$Type == "Scatter" && input$line)
@@ -652,14 +652,14 @@ ggplot_shiny <- function( dataset = NA ) {
         c("input\\$y_var" = input$y_var,
           "input\\$x_var" = input$x_var,
           "input\\$group" = input$group,
-          "input\\$notch" = as.character(input$notch),
+          # "input\\$notch" = as.character(input$notch),
           "input\\$binwidth" = as.character(input$binwidth),
-          "input\\$adj_bw" = as.character(input$adj_bw),
-          "input\\$dot_dir" = as.character(input$dot_dir),
+          # "input\\$adj_bw" = as.character(input$adj_bw),
+          # "input\\$dot_dir" = as.character(input$dot_dir),
           "input\\$alpha" = as.character(input$alpha),
           "input\\$se" = as.character(input$se),
           "input\\$smooth" = as.character(input$smooth),
-          "input\\$CI" = as.character(input$CI),
+          # "input\\$CI" = as.character(input$CI),
           "input\\$size_jitter" = as.character(input$size_jitter),
           "input\\$width_jitter" = as.character(input$width_jitter),
           "input\\$opac_jitter" = as.character(input$opac_jitter),
