@@ -19,11 +19,11 @@
 ggplot_shiny <- function( dataset = NA ) {
 
   ui <- fluidPage(
-    headerPanel("ggplot GUI"),
+    headerPanel("EDI Data Viewer"),
     sidebarPanel(width = 3,
       conditionalPanel(
-        condition = "input.tabs=='Data upload'",
-        h4("Data upload"),
+        condition = "input.tabs=='Raw Data'",
+        h4("Raw Data"),
         radioButtons(
           "data_input", "",
           choices = if (is.data.frame(dataset)) {
@@ -79,7 +79,7 @@ ggplot_shiny <- function( dataset = NA ) {
         )
       ),
       conditionalPanel(
-        condition = "input.tabs=='ggplot' || input.tabs=='Plotly' ||
+        condition = "input.tabs=='Plot' || input.tabs=='Interactive Plot' ||
                     input.tabs=='R-code'",
         h4("Create visualization"),
         selectInput(inputId = "Type",
@@ -171,14 +171,14 @@ ggplot_shiny <- function( dataset = NA ) {
     mainPanel(width = 6,
       tabsetPanel(
         type = "tabs",
-        tabPanel("Data upload", dataTableOutput("out_table")),
-        tabPanel("ggplot",
+        tabPanel("Raw Data", dataTableOutput("out_table")),
+        tabPanel("Plot",
                  mainPanel(
                    downloadButton("download_plot_PDF",
                                   "Download pdf of figure"),
                    plotOutput("out_ggplot"))
                 ),
-        tabPanel("Plotly", plotlyOutput("out_plotly")),
+        tabPanel("Interactive Plot", plotlyOutput("out_plotly")),
         tabPanel("R-code", verbatimTextOutput("out_r_code")),
         tabPanel("Info",
 h3("Background"),
@@ -250,7 +250,7 @@ p(
 #####################################
 
     conditionalPanel(
-      condition = "input.tabs=='ggplot' || input.tabs=='Plotly' ||
+      condition = "input.tabs=='Plot' || input.tabs=='Interactive Plot' ||
                     input.tabs=='R-code'",
       sidebarPanel(
         width = 3,
