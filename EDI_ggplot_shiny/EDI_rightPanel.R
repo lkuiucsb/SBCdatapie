@@ -59,7 +59,7 @@ EDI_rightPanel <- function(){
             conditionalPanel(
               condition = "input.group != '.'",
               checkboxInput(inputId = "adj_col",
-                            label = strong("Change colours"),
+                            label = strong("Change colors"),
                             value = FALSE),
               conditionalPanel(
                 condition = "input.adj_col",
@@ -112,7 +112,7 @@ EDI_rightPanel <- function(){
                 condition = "input.adj_jitter",
                 textInput("col_jitter", "Colour (name or RGB):",
                           value = "black"),
-                numericInput("size_jitter", "Size:", value = 1),
+                numericInput("size_jitter", "Size:", value = 2),
                 sliderInput("opac_jitter", "Opacity:",
                             min = 0, max = 1, value = 0.5, step = 0.01),
                 sliderInput("width_jitter", "Width jitter:",

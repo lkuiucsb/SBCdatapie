@@ -63,50 +63,48 @@ EDI_leftPanel <- function(dataset = NA) {
         h4("Create visualization"),
         selectInput(inputId = "Type",
                     label = "Type of graph:",
-                    choices = c("Boxplot", "Density", "Dot + Error",
-                                "Dotplot", "Histogram", "Scatter", "Violin"),
-                    selected = "Violin"),
+                    choices = c("Boxplot", "Histogram", "Scatter"), # c("Boxplot", "Density", "Dot + Error", "Dotplot", "Histogram", "Scatter", "Violin"),
+                    selected = "Histogram"),
         selectInput("y_var", "Y-variable", choices = ""),
         conditionalPanel(
-          condition = "input.Type!='Density' && input.Type!='Histogram'",
+          condition = "input.Type!='Histogram'", # "input.Type!='Density' && input.Type!='Histogram'",
           selectInput("x_var", "X-variable", choices = "")
         ),
-        selectInput("group", "Group (or colour)", choices = ""),
+        selectInput("group", "Group (or color)", choices = ""),
         selectInput("facet_row", "Facet Row", choices = ""),
         selectInput("facet_col", "Facet Column", choices = ""),
         conditionalPanel(
-          condition = "input.Type == 'Boxplot' || input.Type == 'Violin' ||
-          input.Type == 'Dot + Error'",
+          condition = "input.Type == 'Boxplot'", # "input.Type == 'Boxplot' || input.Type == 'Violin' || input.Type == 'Dot + Error'",
           checkboxInput(inputId = "jitter",
                         label = strong("Show data points (jittered)"),
                         value = FALSE)
         ),
+        # conditionalPanel(
+        #   condition = "input.Type == 'Boxplot'",
+        #   checkboxInput(inputId = "notch",
+        #                 label = strong("Notched box plot"),
+        #                 value = FALSE)
+        # ),
         conditionalPanel(
-          condition = "input.Type == 'Boxplot'",
-          checkboxInput(inputId = "notch",
-                        label = strong("Notched box plot"),
-                        value = FALSE)
-        ),
-        conditionalPanel(
-          condition = "input.Type == 'Density' || input.Type == 'Histogram'",
+          condition = "input.Type == 'Scatter' || input.Type == 'Histogram'", # "input.Type == 'Density' || input.Type == 'Histogram'",
           sliderInput("alpha", "Opacity:", min = 0, max = 1, value = 0.8)
         ),
         conditionalPanel(
-          condition = "input.Type == 'Histogram' || input.Type=='Dotplot'",
+          condition = "input.Type == 'Histogram'", # "input.Type == 'Histogram' || input.Type=='Dotplot'",
           numericInput("binwidth", "Binwidth:", value = 1)
         ),
-        conditionalPanel(
-          condition = "input.Type == 'Dotplot'",
-          selectInput("dot_dir", "Direction stack:",
-                      choices = c("up", "down", "center", "centerwhole"),
-                      selected = "up")
-        ),
-        conditionalPanel(
-          condition = "input.Type == 'Density' || input.Type == 'Violin'",
-          sliderInput(inputId = "adj_bw",
-                      label = "Bandwidth adjustment:",
-                      min = 0.01, max = 2, value = 1, step = 0.1)
-        ),
+        # conditionalPanel(
+        #   condition = "input.Type == 'Dotplot'",
+        #   selectInput("dot_dir", "Direction stack:",
+        #               choices = c("up", "down", "center", "centerwhole"),
+        #               selected = "up")
+        # ),
+        # conditionalPanel(
+        #   condition = "input.Type == 'Density' || input.Type == 'Violin'",
+        #   sliderInput(inputId = "adj_bw",
+        #               label = "Bandwidth adjustment:",
+        #               min = 0.01, max = 2, value = 1, step = 0.1)
+        # ),
         conditionalPanel(
           condition = "input.Type == 'Scatter'",
           checkboxInput(inputId = "line",
@@ -123,23 +121,24 @@ EDI_leftPanel <- function(dataset = NA) {
                           label = strong("Show confidence interval"),
                           value = FALSE)
           )
-        ),
-        conditionalPanel(
-          condition = "input.Type == 'Dot + Error'",
-          selectInput("CI", "Confidence Interval:",
-                      choices = c("68% (1 SE)" = 1,
-                                  "90%" = 1.645,
-                                  "95%" = 1.96,
-                                  "99%" = 2.575),
-                      selected = 1.96)
         )
+        # ,
+        # conditionalPanel(
+        #   condition = "input.Type == 'Dot + Error'",
+        #   selectInput("CI", "Confidence Interval:",
+        #               choices = c("68% (1 SE)" = 1,
+        #                           "90%" = 1.645,
+        #                           "95%" = 1.96,
+        #                           "99%" = 2.575),
+        #               selected = 1.96)
+        # )
       ),
       conditionalPanel(
-        condition = "input.tabs=='Info'",
-        h4("Info")
+        condition = "input.tabs == 'About'",
+        h4("About")
       ),
       conditionalPanel(
-        condition = "input.tabs=='Data summary'",
+        condition = "input.tabs == 'Data Summary'",
         h4("Summary of numerical values")
       )
     )

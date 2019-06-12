@@ -108,7 +108,7 @@ shinyServer(function(input, output, session) {
       # Variable used for how to deal with x/y in ggplot
       gg_x_y <- input$Type == "Histogram" ||
                 input$Type == "Density"
-      # Variable used for how to deal with colour/fill
+      # Variable used for how to deal with color/fill
       gg_fil <- input$Type == "Histogram" ||
                 input$Type == "Density" ||
                 input$Type == "Dotplot"
@@ -127,34 +127,35 @@ shinyServer(function(input, output, session) {
         if (input$group != "." && gg_fil) {
           ", fill = input$group"
         } else if (input$group != "." && !gg_fil) {
-          ", colour = input$group"
+          ", color = input$group"
         },
         ")) + ",
         if (input$Type == "Histogram")
           paste("geom_histogram(position = 'identity', alpha = input$alpha, ",
                 "binwidth = input$binwidth)", sep = ""),
-        if (input$Type == "Density")
-          paste("geom_density(position = 'identity', alpha = input$alpha, ",
-                "adjust = input$adj_bw)", sep = ""),
+        # if (input$Type == "Density")
+        #   paste("geom_density(position = 'identity', alpha = input$alpha, ",
+        #         "adjust = input$adj_bw)", sep = ""),
         if (input$Type == "Boxplot")
-          "geom_boxplot(notch = input$notch)",
-        if (input$Type == "Violin")
-          "geom_violin(adjust = input$adj_bw)",
-        if (input$Type == "Dotplot")
-          paste("geom_dotplot(binaxis = 'y', binwidth = input$binwidth, ",
-                "stackdir = 'input$dot_dir')", sep = ""),
-        if (input$Type == "Dot + Error")
-          paste("geom_point(stat = 'summary', fun.y = 'mean') +\n  ",
-                "geom_errorbar(stat = 'summary', fun.data = 'mean_se', ", "
-                width=0, fun.args = list(mult = input$CI))", sep = ""),
+            "geom_boxplot()",
+        #   "geom_boxplot(notch = input$notch)",
+        # if (input$Type == "Violin")
+        #   "geom_violin(adjust = input$adj_bw)",
+        # if (input$Type == "Dotplot")
+        #   paste("geom_dotplot(binaxis = 'y', binwidth = input$binwidth, ",
+        #         "stackdir = 'input$dot_dir')", sep = ""),
+        # if (input$Type == "Dot + Error")
+        #   paste("geom_point(stat = 'summary', fun.y = 'mean') +\n  ",
+        #         "geom_errorbar(stat = 'summary', fun.data = 'mean_se', ", "
+        #         width=0, fun.args = list(mult = input$CI))", sep = ""),
         if (input$Type == "Scatter")
-          "geom_point()",
+          "geom_point(alpha = input$alpha, size = 2)",
         if (input$Type == "Scatter" && input$line)
           "+ geom_smooth(se = input$se, method = 'input$smooth')",
         if (jitt)
           paste(" + geom_jitter(size = input$size_jitter, ",
                 "alpha = input$opac_jitter, width = input$width_jitter, ",
-                "colour = 'input$col_jitter')", sep = ""),
+                "color = 'input$col_jitter')", sep = ""),
         sep = ""
       )
 
@@ -174,14 +175,14 @@ shinyServer(function(input, output, session) {
       # if legend specified
       if (input$adj_leg == "Change legend")
         p <- paste(p, "+ labs(",
-                   if (gg_fil) "fill" else "colour",
+                   if (gg_fil) "fill" else "color",
                    " = 'input$leg_ttl')",
                    sep = "")
 
-      # if colour legend specified
+      # if color legend specified
       if (input$adj_col)
         p <- paste(p, "+ scale_",
-                   if (gg_fil) "fill" else "colour",
+                   if (gg_fil) "fill" else "color",
                    "_brewer(palette = 'input$palet')",
                    sep = "")
 
@@ -227,14 +228,14 @@ shinyServer(function(input, output, session) {
              c("input\\$y_var" = input$y_var,
                "input\\$x_var" = input$x_var,
                "input\\$group" = input$group,
-               "input\\$notch" = as.character(input$notch),
+               # "input\\$notch" = as.character(input$notch),
                "input\\$binwidth" = as.character(input$binwidth),
-               "input\\$adj_bw" = as.character(input$adj_bw),
-               "input\\$dot_dir" = as.character(input$dot_dir),
+               # "input\\$adj_bw" = as.character(input$adj_bw),
+               # "input\\$dot_dir" = as.character(input$dot_dir),
                "input\\$alpha" = as.character(input$alpha),
                "input\\$se" = as.character(input$se),
                "input\\$smooth" = as.character(input$smooth),
-               "input\\$CI" = as.character(input$CI),
+               # "input\\$CI" = as.character(input$CI),
                "input\\$size_jitter" = as.character(input$size_jitter),
                "input\\$width_jitter" = as.character(input$width_jitter),
                "input\\$opac_jitter" = as.character(input$opac_jitter),

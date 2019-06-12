@@ -3,7 +3,7 @@ EDI_mainPanel <- function() {
       tabsetPanel(
         type = "tabs",
         tabPanel("Raw Data", dataTableOutput("out_table")),
-        tabPanel("Data summary", dataTableOutput("summary_table")),
+        tabPanel("Data Summary", dataTableOutput("summary_table")),
         tabPanel("Plot",
                  mainPanel(
                            downloadButton("download_plot_PDF",
