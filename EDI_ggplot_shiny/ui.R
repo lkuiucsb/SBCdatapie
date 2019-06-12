@@ -10,6 +10,13 @@
 library(shiny)
 library(plotly)
 library(ggplot2)
+
+
+source('EDI_header.R')
+source('EDI_leftPanel.R')
+source('EDI_mainPanel.R')
+source('EDI_rightPanel.R')
+
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
   
