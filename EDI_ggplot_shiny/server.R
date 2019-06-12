@@ -119,10 +119,25 @@ shinyServer(function(input, output, session) {
 
       p <- paste(
         "ggplot(df, aes(",
-        if (gg_x_y) {
-          "x = input$y_var"
-        } else {
-          "x = input$x_var, y = input$y_var"
+          if(input$x_cast == 'character'){
+            "x = as.character(input$x_var)"
+          }else if(input$x_cast == 'numeric'){
+            "x = as.numeric(input$x_var)"
+          }else if(input$x_cast == 'Date'){
+            "x = as.Date(input$x_var)"
+          }else{
+            "x = input$x_var"
+          },
+        if (!gg_x_y) {
+          if(input$y_cast == 'character'){
+            ", y = as.character(input$y_var)"
+          }else if(input$y_cast == 'numeric'){
+            ", y = as.numeric(input$y_var)"
+          }else if(input$y_cast == 'Date'){
+            ", y = as.Date(input$y_var)"
+          }else{
+            ", y = input$y_var"
+          }
         },
         if (input$group != "." && gg_fil) {
           ", fill = input$group"
@@ -225,7 +240,9 @@ shinyServer(function(input, output, session) {
       p <- str_replace_all(
              p,
              c("input\\$y_var" = input$y_var,
+               "input\\$y_cast" = input$y_cast,
                "input\\$x_var" = input$x_var,
+               "input\\$x_cast" = input$x_cast,
                "input\\$group" = input$group,
                "input\\$notch" = as.character(input$notch),
                "input\\$binwidth" = as.character(input$binwidth),

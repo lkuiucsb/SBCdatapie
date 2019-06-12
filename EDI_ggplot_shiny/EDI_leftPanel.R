@@ -67,9 +67,11 @@ EDI_leftPanel <- function(dataset = NA) {
                                 "Dotplot", "Histogram", "Scatter", "Violin"),
                     selected = "Violin"),
         selectInput("y_var", "Y-variable", choices = ""),
+        selectInput("y_cast", "Y-coerce", choices = c('default', 'character', 'numeric', 'date')),
         conditionalPanel(
           condition = "input.Type!='Density' && input.Type!='Histogram'",
-          selectInput("x_var", "X-variable", choices = "")
+          selectInput("x_var", "X-variable", choices = ""),
+          selectInput("x_cast", "X-coerce", choices = c('default','character', 'numeric', 'date'))
         ),
         selectInput("group", "Group (or colour)", choices = ""),
         selectInput("facet_row", "Facet Row", choices = ""),
