@@ -155,11 +155,11 @@ ggplot_shiny <- function( dataset = NA ) {
                    # )
     ),
     conditionalPanel(
-      condition = "input.tabs=='Info'",
-      h4("Info")
+      condition = "input.tabs=='About'",
+      h4("About")
     )
     ),
-    h6("For more info see the 'Info'-tab or visit",
+    h6("For more info see the 'About'-tab or visit",
        a("https://github.com/gertstulp/ggplotgui",
          href = "https://github.com/gertstulp/ggplotgui")),
     
@@ -179,7 +179,7 @@ ggplot_shiny <- function( dataset = NA ) {
                 ),
                 tabPanel("Interactive Plot", plotlyOutput("out_plotly")),
                 tabPanel("R-code", verbatimTextOutput("out_r_code")),
-                tabPanel("Info",
+                tabPanel("About",
                          h3("Background"),
                          p(
                            a("R", href = "https://www.r-project.org/"), "is amazing, but daunting
