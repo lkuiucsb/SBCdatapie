@@ -107,7 +107,7 @@ ggplot_shiny <- function( dataset = NA ) {
                    #                 value = FALSE)
                    # ),
                    conditionalPanel(
-                     condition = "input.Type == 'Density' || input.Type == 'Histogram'",
+                     condition = "input.Type == 'Scatter' || input.Type == 'Histogram'", # "input.Type == 'Density' || input.Type == 'Histogram'",
                      sliderInput("alpha", "Opacity:", min = 0, max = 1, value = 0.8)
                    ),
                    conditionalPanel(
@@ -360,7 +360,7 @@ ggplot_shiny <- function( dataset = NA ) {
                 condition = "input.adj_jitter",
                 textInput("col_jitter", "Colour (name or RGB):",
                           value = "black"),
-                numericInput("size_jitter", "Size:", value = 1),
+                numericInput("size_jitter", "Size:", value = 2),
                 sliderInput("opac_jitter", "Opacity:",
                             min = 0, max = 1, value = 0.5, step = 0.01),
                 sliderInput("width_jitter", "Width jitter:",
@@ -573,7 +573,7 @@ ggplot_shiny <- function( dataset = NA ) {
         #         "geom_errorbar(stat = 'summary', fun.data = 'mean_se', ", "
         #         width=0, fun.args = list(mult = input$CI))", sep = ""),
         if (input$Type == "Scatter")
-          "geom_point()",
+          "geom_point(alpha = input$alpha, size = 2)",
         if (input$Type == "Scatter" && input$line)
           "+ geom_smooth(se = input$se, method = 'input$smooth')",
         if (jitt)

@@ -266,10 +266,10 @@ shinyServer(function(input, output, session) {
     
     output$summary_table <- renderDataTable(
       df_shiny() %>%
-        select_if(is.numeric) %>%
-        gather(key="column_name", value='value') %>%
-        group_by(column_name) %>%
-        summarise(min=min(value, na.rm=TRUE), 
+        dplyr::select_if(is.numeric) %>%
+        tidyr::gather(key="column_name", value='value') %>%
+        dplyr::group_by(column_name) %>%
+        dplyr::summarise(min=min(value, na.rm=TRUE), 
                   quatile_25 = quantile(value, 0.25, na.rm=TRUE),
                   quatile_50 = quantile(value, 0.50, na.rm=TRUE),
                   quatile_75 = quantile(value, 0.75, na.rm=TRUE),
