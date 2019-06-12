@@ -65,13 +65,13 @@ EDI_leftPanel <- function(dataset = NA) {
                     label = "Type of graph:",
                     choices = c("Boxplot", "Histogram", "Scatter"), # c("Boxplot", "Density", "Dot + Error", "Dotplot", "Histogram", "Scatter", "Violin"),
                     selected = "Histogram"),
-        selectInput("y_var", "Y-variable", choices = ""),
-        selectInput("y_cast", "Y-coerce", choices = c('default', 'character', 'numeric', 'date')),
-        
+        selectInput("x_var", "X-variable", choices = ""),
+        selectInput("x_cast", "X-coerce", choices = c('default','character', 'numeric', 'date')),
+      
         conditionalPanel(condition = "input.Type!='Histogram'", # "input.Type!='Density' && input.Type!='Histogram'",
-          selectInput("x_var", "X-variable", choices = ""),
-          selectInput("x_cast", "X-coerce", choices = c('default','character', 'numeric', 'date'))
-        ),
+          selectInput("y_var", "Y-variable", choices = ""),
+          selectInput("y_cast", "Y-coerce", choices = c('default', 'character', 'numeric', 'date'))
+                  ),
         
         selectInput("group", "Group (or color)", choices = ""),
         selectInput("facet_row", "Facet Row", choices = ""),

@@ -38,8 +38,8 @@ shinyServer(function(input, output, session) {
           c("No factors available" = ".")
         else c("No groups" = ".", nms_fact)
 
-      updateSelectInput(session, "y_var", choices = avail_con)
-      updateSelectInput(session, "x_var", choices = c("No x-var" = "' '", nms))
+      updateSelectInput(session, "y_var", choices = c("No x-var" = "' '", nms))
+      updateSelectInput(session, "x_var", choices = avail_con)
       updateSelectInput(session, "group", choices = avail_all)
       updateSelectInput(session, "facet_row",  choices = avail_fac)
       updateSelectInput(session, "facet_col",  choices = avail_fac)

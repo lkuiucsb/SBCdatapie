@@ -13,10 +13,10 @@ library(ggplot2)
 library(magrittr)
 #library(tidyverse)
 
-#source('EDI_header.R')
-#source('EDI_leftPanel.R')
-#source('EDI_mainPanel.R')
-#source('EDI_rightPanel.R')
+source('EDI_header.R')
+source('EDI_leftPanel.R')
+source('EDI_mainPanel.R')
+source('EDI_rightPanel.R')
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
