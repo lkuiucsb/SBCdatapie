@@ -6,8 +6,11 @@ EDI_mainPanel <- function() {
         tabPanel("Data summary", dataTableOutput("summary_table")),
         tabPanel("Plot",
                  mainPanel(
-                   downloadButton("download_plot_PDF",
-                                  "Download pdf of figure"),
+                           downloadButton("download_plot_PDF",
+                                          "Download pdf of figure"),
+                      
+                           downloadButton("download_plot_Tiff",
+                                          "Download tiff of figure"),
                    plotOutput("out_ggplot"))
                 ),
         tabPanel("Interactive Plot", plotlyOutput("out_plotly")),

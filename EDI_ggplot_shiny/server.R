@@ -349,7 +349,18 @@ shinyServer(function(input, output, session) {
       },
       contentType = "application/pdf" # MIME type of the image
   )
-
+  output$download_plot_Tiff <- downloadHandler(
+      filename <- function() {
+        paste("Figure_ggplotGUI_", Sys.time(), ".tiff", sep = "")
+      },
+      content <- function(file) {
+        df <- df_shiny()
+        p <- eval(parse(text = string_code()))
+        ggsave(file, p, width = width_download(),
+               height = height_download(), units = "cm")
+      },
+      contentType = "application/tiff" # MIME type of the image
+    )
     # End R-session when browser closed
     session$onSessionEnded(stopApp)
   })
