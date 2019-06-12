@@ -10,7 +10,8 @@
 library(shiny)
 library(plotly)
 library(ggplot2)
-library(tidyverse)
+library(magrittr)
+#library(tidyverse)
 
 source('EDI_header.R')
 source('EDI_leftPanel.R')
