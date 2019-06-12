@@ -11,6 +11,7 @@ library(shiny)
 library(plotly)
 library(ggplot2)
 library(magrittr)
+library(stringr)
 #library(tidyverse)
 
 source('EDI_header.R')
