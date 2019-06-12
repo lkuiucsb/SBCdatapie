@@ -15,8 +15,9 @@ EDI_mainPanel <- function() {
         tabPanel("Quick Start",
                  p("This is place holder text")),
         tabPanel("About",
-                 h3("EDI hackathon extended the ggplotgui to download data directly from the EDI repository and also has additional summary and visulization functions."),
-                 h3("ggplotgui - Background"),
+                 h3("EDI hackathon"),
+                    p("This extends the ggplotgui to download data directly from the EDI repository and also has additional summary and visulization functions."),
+                 h3("ggplotgui -Orginal Background"),
                  p(
                    a("R", href = "https://www.r-project.org/"), "is amazing, but daunting
   for many. The programming style of R, compared to the point-and-click
