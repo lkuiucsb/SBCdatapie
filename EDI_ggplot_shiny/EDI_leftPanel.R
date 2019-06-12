@@ -137,6 +137,10 @@ EDI_leftPanel <- function(dataset = NA) {
       conditionalPanel(
         condition = "input.tabs=='Info'",
         h4("Info")
+      ),
+      conditionalPanel(
+        condition = "input.tabs=='Data summary'",
+        h4("Summary of numerical values")
       )
     )
 }
