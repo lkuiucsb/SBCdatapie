@@ -1,7 +1,9 @@
-Package: ggplotgui
-Title: Create Ggplots via a Graphical User Interface
-Version: 1.0.0
-Authors@R: person("Gert", "Stulp", email = "g.stulp@rug.nl", role = c("aut", "cre"))
+Package: dummyPackageTitle
+Title: Suitability evaluation of data-package assistant
+Version: 0.1.0
+Authors@R: c(person(given='Colin', family= 'Smith', email='colin.smith@wisc.edu', role=c('aut', 'cre')), 
+            person(given="Gert", family="Stulp", email = "g.stulp@rug.nl", role = c("ctb"), 
+            comment='Orgnial creator and author of ggplotgui.'))
 Description: Easily explore data by creating ggplots through a (shiny-)GUI. R-code to recreate graph provided.   
 Depends: R (>= 3.3.2)
 Imports:
@@ -13,7 +15,7 @@ Imports:
     haven,
     readxl,
     RColorBrewer
-License: GPL-3
+License: MIT
 BugReports: https://github.com/gertstulp/ggplotgui/issues
 URL: https://github.com/gertstulp/ggplotgui/
 Encoding: UTF-8
