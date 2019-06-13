@@ -57,24 +57,18 @@ read_data_archived <- function(data.pkg.doi, download.dir = NULL){
   
   message('Downloading data package to directory')
   
-  pkg_dir_name <- suppressMessages(
-    metajam::download_d1_data_pkg(
-      meta_obj = data.pkg.doi,
-      path = download.dir
-    )
+  pkg_dir_name <- metajam::download_d1_data_pkg(
+    meta_obj = data.pkg.doi,
+    path = download.dir
   )
   
   # Read data and metadata ----------------------------------------------------
   
   # Read data and metadata for each data object of the data package
   
-  output <- suppressWarnings(
-    suppressMessages(
-      lapply(
-        pkg_dir_name,
-        metajam::read_d1_files
-      )
-    )
+  output <- lapply(
+    pkg_dir_name,
+    metajam::read_d1_files
   )
   
   # Set list object names as list names
