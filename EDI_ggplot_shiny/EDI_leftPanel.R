@@ -84,7 +84,7 @@ EDI_leftPanel <- function(dataset = NA) {
         
         
         uiOutput("data_range"),
-        # textOutput("range_unavailable"),
+        #textOutput("text_output"),
         
         conditionalPanel(
           condition = "input.Type == 'Boxplot'", # "input.Type == 'Boxplot' || input.Type == 'Violin' || input.Type == 'Dot + Error'",

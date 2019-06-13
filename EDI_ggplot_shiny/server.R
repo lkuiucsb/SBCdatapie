@@ -396,7 +396,7 @@ shinyServer(function(input, output, session) {
      }
    )
 ###############################
-### slide bar #################
+### scale bar #################
 ###############################
 
 output$data_range <- renderUI({
@@ -416,9 +416,11 @@ output$data_range <- renderUI({
   }
 })
 
+####################################
+####subset data from scale bar ####
+#####################################
    
-   #filter subset of the data
-   get_subset <- reactive({
+  get_subset <- reactive({
      
      min_value <- input$range[1] 
      max_value <- input$range[2]
@@ -434,17 +436,16 @@ output$data_range <- renderUI({
    })
    
    
-   #for debugging purpose
-   # output$range_unavailable <- renderText({
-   #   min_value <- input$range[1] 
+#for debugging purpose, uncomment the
+   # output$text_output <- renderText({
+   #   min_value <- input$range[1]
    #   max_value <- input$range[2]
    #   if (!is.null(min_value)) {
-   #   paste("range is", min_value)
-   #   } else {
-   #     "no range"
-   #   }
-   #  
-   })
+   #      paste("range is", min_value)
+   #      } else {
+   #        "no range"
+   #      }
+   # })
 
    # End R-session when browser closed
    session$onSessionEnded(stopApp)
