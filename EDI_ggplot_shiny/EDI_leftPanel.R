@@ -82,6 +82,9 @@ EDI_leftPanel <- function(dataset = NA) {
         selectInput("facet_row", "Facet Row", choices = ""),
         selectInput("facet_col", "Facet Column", choices = ""),
         
+        
+        uiOutput("data_range"),
+        
         conditionalPanel(
           condition = "input.Type == 'Boxplot'", # "input.Type == 'Boxplot' || input.Type == 'Violin' || input.Type == 'Dot + Error'",
           checkboxInput(inputId = "jitter",
@@ -98,10 +101,13 @@ EDI_leftPanel <- function(dataset = NA) {
           condition = "input.Type == 'Scatter' || input.Type == 'Histogram'", # "input.Type == 'Density' || input.Type == 'Histogram'",
           sliderInput("alpha", "Opacity:", min = 0, max = 1, value = 0.8)
         ),
-        conditionalPanel(
-          condition = "input.Type == 'Histogram'", # "input.Type == 'Histogram' || input.Type=='Dotplot'",
-          numericInput("binwidth", "Binwidth:", value = 1)
-        ),
+        
+        
+        #need to fix the binwidth, bins, pad because server doesn't read the value correctly. 
+        # conditionalPanel(
+        #   condition = "input.Type == 'Histogram'", # "input.Type == 'Histogram' || input.Type=='Dotplot'",
+        #   numericInput("binwidth", "Binwidth:", value = 1)
+        # ),
         # conditionalPanel(
         #   condition = "input.Type == 'Dotplot'",
         #   selectInput("dot_dir", "Direction stack:",

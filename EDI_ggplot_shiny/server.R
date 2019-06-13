@@ -391,7 +391,25 @@ shinyServer(function(input, output, session) {
        write.csv(data, con)
      }
    )
-    # End R-session when browser closed
-    session$onSessionEnded(stopApp)
-  })
-  #shinyApp(ui, server)
+###############################
+### slide bar #################
+###############################
+
+output$data_range <- renderUI({
+  # If missing input, return to avoid error later in function
+  if(is.null(input$x_var))
+    return()
+
+  # Get the data set with the selected column
+  dat <- df_shiny()[,input$x_var] 
+  
+  sliderInput("rang", "Range of interest:", min = min(dat), max = max(dat), value = c(min(dat),max(dat)))
+  
+})
+
+
+   # End R-session when browser closed
+   session$onSessionEnded(stopApp)
+})
+#shinyApp(ui, server)
+
