@@ -1,0 +1,217 @@
+{
+  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@type": "SoftwareSourceCode",
+  "identifier": "dummyPackageTitle",
+  "description": "Easily explore data by creating ggplots through a (shiny-)GUI. R-code to recreate graph provided.   ",
+  "name": "dummyPackageTitle: Suitability evaluation of data-package assistant",
+  "codeRepository": "https://github.com/IMCR-Hackathon/ggplotgui",
+  "issueTracker": "https://github.com/IMCR-Hackathon/ggplotgui/issues",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "0.0.0.9000",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "version": "3.4.0",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 3.4.0 (2017-04-21)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Alesia",
+      "familyName": "Hallmark",
+      "email": "alesiahallmark@unm.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Li",
+      "familyName": "Kui",
+      "email": "lkui@ucsb.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": ["Jason", "J"],
+      "familyName": "Mercer",
+      "email": "jmercer4@uwyo.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": ["An", "T"],
+      "familyName": "Nguyen",
+      "email": "enthusiast@utexas.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": ["John", "H"],
+      "familyName": "Porter",
+      "email": "jhp72@virginia.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Sheila",
+      "familyName": "Saia",
+      "email": "ssaia@ncsu.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Colin",
+      "familyName": "Smith",
+      "email": "colin.smith@wisc.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Kathe",
+      "familyName": "Todd-Brown",
+      "email": "ktoddbrown@gmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Kristin",
+      "familyName": "Vanderbilt",
+      "email": "krvander@fiu.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Jocelyn",
+      "familyName": "Wardrup",
+      "email": "jocie@udel.edu"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "givenName": "Gert",
+      "familyName": "Stulp",
+      "email": "g.stulp@rug.nl"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Colin",
+      "familyName": "Smith",
+      "email": "colin.smith@wisc.edu"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.3.2"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "plotly",
+      "name": "plotly",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=plotly"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "shiny",
+      "name": "shiny",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=shiny"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "stringr",
+      "name": "stringr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=stringr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "readr",
+      "name": "readr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=readr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "haven",
+      "name": "haven",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=haven"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "readxl",
+      "name": "readxl",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=readxl"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "RColorBrewer",
+      "name": "RColorBrewer",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=RColorBrewer"
+    }
+  ],
+  "readme": "https://github.com/IMCR-Hackathon/ggplotgui/blob/master/README.md",
+  "fileSize": "1255.395KB",
+  "contIntegration": "https://travis-ci.org/gertstulp/ggplotgui"
+}
