@@ -14,8 +14,7 @@ knitr::opts_chunk$set(
 
 PackageNameHere
 ==========
-<!--- [![Travis-CI Build Status](https://travis-ci.org/gertstulp/ggplotgui.svg?branch=master)](https://travis-ci.org/gertstulp/ggplotgui)
-[![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/ggplotgui)](https://CRAN.R-project.org/package=ggplotgui) [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/ggplotgui)](https://CRAN.R-project.org/package=ggplotgui) --->
+[![Travis-CI Build Status](https://travis-ci.com/IMCR-Hackathon/ggplotgui.svg?branch=master)](https://travis-ci.org/IMCR-Hackathon/ggplotgui)
 
 # Quick overview
 This package allows users to explore the suitibility of a data package for further inquiry via a R Shiny.
