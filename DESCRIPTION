@@ -1,9 +1,20 @@
 Package: dummyPackageTitle
 Title: Suitability evaluation of data-package assistant
-Version: 0.1.0
-Authors@R: c(person(given='Colin', family= 'Smith', email='colin.smith@wisc.edu', role=c('aut', 'cre')), 
-            person(given="Gert", family="Stulp", email = "g.stulp@rug.nl", role = c("ctb"), 
-            comment='Orgnial creator and author of ggplotgui.'))
+Version: 0.0.0.9000
+Authors@R: 
+    c(
+    person(given='Alesia', family='Hallmark', email = 'alesiahallmark@unm.edu', role = c('aut', 'cre')),
+    person(given='Li', family='Kui', email = 'lkui@ucsb.edu', role = c('aut', 'cre')),
+    person(given='Jason', middle = 'J', family='Mercer', email = 'jmercer4@uwyo.edu', role = c('aut', 'cre')),
+    person(given='An', middle = 'T', family='Nguyen', email = 'enthusiast@utexas.edu', role = c('aut', 'cre')),
+    person(given='John', middle = 'H', family='Porter', email = 'jhp72@virginia.edu', role = c('aut', 'cre')),
+    person(given='Sheila', family='Saia', email = 'ssaia@ncsu.edu', role = c('aut', 'cre')),
+    person(given='Colin', family= 'Smith', email='colin.smith@wisc.edu', role=c('aut', 'cre')), 
+    person(given="Gert", family="Stulp", email = "g.stulp@rug.nl", role = c("ctb"), comment='Orgnial creator and author of ggplotgui.'),
+    person(given='Kathe', family='Todd-Brown', email = 'ktoddbrown@gmail.com', role = c('aut', 'cre')),
+    person(given='Kristin', family='Vanderbilt', email = 'krvander@fiu.edu', role = c('aut', 'cre')),
+    person(given='Jocelyn', family='Wardrup', email = 'jocie@udel.edu', role = c('aut', 'cre'))
+    )
 Description: Easily explore data by creating ggplots through a (shiny-)GUI. R-code to recreate graph provided.   
 Depends: R (>= 3.3.2)
 Imports:
@@ -18,8 +29,8 @@ Imports:
 Remotes:
     NCEAS/metajam    
 License: MIT
-BugReports: https://github.com/gertstulp/ggplotgui/issues
-URL: https://github.com/gertstulp/ggplotgui/
+BugReports: https://github.com/IMCR-Hackathon/ggplotgui/issues
+URL: https://github.com/IMCR-Hackathon/ggplotgui
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
