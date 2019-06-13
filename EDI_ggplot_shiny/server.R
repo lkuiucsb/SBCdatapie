@@ -405,13 +405,15 @@ output$data_range <- renderUI({
   # Get the data set with the selected column
   df<-df_shiny()
   
+  if (input$x_var!="") {
   df1 <- unlist(df[,input$x_var])
 
-  if (!is.character(df1)&input$x_cast!="character") {
-  sliderInput("range", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
-  } else {
-    h5("No scale bar for categorical variable")
-  }
+    if (!is.character(df1)&input$x_cast!="character") {
+      sliderInput("range", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
+      } else {
+         h5("No scale bar for categorical variable")
+    }
+  } else {return()}
 })
 
 ####################################
