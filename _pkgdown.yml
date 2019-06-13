@@ -1,0 +1,11 @@
+reference:
+  - title: Functions
+    desc: Suitability evaluation of data-package assistant
+    contents:
+    - ggplot_shiny
+  - title: Helper functions
+    desc: Helper functions for dummyPackageTitle
+    contents:
+    - read_data_archived
+    - remove_data_package_directory
+    
