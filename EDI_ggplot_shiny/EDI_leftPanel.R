@@ -75,7 +75,9 @@ EDI_leftPanel <- function(dataset = NA) {
           selectInput("y_var", "Y-variable", choices = ""),
           selectInput("y_cast", "Y-coerce", choices = c('default', 'character', 'numeric', 'date'))
                   ),
-        
+        conditionalPanel(condition = "input.Type =='Histogram'", # "input.Type!='Density' && input.Type!='Histogram'",
+              p("No y-variable relevant")
+            ),
         selectInput("group", "Group (or color)", choices = ""),
         selectInput("facet_row", "Facet Row", choices = ""),
         selectInput("facet_col", "Facet Column", choices = ""),
