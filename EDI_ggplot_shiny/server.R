@@ -103,13 +103,6 @@ shinyServer(function(input, output, session) {
 ####### CREATE GRAPH-CODE ###########
 #####################################
 
-    #filter subset of the data
-    get_subset <- reactive({
-       df <- df_shiny() 
-      df
-      
-    })
-      
     
     
     string_code <- reactive({
@@ -417,16 +410,41 @@ output$data_range <- renderUI({
   df1 <- unlist(df[,input$x_var])
 
   if (!is.character(df1)) {
-  sliderInput("rang", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
+  sliderInput("range", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
   } else {
     h5("No scale bar for categorical variable")
   }
 })
 
-   # output$range_unavailable <- renderText({ 
-   #   df<-df_shiny()
-   #   paste("class is", class(unlist(df[,input$x_var])))
-   # })  
+   
+   #filter subset of the data
+   get_subset <- reactive({
+     
+     min_value <- input$range[1] 
+     max_value <- input$range[2]
+     
+     df <- df_shiny() 
+
+      if (!is.null(min_value)) {
+      df2<-df %>% filter(df[,input$x_var]>=min_value&df[,input$x_var]<=max_value)
+      } else {
+        df2<-df
+      }
+     df2
+   })
+   
+   
+   #for debugging purpose
+   # output$range_unavailable <- renderText({
+   #   min_value <- input$range[1] 
+   #   max_value <- input$range[2]
+   #   if (!is.null(min_value)) {
+   #   paste("range is", min_value)
+   #   } else {
+   #     "no range"
+   #   }
+   #  
+   })
 
    # End R-session when browser closed
    session$onSessionEnded(stopApp)
