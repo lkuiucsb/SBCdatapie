@@ -1,5 +1,17 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
-language: R
-sudo: false
+language: r
 cache: packages
+r_packages:
+  - plotly
+  - shiny
+  - ggplot2
+  - stringr
+  - readr
+  - haven
+  - readxl
+  - RColorBrewer
+r_github_packages:
+  - NCEAS/metajam
+warnings_are_errors: false
+after_success:
+  - Rscript -e 'library(covr); codecov()'
+  
