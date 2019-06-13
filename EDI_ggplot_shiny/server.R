@@ -38,8 +38,8 @@ shinyServer(function(input, output, session) {
           c("No factors available" = ".")
         else c("No groups" = ".", nms_fact)
 
-      updateSelectInput(session, "y_var", choices = c("No x-var" = "' '", nms))
-      updateSelectInput(session, "x_var", choices = avail_con)
+      updateSelectInput(session, "y_var", choices = c("No y-var" = "' '", nms))
+      updateSelectInput(session, "x_var", choices = nms)
       updateSelectInput(session, "group", choices = avail_all)
       updateSelectInput(session, "facet_row",  choices = avail_fac)
       updateSelectInput(session, "facet_col",  choices = avail_fac)
@@ -146,8 +146,12 @@ shinyServer(function(input, output, session) {
         },
         ")) + ",
         if (input$Type == "Histogram")
-          paste("geom_histogram(position = 'identity', alpha = input$alpha, ",
-                "binwidth = input$binwidth)", sep = ""),
+          if(is.numeric(df_shiny()[,input$x_var])){
+            paste("geom_histogram(alpha = input$alpha, ",
+                  "binwidth = input$binwidth)", sep = "")
+          }else{
+            paste("geom_histogram(alpha = input$alpha, stat='count')", sep = "")
+            },
         # if (input$Type == "Density")
         #   paste("geom_density(position = 'identity', alpha = input$alpha, ",
         #         "adjust = input$adj_bw)", sep = ""),
