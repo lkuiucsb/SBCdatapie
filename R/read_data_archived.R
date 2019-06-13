@@ -42,16 +42,13 @@ read_data_archived <- function(data.pkg.doi, download.dir = NULL){
   message('Creating data package directory')
   
   if (is.null(download.dir)){
-    download.dir <- tempdir()
+    download.dir <- paste0(tempdir(), '/data_package')
+    dir.create(download.dir)
   }
   
   if (!dir.exists(download.dir)){
     stop('Download directory does not exist.')
   }
-  
-  download.dir <- paste0(download.dir, '/data_package')
-  
-  dir.create(download.dir)
   
   # Download data and metadata to directory -----------------------------------
   
