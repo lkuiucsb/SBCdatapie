@@ -352,7 +352,7 @@ shinyServer(function(input, output, session) {
     })
 
 #####################################
-#### GENERATE R-CODE FOR OUTPUT #####
+#### Download codes #################
 #####################################
 
   output$download_plot_PDF <- downloadHandler(
@@ -379,6 +379,14 @@ shinyServer(function(input, output, session) {
       },
       contentType = "application/tiff" # MIME type of the image
     )
+   output$downloadData <- downloadHandler(
+     filename = function() {
+       paste('data-', Sys.Date(), '.csv', sep='')
+     },
+     content = function(con) {
+       write.csv(data, con)
+     }
+   )
     # End R-session when browser closed
     session$onSessionEnded(stopApp)
   })

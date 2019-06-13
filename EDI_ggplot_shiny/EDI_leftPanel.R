@@ -18,7 +18,9 @@ EDI_leftPanel <- function(dataset = NA) {
           selected = if (is.data.frame(dataset)) 4 else 1),
         conditionalPanel(
           condition = "input.data_input=='1'",
-          h5("dataset 'mpg' from library(ggplot2) loaded")
+          h5("dataset 'mpg' from library(ggplot2) loaded"),
+          downloadButton("downloadData",
+                         "Download data"))
           ),
         conditionalPanel(
           condition = "input.data_input=='2'",
@@ -40,7 +42,8 @@ EDI_leftPanel <- function(dataset = NA) {
                              "Space" = " "),
                         selected = "Semicolon")),
           actionButton("submit_datafile_button",
-                       "Submit datafile")),
+                       "Submit datafile"),
+
         conditionalPanel(
           condition = "input.data_input=='3'",
           h5("Paste data below:"),
