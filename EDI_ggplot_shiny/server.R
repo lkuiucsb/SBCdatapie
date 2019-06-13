@@ -103,6 +103,15 @@ shinyServer(function(input, output, session) {
 ####### CREATE GRAPH-CODE ###########
 #####################################
 
+    #filter subset of the data
+    get_subset <- reactive({
+       df <- df_shiny() 
+      df
+      
+    })
+      
+    
+    
     string_code <- reactive({
 
       # Variable used for how to deal with x/y in ggplot
@@ -113,10 +122,12 @@ shinyServer(function(input, output, session) {
                 input$Type == "Density" ||
                 input$Type == "Dotplot"
 
+      
       # Only plot jitter when graphs allow them
       if (gg_fil || input$Type == "Scatter")
         jitt <- FALSE else jitt <- input$jitter
-
+      
+      
       p <- paste(
         "ggplot(df, aes(",
           if(input$x_cast == 'character'){
@@ -309,7 +320,7 @@ shinyServer(function(input, output, session) {
     output$out_ggplot <- renderPlot(width = width,
                                     height = height, {
       # evaluate the string RCode as code
-      df <- df_shiny()
+      df <- get_subset()
       p <- eval(parse(text = string_code()))
       p
     })
@@ -401,15 +412,25 @@ output$data_range <- renderUI({
     return()
 
   # Get the data set with the selected column
-  dat <- df_shiny()[,input$x_var] 
+  df<-df_shiny()
   
-  sliderInput("rang", "Range of interest:", min = min(dat), max = max(dat), value = c(min(dat),max(dat)))
-  
+  df1 <- unlist(df[,input$x_var])
+
+  if (!is.character(df1)) {
+  sliderInput("rang", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
+  } else {
+    h5("No scale bar for categorical variable")
+  }
 })
 
+   # output$range_unavailable <- renderText({ 
+   #   df<-df_shiny()
+   #   paste("class is", class(unlist(df[,input$x_var])))
+   # })  
 
    # End R-session when browser closed
    session$onSessionEnded(stopApp)
 })
 #shinyApp(ui, server)
+
 
