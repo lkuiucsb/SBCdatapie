@@ -103,8 +103,6 @@ shinyServer(function(input, output, session) {
 ####### CREATE GRAPH-CODE ###########
 #####################################
 
-    
-    
     string_code <- reactive({
 
       # Variable used for how to deal with x/y in ggplot
@@ -409,7 +407,7 @@ output$data_range <- renderUI({
   
   df1 <- unlist(df[,input$x_var])
 
-  if (!is.character(df1)) {
+  if (!is.character(df1)&input$x_cast!="character") {
   sliderInput("range", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
   } else {
     h5("No scale bar for categorical variable")
