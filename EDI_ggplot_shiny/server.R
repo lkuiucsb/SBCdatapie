@@ -9,6 +9,40 @@
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
+  
+#####################################
+######### GET DATA FROM DOI #########
+#####################################
+  
+  # make full edi output available to downstream app tools
+  list_shiny <- reactive({
+    if (input$data_input == 2) {
+      read_data_archived(input$doi)
+    } else if (!is.null(list_shiny)){
+      list_shiny
+    } else {
+      NULL
+    }
+  })
+  
+#   if (input$data_type == 2) {
+#     # making edi data into reactive object
+#     edi_object_reactive <- eventReactive(input$fetch_button, {
+#       # wrapping edi read_data_archived function
+#       edi_download_wrapper <- function(x) {
+#         read_data_archived(x)
+#         }
+#       edi_download_wrapper(input$doi)
+#     })
+#     
+    # watch file selection
+    observe({
+      file_names_raw <- names(list_shiny())
+      file_names <- file_names_raw[-length(file_names_raw)]
+
+      updateSelectInput(session, "repo_file", choices = c("No file selected", file_names), selected = 'No file selected')
+    })
+# }
    
 #####################################
 ### GET VARIABLE NAMES FOR INPUT ####
@@ -54,6 +88,16 @@ shinyServer(function(input, output, session) {
       if (input$data_input == 1) {
         data <- ggplot2::mpg
       } else if (input$data_input == 2) {
+        if(is.null(input$repo_data)) {
+          return(data.frame(x = "Fetch your DOI"))
+        } else if (input$fetch_button == 0) {
+          return(data.frame(x = "Press 'Fetch Data' button"))
+        } else {
+          isolate({
+            data <- list_shiny()[[input$repo_file]]
+          })
+        }
+      } else if (input$data_input == 3) {
         file_in <- input$upload
         # Avoid error message while file is not uploaded yet
         if (is.null(input$upload)) {
@@ -77,25 +121,27 @@ shinyServer(function(input, output, session) {
             }
           })
         }
-      } else if (input$data_input == 3) {
-        if (input$data_paste == "") {
-          data <- data.frame(x = "Copy your data into the textbox,
-                             select the appropriate delimiter, and
-                             press 'Submit data'")
-        } else {
-          if (input$submit_data_button == 0) {
-            return(data.frame(x = "Press 'submit data' button"))
-          } else {
-            isolate({
-              data <- read_delim(input$data_paste,
-                                 delim = input$text_delim,
-                                 col_names = TRUE)
-            })
-          }
-        }
-      } else if (input$data_input == 4){
-        data <- dataset
-      }
+      } 
+      #   else if (input$data_input == 3) {
+      #   if (input$data_paste == "") {
+      #     data <- data.frame(x = "Copy your data into the textbox,
+      #                        select the appropriate delimiter, and
+      #                        press 'Submit data'")
+      #   } else {
+      #     if (input$submit_data_button == 0) {
+      #       return(data.frame(x = "Press 'submit data' button"))
+      #     } else {
+      #       isolate({
+      #         data <- read_delim(input$data_paste,
+      #                            delim = input$text_delim,
+      #                            col_names = TRUE)
+      #       })
+      #     }
+      #   }
+      # } 
+      #   else if (input$data_input == 4){
+      #   data <- dataset
+      # }
       return(data)
     })
 

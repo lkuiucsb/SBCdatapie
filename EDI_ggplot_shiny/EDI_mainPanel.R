@@ -15,7 +15,7 @@ EDI_mainPanel <- function() {
                 ),
         tabPanel("Interactive Plot", plotlyOutput("out_plotly")),
         tabPanel("R-code", verbatimTextOutput("out_r_code")),
-        tabPanel("Quick Start",
+        tabPanel("Help",
                  p("This is place holder text")),
         tabPanel("About",
                  h3("EDI hackathon"),
