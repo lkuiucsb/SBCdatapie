@@ -1,0 +1,115 @@
+#' Read a data package into R
+#' 
+#' This function reads a data package downloaded with the function
+#' \code{data_package_read()} to the R environment as a list object.
+#' 
+#' @usage
+#'   data_package_read(
+#'     data.pkg.path = NULL
+#'   )
+#' 
+#' @param data.pkg.path
+#'   (character) Directory where a data package stored. Default (NULL) is
+#'   the temporary data package directory defined by
+#'   \code{paste0(tempdir(), 'data_package')}.
+#'
+#' @return
+#'   (list) List of tibbles containing data and metadata. Each list object is
+#'   named after the data object file name.
+#'   
+#' @details
+#'   This function is a wrapper to \code{read_d1_files()} function of the 
+#'   \href{https://github.com/NCEAS/metajam}{metajam} package but outputs an
+#'   object with a slightly different format.
+#'   
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Read data package from temporary directory -------------------------------
+#' 
+#' # Download data package to temporary directory
+#' data_package_download(data.pkg.doi = 'doi:10.18739/A2DP3X')
+#' 
+#' # Read data package into R
+#' pkg <- data_package_read()
+#' 
+#' # View data package contents
+#' View(pkg)
+#' 
+#' # Clean up
+#' data_package_remove()
+#' 
+#' # Read data package from local directory -----------------------------------
+#' 
+#' # Download data package to local directory
+#' data_package_download(
+#'   data.pkg.doi = 'doi:10.18739/A2DP3X',
+#'   download.dir = '/Desktop/data_packages'
+#' )
+#' 
+#' # Read data package into R
+#' pkg <- data_package_read(
+#'   data.pkg.path = '/Desktop/data_packages/doi_10.18739_A2DP3X'
+#' )
+#' 
+#' # View data package contents
+#' View(pkg)
+#' 
+#' # Clean up
+#' data_package_remove('/Desktop/data_packages/doi_10.18739_A2DP3X')
+#' 
+#' }
+#' 
+
+data_package_read <- function(data.pkg.path = NULL){
+  
+  # Check arguments and parameterize ------------------------------------------
+  
+  # Use temporary directory if data.pkg.path = NULL
+  
+  if (is.null(data.pkg.path)){
+    data.pkg.path <- paste0(tempdir(), '/data_package')
+  }
+  
+  # Error if data.pkg.path doesn't exist
+  
+  if (!dir.exists(data.pkg.path)){
+    stop("Data package directory doesn't exist.")
+  }
+  
+  # Read data package ---------------------------------------------------------
+
+  message(paste0('Reading data package from "', data.pkg.path, '"'))
+  
+  # Get paths of each data object (a package may contain more than one data 
+  # object and associated metadata stored within an associated directory).
+  
+  pkg_dir_name <- list.dirs(data.pkg.path, recursive = FALSE)
+  
+  # Read objects
+  
+  output <- lapply(
+    pkg_dir_name,
+    metajam::read_d1_files
+  )
+  
+  # Use object names for the output list
+  
+  names(output) <- paste0(
+    stringr::str_extract(
+      pkg_dir_name,
+      '(?<=__)[:graph:]*(?=__)'
+    ),
+    '.',
+    stringr::str_extract(
+      pkg_dir_name,
+      '(?<=__)[:alpha:]*$'
+    )
+  )
+
+  # Return list object --------------------------------------------------------
+  
+  output
+  
+}
