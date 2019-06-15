@@ -16,6 +16,7 @@
 #' @param download.dir
 #'   (character) Directory to which the data package will be downloaded. 
 #'   Default is \code{paste0(tempdir(), '/data_package')}
+#'   
 #'
 #' @return
 #'   (data package) Data package objects (as rendered by \code{metajam}) in the
