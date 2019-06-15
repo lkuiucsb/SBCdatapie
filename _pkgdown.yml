@@ -2,10 +2,15 @@ reference:
   - title: Functions
     desc: Suitability evaluation of data-package assistant
     contents:
+    - data_entity_summary
+    - data_package_copy
+    - data_package_download
+    - data_package_read
+    - data_package_remove
+    - data_variable_report
     - ggplot_shiny
-  - title: Helper functions
-    desc: Helper functions for dummyPackageTitle
-    contents:
+    - make_entity_report
     - read_data_archived
-    - remove_data_package_directory
-    
+    - space_detective
+    - space_plot
+    - time_detective
