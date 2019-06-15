@@ -38,6 +38,14 @@
 
 read_data_archived <- function(data.pkg.doi, download.dir = NULL){
   
+  # Send deprecation notice ---------------------------------------------------
+  
+  .Deprecated(
+    new = c('data_package_download()', 'data_package_read()'),
+    package = 'dummyPackageTitle',
+    old = 'read_data_archived()'
+  )
+  
   # Create directory for data and metadata ------------------------------------
   
   message('Creating data package directory')
