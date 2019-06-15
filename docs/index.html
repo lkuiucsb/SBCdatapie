@@ -18,7 +18,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -63,83 +63,62 @@
 
       
       </header><div class="row">
-  <div class="col-md-9 contents">
-    
+  <div class="contents col-md-9">
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="packagenamehere" class="section level1">
+
+<div id="ggplotgui" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#packagenamehere" class="anchor"></a>PackageNameHere</h1></div>
-
-</div>
-<div id="quick-overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#quick-overview" class="anchor"></a>Quick overview</h1>
+<a href="#ggplotgui" class="anchor"></a>ggplotgui</h1></div>
 <p>This package allows users to explore the suitibility of a data package for further inquiry via a R Shiny. Users identify data packages of interest by passing a DOI to a GUI interface and then browse summary reports and generate exploritory plots. The package also attempts to address some common shortcomings of data formats to aid suitability evaluation. Data is highly diverse and we provide no guarantee this will actually work for a given data package, but it’s worth a shot!</p>
-</div>
-<div id="background" class="section level1">
-<h1 class="hasAnchor">
-<a href="#background" class="anchor"></a>Background</h1>
+<div id="background" class="section level2">
+<h2 class="hasAnchor">
+<a href="#background" class="anchor"></a>Background</h2>
 <p>Data can be a valuable scientific resource. However the inherent existance of information is not sufficeint to valuable, data must also be <a href="https://www.force11.org/group/fairgroup/fairprinciples">Findable Accesible Interoperable Reusable</a>.</p>
 <p>This project assists researchers and other data users who wish to reuse existing data packages that are archived on <a href="https://www.dataone.org/">DataOne</a> member notes. We provide a R shiny application (built off of the framework provided by <a href="https://github.com/gertstulp/ggplotgui">ggplotgui</a>) that 1) downloads identified DOIs registared on DataOne member notes, 2) reads in the data into a light weight viewer, 3) provides summary statistics and basic graphics describing the data package, and 4) generates a more robust report describing the data. This is not intented to replace a full analysis in R or comparble statistical packages, but instead intended to allow the user to quickly access if the data is suitable for their needs.</p>
 <p>Access to data packages on DataOne member notes is provided through the package <a href="https://github.com/NCEAS/metajam">metajam</a>.</p>
-<!-- revisit this once the package name and API is layed out
-# Installation
-
-```r
-install.packages("ggplotgui")
-
-# In order to install the most recent version of this package, you'll need to use the "devtools"-package
-install.packages("remotes")
-remotes::install_github("gertstulp/ggplotgui")
-
-library("ggplotgui")
-```
-
-# Usage
-There are two ways to use this functionality:
-
-* By calling it from within R
-
-```r
-# You can call the function with and without passing a dataset
-ggplot_shiny()
-ggplot_shiny(mpg) # Passing ggplot's mpg dataset
-```
-* By using the following link:
-https://site.shinyserver.dck.gmw.rug.nl/ggplotgui/
-
-This will open up the following screen:
-![](man/figures/tab_data_upload.png)
-There are four ways in which you can use data within this GUI:    
-1. You can pass your dataframe through R, by using ggplot_gui(my_df)    
-2. You can examine sample data (data 'mpg' from the ggplot2 package)    
-3. You can upload your datafile in many different formats (e.g., csv, SPSS, Excel)    
-4. You can paste some data into a window (the data need to be "[tidy](http://tidyr.tidyverse.org/)")    
-
-
-A ggplot-graph can be made through point and click (after data is loaded and through the ggplot-tab):
-![](man/figures/tab_ggplot.png)
-Aesthetics of the graph can be changed with the tabs on the right hand side. 
-
-An interactive version (through plotly) of the graph is displayed (the Plotly-tab) to allow for further exploration of the data:
-![](man/figures/tab_plotly.png)
-
-
-Importantly, the R-code to recreate the graphs will be provided (in the R-code tab):
-![](man/figures/tab_R-code.png)
-# Current functionality
--->
 </div>
-<div id="acknowledgements" class="section level1">
-<h1 class="hasAnchor">
-<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h1>
+<div id="install" class="section level2">
+<h2 class="hasAnchor">
+<a href="#install" class="anchor"></a>Install</h2>
+<p>TBD</p>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>TBD</p>
+</div>
+<div id="road-map" class="section level2">
+<h2 class="hasAnchor">
+<a href="#road-map" class="anchor"></a>Road map</h2>
+<p>TBD</p>
+</div>
+<div id="contributing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributing" class="anchor"></a>Contributing</h2>
+<p>TBD</p>
+</div>
+<div id="versioning" class="section level2">
+<h2 class="hasAnchor">
+<a href="#versioning" class="anchor"></a>Versioning</h2>
+<p>This project uses <a href="https://semver.org">semantic versioning</a>.</p>
+</div>
+<div id="authors" class="section level2">
+<h2 class="hasAnchor">
+<a href="#authors" class="anchor"></a>Authors</h2>
+<p>TBD</p>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
 <p>This package was the product of the 2019 Information Management Code Registry Hackathon sponcered by the <a href="https://environmentaldatainitiative.org/">Environmental Data Initiative</a>.</p>
 <p>We are very greatful to <a href="https://www.gertstulp.com/">Gert Stulp</a> for their <a href="https://github.com/gertstulp/ggplotgui">ggplotgui</a> package form which this repository is forked.</p>
-<p>Dr Stulp’s orginal acknowledgement follows: &gt; I am grateful to the people who made <a href="https://www.r-project.org/">R</a>, and to <a href="http://hadley.nz/">Hadley Wicham</a> for making such good packages (and open access books describing them), that allow even low-skilled and low-talented programmers like myself to be able to contribute to R. This package makes use of: <a href="http://ggplot2.tidyverse.org/">ggplot2</a>, <a href="http://shiny.rstudio.com/">Shiny</a>, <a href="http://stringr.tidyverse.org/">stringr</a>, <a href="https://plot.ly/r/">plotly</a>, <a href="http://readr.tidyverse.org/">readr</a>, <a href="http://readxl.tidyverse.org/">readxl</a>, <a href="http://haven.tidyverse.org/">haven</a>, and <a href="https://cran.r-project.org/web/packages/RColorBrewer/RColorBrewer.pdf">RColorBrewer</a>. Package development through <a href="https://www.rstudio.com/">RStudio</a> and <a href="https://github.com/">Github</a>, and with the help of <a href="http://rmarkdown.rstudio.com">R Markdown</a> and <a href="https://www.rstudio.com/products/rpackages/devtools/">devtools</a>. The code that allows for online data input was based somewhat on the <a href="https://github.com/VizWizard/BoxPlotR.shiny">BoxPlotR Shiny app</a>. Many thanks to Wilmer Joling who set up the illustrous “<a href="https://www.docker.com/">docker</a>” and <a href="https://site.shinyserver.dck.gmw.rug.nl/ggplotgui/">website</a> where the online version of this packages runs.</p>
+<p>Dr Stulp’s orginal acknowledgement follows:</p>
+<blockquote>
+<p>I am grateful to the people who made <a href="https://www.r-project.org/">R</a>, and to <a href="http://hadley.nz/">Hadley Wicham</a> for making such good packages (and open access books describing them), that allow even low-skilled and low-talented programmers like myself to be able to contribute to R. This package makes use of: <a href="http://ggplot2.tidyverse.org/">ggplot2</a>, <a href="http://shiny.rstudio.com/">Shiny</a>, <a href="http://stringr.tidyverse.org/">stringr</a>, <a href="https://plot.ly/r/">plotly</a>, <a href="http://readr.tidyverse.org/">readr</a>, <a href="http://readxl.tidyverse.org/">readxl</a>, <a href="http://haven.tidyverse.org/">haven</a>, and <a href="https://cran.r-project.org/web/packages/RColorBrewer/RColorBrewer.pdf">RColorBrewer</a>. Package development through <a href="https://www.rstudio.com/">RStudio</a> and <a href="https://github.com/">Github</a>, and with the help of <a href="http://rmarkdown.rstudio.com">R Markdown</a> and <a href="https://www.rstudio.com/products/rpackages/devtools/">devtools</a>. The code that allows for online data input was based somewhat on the <a href="https://github.com/VizWizard/BoxPlotR.shiny">BoxPlotR Shiny app</a>. Many thanks to Wilmer Joling who set up the illustrous “<a href="https://www.docker.com/">docker</a>” and <a href="https://site.shinyserver.dck.gmw.rug.nl/ggplotgui/">website</a> where the online version of this packages runs.</p>
+</blockquote>
 </div>
+</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -175,23 +154,21 @@ Importantly, the R-code to recreate the graphs will be provided (in the R-code t
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/IMCR-Hackathon/ggplotgui"><img src="https://travis-ci.com/IMCR-Hackathon/ggplotgui.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 </ul>
 </div>
 </div>
-
 </div>
-
 
       <footer><div class="copyright">
   <p>Developed by Alesia Hallmark, Li Kui, Jason J Mercer, An T Nguyen, John H Porter, Sheila Saia, Colin Smith, Kathe Todd-Brown, Kristin Vanderbilt, Jocelyn Wardrup.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
 </div>
