@@ -1,7 +1,7 @@
 Package: dummyPackageTitle
 Title: Suitability evaluation of data-package assistant
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     c(
     person(given='Alesia', family='Hallmark', email = 'alesiahallmark@unm.edu', role = c('aut')),
     person(given='Li', family='Kui', email = 'lkui@ucsb.edu', role = c('aut')),
@@ -34,4 +34,7 @@ URL: https://github.com/IMCR-Hackathon/ggplotgui
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
