@@ -14,42 +14,29 @@ shinyServer(function(input, output, session) {
 ######### GET DATA FROM DOI #########
 #####################################
   
-  # make full edi output available to downstream app tools
-  # list_shiny <- reactive({
-  #   if (input$data_input == 2) {
-  #     # read in data
-  #     read_data_archived(input$doi)
-  #     
-  #   } else if (!is.null(list_shiny)){
-  #     list_shiny
-  #   } else {
-  #     NULL
-  #   }
-  # })
-  
-  # making edi data into reactive object
-  edi_object_reactive <- eventReactive(input$fetch_button, {
+
+  # make repo download available to downstream app tools
+  list_shiny <- eventReactive(input$fetch_button, {
     # delete existing files in tempdir
     unlink(
       paste0(tempdir(), "/data_package"),
       recursive = TRUE, 
       force = TRUE)
-    
-    # wrapping edi read_data_archived function
-    edi_download_wrapper <- function(x) {
-      # read doi data to tempdir()
-      read_data_archived(data.pkg.doi = x)
-    }
-    
-    edi_download_wrapper(input$doi)
+  
+    # read in data
+    read_data_archived(input$doi)
   })
   
   # watch file selection
   observe({
-    file_names_raw <- names(edi_object_reactive())
+    file_names_raw <- names(list_shiny())
     file_names <- file_names_raw[-length(file_names_raw)]
     
-    updateSelectInput(session, "repo_file", choices = c("No file selected", file_names), selected = 'No file selected')
+    updateSelectInput(
+      session,
+      "repo_file",
+      choices = c("No file selected", file_names),
+      selected = 'No file selected')
   })
    
 #####################################
@@ -107,11 +94,11 @@ shinyServer(function(input, output, session) {
         # }
         
         # draft code (sheila)
-        if(input$fetch_button == 0) {
+        if(!exists("list_shiny")) {
           return(data.frame(x = "Enter DOI and press 'Fetch Data' button"))
         }
         else {
-          data <- edi_object_reactive()[[input$repo_file]]
+          data <- list_shiny()[[input$repo_file]]$data
         }
         
       } else if (input$data_input == 3) {

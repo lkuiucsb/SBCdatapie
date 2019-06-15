@@ -22,6 +22,8 @@ withConsoleRedirect <- function(containerId, expr) {
 doi_obj <- 'doi:10.6073/pasta/b745934d136ce9ca8de26c5063eee86a'
 source("C:/Projects/ggplotgui/R/read_data_archived.R")
 
+#edi_obj <- read_data_archived(doi_obj)
+
 library(shiny)
 library(metajam)
 
@@ -43,14 +45,14 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
-  edi_download_wrapper <- function(x) {
-    read_data_archived(x)
-  }
+  # edi_download_wrapper <- function(x) {
+  #   read_data_archived(x)
+  # }
   
 
   #Makes a responsive output when the "Download" button is pushed 
   edi_object_reactive <- eventReactive(input$fetch_button, {
-      edi_download_wrapper(input$doi)
+      read_data_archived(input$doi)
     }
   )
 
