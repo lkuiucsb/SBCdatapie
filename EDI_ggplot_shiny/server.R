@@ -15,34 +15,42 @@ shinyServer(function(input, output, session) {
 #####################################
   
   # make full edi output available to downstream app tools
-  list_shiny <- reactive({
-    if (input$data_input == 2) {
-      read_data_archived(input$doi)
-    } else if (!is.null(list_shiny)){
-      list_shiny
-    } else {
-      NULL
+  # list_shiny <- reactive({
+  #   if (input$data_input == 2) {
+  #     # read in data
+  #     read_data_archived(input$doi)
+  #     
+  #   } else if (!is.null(list_shiny)){
+  #     list_shiny
+  #   } else {
+  #     NULL
+  #   }
+  # })
+  
+  # making edi data into reactive object
+  edi_object_reactive <- eventReactive(input$fetch_button, {
+    # delete existing files in tempdir
+    unlink(
+      paste0(tempdir(), "/data_package"),
+      recursive = TRUE, 
+      force = TRUE)
+    
+    # wrapping edi read_data_archived function
+    edi_download_wrapper <- function(x) {
+      # read doi data to tempdir()
+      read_data_archived(data.pkg.doi = x)
     }
+    
+    edi_download_wrapper(input$doi)
   })
   
-#   if (input$data_type == 2) {
-#     # making edi data into reactive object
-#     edi_object_reactive <- eventReactive(input$fetch_button, {
-#       # wrapping edi read_data_archived function
-#       edi_download_wrapper <- function(x) {
-#         read_data_archived(x)
-#         }
-#       edi_download_wrapper(input$doi)
-#     })
-#     
-    # watch file selection
-    observe({
-      file_names_raw <- names(list_shiny())
-      file_names <- file_names_raw[-length(file_names_raw)]
-
-      updateSelectInput(session, "repo_file", choices = c("No file selected", file_names), selected = 'No file selected')
-    })
-# }
+  # watch file selection
+  observe({
+    file_names_raw <- names(edi_object_reactive())
+    file_names <- file_names_raw[-length(file_names_raw)]
+    
+    updateSelectInput(session, "repo_file", choices = c("No file selected", file_names), selected = 'No file selected')
+  })
    
 #####################################
 ### GET VARIABLE NAMES FOR INPUT ####
@@ -88,15 +96,24 @@ shinyServer(function(input, output, session) {
       if (input$data_input == 1) {
         data <- ggplot2::mpg
       } else if (input$data_input == 2) {
-        if(is.null(input$repo_data)) {
-          return(data.frame(x = "Fetch your DOI"))
-        } else if (input$fetch_button == 0) {
-          return(data.frame(x = "Press 'Fetch Data' button"))
-        } else {
-          isolate({
-            data <- list_shiny()[[input$repo_file]]
-          })
+        # if(is.null(input$repo_data)) { # check this, where else do we define repo_data? (sheila)
+        #   return(data.frame(x = "Fetch your DOI"))
+        # } else if (input$fetch_button == 0) {
+        #   return(data.frame(x = "Press 'Fetch Data' button"))
+        # } else {
+        #   #isolate({
+        #   data <- edi_object_reactive()[[input$repo_file]]
+        #   #})
+        # }
+        
+        # draft code (sheila)
+        if(input$fetch_button == 0) {
+          return(data.frame(x = "Enter DOI and press 'Fetch Data' button"))
         }
+        else {
+          data <- edi_object_reactive()[[input$repo_file]]
+        }
+        
       } else if (input$data_input == 3) {
         file_in <- input$upload
         # Avoid error message while file is not uploaded yet
