@@ -60,6 +60,6 @@ test_that("Validate output structure", {
   
   # Clean up
   
-  suppressMessages(remove_data_package_directory())
+  suppressMessages(data_package_remove())
   
 })
