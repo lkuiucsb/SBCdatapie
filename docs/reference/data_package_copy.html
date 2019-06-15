@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • dummyPackageTitle</title>
+<title>Copy data package from temporary directory to user specified directory — data_package_copy • dummyPackageTitle</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,12 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Copy data package from temporary directory to user specified directory — data_package_copy" />
+
+<meta property="og:description" content="This function copies the data package from the temporary directory
+specified by paste0(tempdir(), '/data_package') to a user
+specified directory." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +52,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -94,109 +99,62 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Copy data package from temporary directory to user specified directory</h1>
+    <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/ggplotgui/blob/master/R/data_package_copy.R'><code>R/data_package_copy.R</code></a></small>
+    <div class="hidden name"><code>data_package_copy.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>This function copies the data package from the temporary directory
+specified by paste0(tempdir(), '/data_package') to a user
+specified directory.</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-functions" class="hasAnchor"><a href="#section-functions" class="anchor"></a>Functions</h2>
-          <p class="section-desc"><p>Suitability evaluation of data-package assistant</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="HackathonFunction1.html">HackathonFunction1()</a></code> </p>
-        </td>
-        <td><p>Collection of functions to generate data-entity level summary information
-By Jocelyn (An is documenting)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="classify_xy.html">classify_xy()</a></code> </p>
-        </td>
-        <td><p>Detect spatial information in data columns</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data_package_copy.html">data_package_copy()</a></code> </p>
-        </td>
-        <td><p>Copy data package from temporary directory to user specified directory</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data_package_download.html">data_package_download()</a></code> </p>
-        </td>
-        <td><p>Download a data package from the DataONE network</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data_package_read.html">data_package_read()</a></code> </p>
-        </td>
-        <td><p>Read a data package into R</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data_package_remove.html">data_package_remove()</a></code> </p>
-        </td>
-        <td><p>Remove a data package directory</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggplot_shiny.html">ggplot_shiny()</a></code> </p>
-        </td>
-        <td><p>Creating a graphical user interface for creating ggplot-graphs.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="make_entity_report.html">make_entity_report()</a></code> </p>
-        </td>
-        <td><p>A wrapper function to generate data entity-level summary plus variable-level reports for one entities</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="make_vector_of_numeric_variable_names.html">make_vector_of_numeric_variable_names()</a></code> </p>
-        </td>
-        <td><p>Collection of functions to create variable-specific report</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_data_archived.html">read_data_archived()</a></code> </p>
-        </td>
-        <td><p>Read an archived data package into R as a list object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="space_detective.html">space_detective()</a></code> </p>
-        </td>
-        <td><p>the space detective</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="space_plot.html">space_plot()</a></code> </p>
-        </td>
-        <td><p>the Space plot</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>data_package_copy</span>(
+    <span class='no'>copy.dir</span>
+  )</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>copy.dir</th>
+      <td><p>(character) Directory to which the data package will be copied.</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>(data package) Data package contents as parsed by <code>metajam</code>.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Download data package to temporary directory</span>
+<span class='fu'>data_package_download</span>(<span class='st'>'doi:10.18739/A2DP3X'</span>)
+
+<span class='co'># Copy data package to user specified directory</span>
+<span class='fu'>copy_data_package</span>(<span class='st'>'/Users/csmith/Desktop/data_packages'</span>)
+
+<span class='co'># Clean up</span>
+<span class='fu'>data_package_remove</span>()
+<span class='co'># }</span><div class='input'>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-functions">Functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

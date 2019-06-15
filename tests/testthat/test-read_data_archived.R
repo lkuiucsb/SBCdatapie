@@ -49,6 +49,6 @@ test_that("Return messages", {
   )
   
   # Clean up
-  suppressMessages(remove_data_package_directory())
+  suppressMessages(data_package_remove())
   
 })

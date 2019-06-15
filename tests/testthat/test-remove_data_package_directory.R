@@ -8,9 +8,9 @@ test_that("Return messages", {
   dir.create(paste0(tempdir(), '/data_package'))
   
   # Remove existing directory
-  expect_message(remove_data_package_directory())
+  expect_message(data_package_remove())
   
   # Try removing non-existanat directory
-  expect_message(remove_data_package_directory())
+  expect_message(data_package_remove())
   
 })

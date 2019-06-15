@@ -32,12 +32,6 @@ data_package_remove <- function(pkg.dir = NULL){
     pkg.dir <- paste0(tempdir(), '/data_package')
   }
   
-  # Error if pkg.dir doesn't exist
-  
-  if (!dir.exists(pkg.dir)){
-    stop("Data package directory doesn't exist.")
-  }
-  
   # Remove pkg.dir
   
   unlink(

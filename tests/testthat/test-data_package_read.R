@@ -2,6 +2,10 @@ context('data_package_read()')
 
 test_that("Validate output structure", {
   
+  # Ensure the temporary directory has been removed
+  
+  suppressMessages(data_package_remove())
+  
   # Download data package to temporary directory and read
   
   suppressMessages(
@@ -9,7 +13,7 @@ test_that("Validate output structure", {
   )
   
   
-  pkg <- suppressMessages(
+  output <- suppressMessages(
     suppressWarnings(
       data_package_read()
     )
