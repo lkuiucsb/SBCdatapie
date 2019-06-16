@@ -3,13 +3,13 @@ Title: Suitability evaluation of data-package assistant
 Version: 0.0.0.9000
 Authors@R:
     c(
+    person(given='Colin A.', family= 'Smith', email='colin.smith@wisc.edu', role=c('aut', 'cre')), 
     person(given='Alesia', family='Hallmark', email = 'alesiahallmark@unm.edu', role = c('aut')),
     person(given='Li', family='Kui', email = 'lkui@ucsb.edu', role = c('aut')),
     person(given='Jason J.', family='Mercer', email = 'jmercer4@uwyo.edu', role = c('aut')),
     person(given='An T.', family='Nguyen', email = 'enthusiast@utexas.edu', role = c('aut')),
     person(given='John H.', family='Porter', email = 'jhp72@virginia.edu', role = c('aut')),
     person(given='Sheila', family='Saia', email = 'ssaia@ncsu.edu', role = c('aut')),
-    person(given='Colin A.', family= 'Smith', email='colin.smith@wisc.edu', role=c('aut', 'cre')), 
     person(given="Gert", family="Stulp", email = "g.stulp@rug.nl", role = c("ctb"), comment='Orgnial creator and author of ggplotgui.'),
     person(given='Kathe', family='Todd-Brown', email = 'ktoddbrown@gmail.com', role = c('aut')),
     person(given='Kristin', family='Vanderbilt', email = 'krvander@fiu.edu', role = c('aut')),

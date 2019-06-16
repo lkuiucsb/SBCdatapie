@@ -1,16 +1,21 @@
-reference:
-  - title: Functions
-    desc: Suitability evaluation of data-package assistant
-    contents:
-    - data_entity_summary
-    - data_package_copy
-    - data_package_download
-    - data_package_read
-    - data_package_remove
-    - data_variable_report
-    - ggplot_shiny
-    - make_entity_report
-    - read_data_archived
-    - space_detective
-    - space_plot
-    - time_detective
+title: dummyPackageName
+
+template:
+  bootswatch: spacelab
+
+navbar:
+  title: ~
+  type: default
+  left:
+    - text: Functions
+      href: reference/index.html
+    - text: Articles
+      menu:
+      - text: Overview
+        href: articles/overview.html
+      - text: Static report
+        href: articles/static_report.html
+      - text: Interactive report
+        href: articles/interactive_report.html
+    - text: News
+      href: news/index.html
