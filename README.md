@@ -32,7 +32,10 @@ TBD
 
 ## Road map
 
-TBD
+* Supplement reports with metadata if it exists.
+* Work with `metajam` to support other file formats (e.g. .xlsx).
+* Support other data types (e.g. spatial raster).
+* Create guidelines for integrating this app into data catalogs and websites.
 
 ## Contributing
 
