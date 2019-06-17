@@ -10,30 +10,30 @@ output:
 
 
 ```{r make_report1, echo=F,warning=F,message=F, fig.height=2,fig.width=6}
-library(knitr)
-
 df <- data_entity_list[["data"]]
+head(df)
 
-df <- time.detector(df)
+names(data_entity_list)
+#df <- time.detector(df)
 
 #df$DATE <- as.Date(df$DATE, "%d-%b-%y")
 
-dt2 <- HackathonFunction1(df)
-rownames(dt2) <- dt2$column_name
+#dt2 <- HackathonFunction1(df)
+#rownames(dt2) <- dt2$column_name
 # once on each data frame
 # pandoc.table(HackathonFunction1(df),split.cells=10)
 # pandoc.table(HackathonFunction2(df),split.cells=10)
-print(as.data.frame(dt2))
+#print(as.data.frame(dt2))
 #print(HackathonFunction1(df),n=1e3)
-print(HackathonFunction3(df),n=5e2)
-print(HackathonFunction2(df),n=5e2)
+#print(HackathonFunction3(df),n=5e2)
+#print(HackathonFunction2(df),n=5e2)
 
 space_cols <- space_detective(data_entity_list)
-
+names(space_cols)
 ```
 
 ## Variable Report
-```{r make_report2, echo=F,warning=F,message=F, fig.height=2,fig.width=6}
+```{r make_report2, eval=FALSE, fig.height=2, fig.width=6, message=FALSE, warning=FALSE, include=T}
 attach(df)
 
 
@@ -48,7 +48,7 @@ for(varname in names(df)){
      x<-make_numeric_histogram(df,var,varname)
      print(x)
   }
-  if(is.factor(var) | is_character(var)){
+  if(is.factor(var) | is.character(var)){
     print(varname[1])
     xsummary<-make_cat_variable_summary_df(var)
     print(kable(xsummary,format="pandoc"))

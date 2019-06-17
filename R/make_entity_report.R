@@ -8,10 +8,10 @@ make_entity_report <- function(data_entity_list) {
   report_name <- paste0("report_",data_entity_list[["summary_metadata"]][["file_name"]], ".html")
   
   rmarkdown::render(
-    input = "./static_report_template.Rmd",
+    input = "./R/static_report_template.Rmd",
     output_format = "html_document",
     output_file = report_name,
-    envir = list(data_entity_list = data_entity_list)
+    envir = list(data_entity_list = data_entity_list, df = data_entity_list[["data"]], space_cols = space_detective(data_entity_list))
   )
   
   message(paste("Report generated."))
