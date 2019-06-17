@@ -14,6 +14,8 @@ shinyServer(function(input, output, session) {
 ######### GET DATA FROM DOI #########
 #####################################
   
+  #Initialize the 
+  values <- reactiveValues(shiny_data = NULL)
 
   # make repo download available to downstream app tools
   list_shiny <- eventReactive(input$fetch_button, {
@@ -24,14 +26,44 @@ shinyServer(function(input, output, session) {
       force = TRUE)
   
     # read in data
-    read_data_archived(input$doi)
+      if(!is.null(values$shiny_data)) {
+        #cat("Condition 1", "\n") #Debugging
+        if(attr(isolate(values$shiny_data), "doi") == input$doi) {
+          #cat("Condition 1A", "\n") #Debugging
+         data_list <- isolate(values$shiny_data)
+        } else if(is.null(input$doi) ||
+            is.na(input$doi) ||
+            nchar(input$doi) < 1){
+          #cat("Condition 1B", "\n") #Debugging
+          data_list <- isolate(values$shiny_data)
+        } else {
+          data_list <- data_package_download_wrapper(input$doi)
+          #cat("Condition 1C", "\n") #Debugging
+        }
+        
+      } else {
+        #cat("Condition 2", "\n") #Debugging
+        data_list <- data_package_download_wrapper(input$doi)
+        }
+    data_list
+  })
+  
+  #values$shiny_data <- isolate(list_shiny())
+  
+  observeEvent(input$fetch_button, {
+    values$shiny_data <- list_shiny()
   })
   
   # watch file selection
   observe({
+    #Extract the file names in the data package
     file_names_raw <- names(list_shiny())
+    
+    #Remove the last item in the file list, which contains the location of the
+    #folders in which data were downloaded
     file_names <- file_names_raw[-length(file_names_raw)]
     
+    #Use the file names to populate the dropdown list
     updateSelectInput(
       session,
       "repo_file",
@@ -81,19 +113,8 @@ shinyServer(function(input, output, session) {
 
     df_shiny <- reactive({
       if (input$data_input == 1) {
-        data <- ggplot2::mpg
+        data <- data_example[[1]]$data
       } else if (input$data_input == 2) {
-        # if(is.null(input$repo_data)) { # check this, where else do we define repo_data? (sheila)
-        #   return(data.frame(x = "Fetch your DOI"))
-        # } else if (input$fetch_button == 0) {
-        #   return(data.frame(x = "Press 'Fetch Data' button"))
-        # } else {
-        #   #isolate({
-        #   data <- edi_object_reactive()[[input$repo_file]]
-        #   #})
-        # }
-        
-        # draft code (sheila)
         if(!exists("list_shiny")) {
           return(data.frame(x = "Enter DOI and press 'Fetch Data' button"))
         }

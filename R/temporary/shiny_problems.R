@@ -1,4 +1,4 @@
-remotes::install_github("clnsmth/metajam", build = TRUE)
+#remotes::install_github("clnsmth/metajam", build = TRUE)
 
 unlink(
   paste0(tempdir(), '/data_package'),
@@ -7,20 +7,21 @@ unlink(
 )
 
 #https://gist.github.com/jcheng5/3830244757f8ca25d4b00ce389ea41b3
-withConsoleRedirect <- function(containerId, expr) {
-  # Change type="output" to type="message" to catch stderr
-  # (messages, warnings, and errors) instead of stdout.
-  txt <- capture.output(results <- expr, type = "message")
-  if (length(txt) > 0) {
-    insertUI(paste0("#", containerId), where = "beforeEnd",
-      ui = paste0(txt, "\n", collapse = "")
-    )
-  }
-  results
-}
+# withConsoleRedirect <- function(containerId, expr) {
+#   # Change type="output" to type="message" to catch stderr
+#   # (messages, warnings, and errors) instead of stdout.
+#   txt <- capture.output(results <- expr, type = "message")
+#   if (length(txt) > 0) {
+#     insertUI(paste0("#", containerId), where = "beforeEnd",
+#       ui = paste0(txt, "\n", collapse = "")
+#     )
+#   }
+#   results
+# }
 
 doi_obj <- 'doi:10.6073/pasta/b745934d136ce9ca8de26c5063eee86a'
-source("C:/Projects/ggplotgui/R/read_data_archived.R")
+#doi_obj <- "doi:10.6073/pasta/d3c106dfafbc14ae46e55dbd084a7c68"
+#source("C:/Projects/ggplotgui/R/read_data_archived.R")
 
 #edi_obj <- read_data_archived(doi_obj)
 

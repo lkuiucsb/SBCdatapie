@@ -12,13 +12,16 @@ library(plotly)
 library(ggplot2)
 library(magrittr)
 library(stringr)
+#library(DT)
 #library(tidyverse)
 
 source('EDI_header.R')
 source('EDI_leftPanel.R')
 source('EDI_mainPanel.R')
 source('EDI_rightPanel.R')
-source('read_data_archived.R')
+source('../R/read_data_archived.R')
+source('../R/data_package_download_wrapper.R')
+load('../data/data_example.rda')
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
