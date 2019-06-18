@@ -37,13 +37,15 @@ shinyServer(function(input, output, session) {
           #cat("Condition 1B", "\n") #Debugging
           data_list <- isolate(values$shiny_data)
         } else {
-          data_list <- data_package_download_wrapper(input$doi)
+          data_list <- data_package_shiny_handler(input$doi,
+            isolate(values$shiny_data))
           #cat("Condition 1C", "\n") #Debugging
         }
         
       } else {
         #cat("Condition 2", "\n") #Debugging
-        data_list <- data_package_download_wrapper(input$doi)
+        data_list <- data_package_shiny_handler(input$doi,
+          isolate(values$shiny_data))
         }
     data_list
   })
@@ -57,11 +59,7 @@ shinyServer(function(input, output, session) {
   # watch file selection
   observe({
     #Extract the file names in the data package
-    file_names_raw <- names(list_shiny())
-    
-    #Remove the last item in the file list, which contains the location of the
-    #folders in which data were downloaded
-    file_names <- file_names_raw[-length(file_names_raw)]
+    file_names <- names(list_shiny())
     
     #Use the file names to populate the dropdown list
     updateSelectInput(

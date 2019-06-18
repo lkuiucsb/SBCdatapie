@@ -25,7 +25,8 @@ Imports:
     readr,
     haven,
     readxl,
-    RColorBrewer
+    RColorBrewer,
+    usethis
 Remotes:
     NCEAS/metajam    
 License: MIT
