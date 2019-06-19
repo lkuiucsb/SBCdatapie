@@ -10,11 +10,11 @@
 #' 
 #' @export
 
-space_plot <- function (space_cols = space_cols, var) {
+space_plot <- function (space_cols = space_cols, df, var) {
   
   if (is.vector(space_cols) & length(space_cols) == 2) {
-    x_col <- data_entity_list[["data"]][[space_cols[["lon_col"]]]]
-    y_col <- data_entity_list[["data"]][[space_cols[["lat_col"]]]]
+    x_col <- df[[space_cols[["lon_col"]]]]
+    y_col <- df[[space_cols[["lat_col"]]]]
     
     xrange <-
       max(x_col, na.rm = T) - min(x_col, na.rm = T)
@@ -26,8 +26,8 @@ space_plot <- function (space_cols = space_cols, var) {
     
     non_na <-
       aggregate(
-        data_entity_list[["data"]][[var]],
-        by = data_entity_list(
+        df[[var]],
+        by = df(
           lat = cut(y_col, breaks = yrange),
           lng = cut(x_col, breaks = xrange)
         ),
@@ -58,11 +58,11 @@ space_plot <- function (space_cols = space_cols, var) {
     
     print(non_na_plot)
     
-    if (is.numeric(data_entity_list[["data"]][[var]])) {
+    if (is.numeric(df[[var]])) {
       avg <-
         aggregate(
-          data_entity_list[["data"]][[var]],
-          by = data_entity_list(
+          df[[var]],
+          by = df(
             lat = cut(y_col, breaks = yrange),
             lng = cut(x_col, breaks = xrange)
           ),
@@ -92,11 +92,11 @@ space_plot <- function (space_cols = space_cols, var) {
         guides(fill = guide_legend(paste0("Mean of \n variable \"", var, "\"")))
       
       print(avg_plot)
-    } else if (is.factor(data_entity_list[["data"]][[var]]) | is.character(data_entity_list[["data"]][[var]])) {
+    } else if (is.factor(df[[var]]) | is.character(df[[var]])) {
       prev <-
         aggregate(
-          data_entity_list[["data"]][[var]],
-          by = data_entity_list(
+          df[[var]],
+          by = df(
             lat = cut(y_col, breaks = yrange),
             lng = cut(x_col, breaks = xrange)
           ),
