@@ -10,11 +10,11 @@
 #Code created for Hackathon June 11-13, 2019, Albuquerque, New Mexico. 
 
 #Goal of the project for the Hackathon is to create a GUI interface to allow for 
-#the user to have an interactive or static experience with the variety of the data available. 
+#the user to have an interactive or static experience with the variety of available data. 
 #The user chooses which dataset to use and the interface assists them with bringing in the
 #data and displaying which variables.
 
-#Part of this project involved two part, a static report and an interactive experience. These
+#This project involves two parts, a static report and an interactive experience. These
 #are geared toward separate users, level of data interest or processing. 
 
 #These codes are for the beginning of the static report. In the very beginning of the static report
@@ -22,7 +22,7 @@
 #composed by John Porter, PhD. 
 
 #code edited (function names revised, smalled summary table put as table #2), comments here and above added
-#to describe contents. Uploaded to Hackathon gui GitHub on 6.18.2019. 
+#to describe contents. Uploaded to Hackathon ggplotgui R folder GitHub on 6.18.2019. 
 
 #--------------------------------------------------------
 
