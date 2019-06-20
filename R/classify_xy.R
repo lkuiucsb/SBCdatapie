@@ -12,9 +12,9 @@ classify_xy <- function(list, x_or_y) {
   # set up conditions depending on whether we are looking for lat or lon
   
   if (x_or_y == "x") {
-    name_matches <- paste(c("lon", "lng", "*x", "x$"), collapse = "|")
+    name_matches <- paste(c("(lon){1,2}", "(lng){1,2}", "(^x){1,2}", "(x$){1,2}"), collapse = "|")
   } else if (x_or_y == "y") {
-    name_matches <- paste(c("lat", "*y", "y$"), collapse = "|")
+    name_matches <- paste(c("(lat){1,2}", "(^y){1,2}", "(y$){1,2}"), collapse = "|")
   } else {
     stop("Please specify either x or y as criteria to classify columns.")
   }
