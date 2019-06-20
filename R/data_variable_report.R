@@ -26,7 +26,7 @@ make_vector_of_categorical_variable_names<-function(df){
   attach(df,warn.conflicts = F)
   for(varname in names(df)) {
     var<-get(varname)
-    if(is.factor(var) | is_character(var)){
+    if(is.factor(var) | is.character(var)){
       cat_var_name_vector<-append(cat_var_name_vector, varname, after = length(cat_var_name_vector))
     }
   }
