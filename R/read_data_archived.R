@@ -1,4 +1,4 @@
-#' Read an archived data package into R as a list object
+#' Read an archived data package into R as a list object (THIS FUNCTION IS DEPRECATED. PLEASE USE data_package_download() and data_package_read() INSTEAD.)
 #' 
 #' This function downloads and reads a data package available in the 
 #' \href{https://search.dataone.org/data}{DataONE} network to the R environment 
@@ -37,6 +37,14 @@
 #' 
 
 read_data_archived <- function(data.pkg.doi, download.dir = NULL){
+  
+  # Send deprecation notice ---------------------------------------------------
+  
+  .Deprecated(
+    new = c('data_package_download()', 'data_package_read()'),
+    package = 'dummyPackageTitle',
+    old = 'read_data_archived()'
+  )
   
   # Create directory for data and metadata ------------------------------------
   

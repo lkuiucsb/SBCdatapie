@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Suitability evaluation of data-package assistant • dummyPackageTitle</title>
+<title>Suitability evaluation of data-package assistant • dummyPackageName</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">dummyPackageTitle</a>
+        <a class="navbar-link" href="index.html">dummyPackageName</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -37,13 +37,28 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+  <a href="reference/index.html">Functions</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
      
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/overview.html">Overview</a>
+    </li>
+    <li>
+      <a href="articles/static_report.html">Static report</a>
+    </li>
+    <li>
+      <a href="articles/interactive_report.html">Interactive report</a>
+    </li>
+  </ul>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="news/index.html">News</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -90,7 +105,12 @@
 <div id="road-map" class="section level2">
 <h2 class="hasAnchor">
 <a href="#road-map" class="anchor"></a>Road map</h2>
-<p>TBD</p>
+<ul>
+<li>Supplement reports with metadata if it exists.</li>
+<li>Work with <code>metajam</code> to support other file formats (e.g. .xlsx).</li>
+<li>Support other data types (e.g. spatial raster).</li>
+<li>Create guidelines for integrating this app into data catalogs and websites.</li>
+</ul>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
@@ -140,13 +160,13 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
+<li>Colin A. Smith <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Alesia Hallmark <br><small class="roles"> Author </small>  </li>
 <li>Li Kui <br><small class="roles"> Author </small>  </li>
-<li>Jason J Mercer <br><small class="roles"> Author </small>  </li>
-<li>An T Nguyen <br><small class="roles"> Author </small>  </li>
-<li>John H Porter <br><small class="roles"> Author </small>  </li>
+<li>Jason J. Mercer <br><small class="roles"> Author </small>  </li>
+<li>An T. Nguyen <br><small class="roles"> Author </small>  </li>
+<li>John H. Porter <br><small class="roles"> Author </small>  </li>
 <li>Sheila Saia <br><small class="roles"> Author </small>  </li>
-<li>Colin Smith <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Kathe Todd-Brown <br><small class="roles"> Author </small>  </li>
 <li>Kristin Vanderbilt <br><small class="roles"> Author </small>  </li>
 <li>Jocelyn Wardrup <br><small class="roles"> Author </small>  </li>
@@ -158,13 +178,15 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/IMCR-Hackathon/ggplotgui"><img src="https://travis-ci.com/IMCR-Hackathon/ggplotgui.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/IMCR-Hackathon/ggplotgui"><img src="https://ci.appveyor.com/api/projects/status/github/IMCR-Hackathon/ggplotgui?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://codecov.io/github/IMCR-Hackathon/ggplotgui?branch=master"><img src="https://codecov.io/github/IMCR-Hackathon/ggplotgui/coverage.svg?branch=master" alt="codecov.io"></a></li>
 </ul>
 </div>
 </div>
 </div>
 
       <footer><div class="copyright">
-  <p>Developed by Alesia Hallmark, Li Kui, Jason J Mercer, An T Nguyen, John H Porter, Sheila Saia, Colin Smith, Kathe Todd-Brown, Kristin Vanderbilt, Jocelyn Wardrup.</p>
+  <p>Developed by Colin A. Smith, Alesia Hallmark, Li Kui, Jason J. Mercer, An T. Nguyen, John H. Porter, Sheila Saia, Kathe Todd-Brown, Kristin Vanderbilt, Jocelyn Wardrup.</p>
 </div>
 
 <div class="pkgdown">

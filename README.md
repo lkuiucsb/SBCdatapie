@@ -2,6 +2,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.com/IMCR-Hackathon/ggplotgui.svg?branch=master)](https://travis-ci.org/IMCR-Hackathon/ggplotgui)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IMCR-Hackathon/ggplotgui?branch=master&svg=true)](https://ci.appveyor.com/project/IMCR-Hackathon/ggplotgui)
+[![codecov.io](https://codecov.io/github/IMCR-Hackathon/ggplotgui/coverage.svg?branch=master)](https://codecov.io/github/IMCR-Hackathon/ggplotgui?branch=master)
 
 # ggplotgui
 
@@ -31,7 +32,10 @@ TBD
 
 ## Road map
 
-TBD
+* Supplement reports with metadata if it exists.
+* Work with `metajam` to support other file formats (e.g. .xlsx).
+* Support other data types (e.g. spatial raster).
+* Create guidelines for integrating this app into data catalogs and websites.
 
 ## Contributing
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_data_archived.R
 \name{read_data_archived}
 \alias{read_data_archived}
-\title{Read an archived data package into R as a list object}
+\title{Read an archived data package into R as a list object (THIS FUNCTION IS DEPRECATED. PLEASE USE data_package_download() and data_package_read() INSTEAD.)}
 \usage{
 read_data_archived(data.pkg.doi, download.dir = NULL)
 }
