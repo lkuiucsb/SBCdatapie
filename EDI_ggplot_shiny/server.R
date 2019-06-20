@@ -14,49 +14,57 @@ shinyServer(function(input, output, session) {
 ######### GET DATA FROM DOI #########
 #####################################
   
-  #Initialize the 
+  #Initialize the output that will be displayed using the "Fetch data..." option
   values <- reactiveValues(shiny_data = NULL)
 
-  # make repo download available to downstream app tools
+  #Make repo download available to downstream app tools
   list_shiny <- eventReactive(input$fetch_button, {
-    # delete existing files in tempdir
-    unlink(
-      paste0(tempdir(), "/data_package"),
-      recursive = TRUE, 
-      force = TRUE)
+    #Delete existing files in tempdir. This step may prove problematic.
+    # unlink(
+    #   paste0(tempdir(), "/data_package"),
+    #   recursive = TRUE, 
+    #   force = TRUE)
+    
   
-    # read in data
+    #Read in data
+    #In the future, a lot of this logic could be placed in the function
+    # data_package_shiny_handler, thereby unifying the concepts expressed
+    # below and in said function.
       if(!is.null(values$shiny_data)) {
-        #cat("Condition 1", "\n") #Debugging
+        #The downloaded data is initially set to NULL, so it is easier to check
+        # if 
         if(attr(isolate(values$shiny_data), "doi") == input$doi) {
-          #cat("Condition 1A", "\n") #Debugging
+          #Return the existing dataset when the same doi is input
+          #cat("App condition 1A\n") #Debugging
          data_list <- isolate(values$shiny_data)
         } else if(is.null(input$doi) ||
             is.na(input$doi) ||
             nchar(input$doi) < 1){
-          #cat("Condition 1B", "\n") #Debugging
+          #Return the existing dataset when an invalid doi is entered
+          #cat("App condition 1B\n") #Debugging
           data_list <- isolate(values$shiny_data)
         } else {
+          #Otherwise download the data
           data_list <- data_package_shiny_handler(input$doi,
             isolate(values$shiny_data))
-          #cat("Condition 1C", "\n") #Debugging
+          cat("App condition 1C\n") #Debugging
         }
-        
       } else {
-        #cat("Condition 2", "\n") #Debugging
+        cat("App condition 2\n") #Debugging
+        #If there is not data (NULL) then try to download the data package
         data_list <- data_package_shiny_handler(input$doi,
           isolate(values$shiny_data))
         }
     data_list
   })
   
-  #values$shiny_data <- isolate(list_shiny())
-  
+  #Update the values after the "Fetch data" button is pressed and the list_shiny
+  # code is run.
   observeEvent(input$fetch_button, {
     values$shiny_data <- list_shiny()
   })
   
-  # watch file selection
+  #Update the data package columns to be selected
   observe({
     #Extract the file names in the data package
     file_names <- names(list_shiny())

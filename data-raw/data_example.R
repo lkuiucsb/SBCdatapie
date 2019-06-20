@@ -17,6 +17,11 @@ data_example <- data_package_wrapper(doi_string)
 # example dataset.
 names(data_example)[1] <- "Example_dataset.csv"
 
+#Reassign the doi. This makes it so if someone actually downloads this
+# particular doi they won't get a mislabled (i.e., Example_dataset.csv)
+# data package element.
+attributes(data_example)$doi <- NA
+
 #Reassign the folder location to something more generic
 attributes(data_example)$folder <- NA
 

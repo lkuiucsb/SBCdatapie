@@ -24,6 +24,7 @@ source('EDI_rightPanel.R')
 source('../R/data_package_download.R')
 source('../R/data_package_read.R')
 source('../R/data_package_wrapper.R')
+source('../R/data_package_remove.R')
 source('../R/data_package_shiny_handler.R')
 
 load('../data/data_example.rda')
