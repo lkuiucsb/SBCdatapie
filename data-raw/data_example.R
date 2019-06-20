@@ -22,7 +22,8 @@ names(data_example)[1] <- "Example_dataset.csv"
 # data package element.
 attributes(data_example)$doi <- NA
 
-#Reassign the folder location to something more generic
+#Reassign the folder location to NA, since the data isn't actually downloaded
+# locally.
 attributes(data_example)$folder <- NA
 
 #Save the data
