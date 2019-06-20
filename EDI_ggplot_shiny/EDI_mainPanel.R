@@ -81,6 +81,8 @@ EDI_mainPanel <- function() {
                  )
         ),
         id = "tabs"
-      )
+      ),
+    conditionalPanel(condition="$('html').hasClass('shiny-busy')",
+                            tags$div("Loading...",id="loadmessage"))
   )
 }
