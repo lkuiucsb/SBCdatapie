@@ -7,6 +7,7 @@
 
 #' @import ggplot2
 #' @import shiny
+#' @import shinyjs
 #' @import readxl
 #' @import haven
 #' @import RColorBrewer
