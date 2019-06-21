@@ -12,6 +12,8 @@
 
 space_plot <- function (space_cols = space_cols, df, var) {
   
+  theme_set(theme_bw(base_size = 7))
+  
   if (is.vector(space_cols) & length(space_cols) == 2) {
     x_col <- df[[space_cols[["lon_col"]]]]
     y_col <- df[[space_cols[["lat_col"]]]]
@@ -27,9 +29,9 @@ space_plot <- function (space_cols = space_cols, df, var) {
     non_na <-
       aggregate(
         df[[var]],
-        by = df(
-          lat = cut(y_col, breaks = yrange),
-          lng = cut(x_col, breaks = xrange)
+        by = list(
+          lat = cut(y_col, breaks = ybreak),
+          lng = cut(x_col, breaks = xbreak)
         ),
         FUN = function(x) {
           sum(!is.na(x))
@@ -56,15 +58,13 @@ space_plot <- function (space_cols = space_cols, df, var) {
            y = "lat (binned)") +
       guides(fill = guide_legend(paste0("Count of non-NAs in \n variable \"", var, "\"")))
     
-    print(non_na_plot)
-    
     if (is.numeric(df[[var]])) {
       avg <-
         aggregate(
           df[[var]],
-          by = df(
-            lat = cut(y_col, breaks = yrange),
-            lng = cut(x_col, breaks = xrange)
+          by = list(
+            lat = cut(y_col, breaks = ybreak),
+            lng = cut(x_col, breaks = xbreak)
           ),
           FUN = function(x) {
             mean(x, na.rm = T)
@@ -91,14 +91,15 @@ space_plot <- function (space_cols = space_cols, df, var) {
              y = "lat (binned)") +
         guides(fill = guide_legend(paste0("Mean of \n variable \"", var, "\"")))
       
-      print(avg_plot)
+      return(list(non_na_plot, avg_plot))
+      
     } else if (is.factor(df[[var]]) | is.character(df[[var]])) {
       prev <-
         aggregate(
           df[[var]],
-          by = df(
-            lat = cut(y_col, breaks = yrange),
-            lng = cut(x_col, breaks = xrange)
+          by = list(
+            lat = cut(y_col, breaks = ybreak),
+            lng = cut(x_col, breaks = xbreak)
           ),
           FUN = function(x) {
             names(which.max(table(x)))
@@ -123,7 +124,8 @@ space_plot <- function (space_cols = space_cols, df, var) {
              y = "lat (binned)") +
         guides(fill = guide_legend(paste0("Level in \n variable \"", var, "\"")))
       
-      print(prev_plot)
+      return(list(non_na_plot, prev_plot))
+      
     }
   }
 }
