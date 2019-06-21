@@ -18,6 +18,8 @@ CleverName_shiny <- function( dataset = NA ) {
   
   ######### UI definition #############
   ui <- fluidPage(
+    #Allows app to print messages to the console
+    shinyjs::useShinyjs(),
     
     ###### Application title ########
     headerPanel("EDI Data Viewer"),
@@ -145,7 +147,9 @@ CleverName_shiny <- function( dataset = NA ) {
     mainPanel(width = 6,
               tabsetPanel(
                 type = "tabs",
-                tabPanel("Raw Data", dataTableOutput("out_table")),
+                tabPanel("Raw Data",
+                  dataTableOutput("out_table"),
+                  textOutput("message_text")),
                 tabPanel("Data Summary", dataTableOutput("summary_table")),
                 tabPanel("Plot",
                          mainPanel(
@@ -431,6 +435,10 @@ CleverName_shiny <- function( dataset = NA ) {
   
     #Make repo download available to downstream app tools
     list_shiny <- eventReactive(input$fetch_button, {
+      #Allow messages to be printed to the console
+      withCallingHandlers({
+        #Initialize the package used to print messages
+        shinyjs::html("message_text", "")
       #Read in data
       #In the future, a lot of this logic could be placed in the function
       # data_package_shiny_handler, thereby unifying the concepts expressed
@@ -464,14 +472,25 @@ CleverName_shiny <- function( dataset = NA ) {
           #If there is not data (NULL) then try to download the data package
           data_list <- data_package_shiny_handler(input$doi,
             isolate(values$shiny_data))
-          }
+        }
+      },
+        #Generate the loading message
+        message = function(m) {
+          shinyjs::html(id = "message_text",
+            html = paste(m$message, "<br>"),
+            add = TRUE)
+        })
       data_list
-    })
+    }
+      )
     
     #Update the values after the "Fetch data" button is pressed and the list_shiny
     # code is run.
     observeEvent(input$fetch_button, {
+      #populate the object
       values$shiny_data <- list_shiny()
+      #Clear the console of any messages
+      shinyjs::html(id = "message_text", html = "")
     })
     
     #Update the data package columns to be selected
