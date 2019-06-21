@@ -418,7 +418,7 @@ CleverName_shiny <- function( dataset = NA ) {
   ) #end fluidPanel
   
   ############Server function ############
-  shinyServer(function(input, output, session) {
+  server <- shinyServer(function(input, output, session) {
   
   #####################################
   ######### GET DATA FROM DOI #########
