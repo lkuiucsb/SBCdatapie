@@ -14,11 +14,17 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.4.0",
+    "version": "3.5.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.4.0 (2017-04-21)",
+  "runtimePlatform": "R version 3.5.2 (2018-12-20)",
   "author": [
+    {
+      "@type": "Person",
+      "givenName": "Colin A.",
+      "familyName": "Smith",
+      "email": "colin.smith@wisc.edu"
+    },
     {
       "@type": "Person",
       "givenName": "Alesia",
@@ -33,19 +39,19 @@
     },
     {
       "@type": "Person",
-      "givenName": ["Jason", "J"],
+      "givenName": "Jason J.",
       "familyName": "Mercer",
       "email": "jmercer4@uwyo.edu"
     },
     {
       "@type": "Person",
-      "givenName": ["An", "T"],
+      "givenName": "An T.",
       "familyName": "Nguyen",
       "email": "enthusiast@utexas.edu"
     },
     {
       "@type": "Person",
-      "givenName": ["John", "H"],
+      "givenName": "John H.",
       "familyName": "Porter",
       "email": "jhp72@virginia.edu"
     },
@@ -54,12 +60,6 @@
       "givenName": "Sheila",
       "familyName": "Saia",
       "email": "ssaia@ncsu.edu"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Colin",
-      "familyName": "Smith",
-      "email": "colin.smith@wisc.edu"
     },
     {
       "@type": "Person",
@@ -91,7 +91,7 @@
   "maintainer": [
     {
       "@type": "Person",
-      "givenName": "Colin",
+      "givenName": "Colin A.",
       "familyName": "Smith",
       "email": "colin.smith@wisc.edu"
     }
@@ -239,6 +239,9 @@
     }
   ],
   "readme": "https://github.com/IMCR-Hackathon/ggplotgui/blob/master/README.md",
-  "fileSize": "1271.45KB",
-  "contIntegration": "https://travis-ci.org/gertstulp/ggplotgui"
+  "fileSize": "1288.646KB",
+  "contIntegration": "https://travis-ci.org/gertstulp/ggplotgui",
+  "copyrightHolder": {},
+  "funder": {},
+  "releaseNotes": "https://github.com/IMCR-Hackathon/ggplotgui/blob/master/NEWS.md"
 }
