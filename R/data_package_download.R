@@ -52,10 +52,10 @@
 #' )
 #' 
 #' # View directory contents
-#' dir('/Desktop/data_packages/doi_10.18739_A2DP3X')
+#' dir('/Desktop/data_packages/AlSR200915')
 #' 
 #' # Clean up
-#' data_package_remove('/Desktop/data_packages/doi_10.18739_A2DP3X')
+#' data_package_remove('/Desktop/data_packages/AlSR200915')
 #' 
 #' }
 #' 
@@ -101,12 +101,18 @@ data_package_download <- function(data.pkg.doi, download.dir = NULL){
     parent_dir <- paste0(
       download.dir,
       '/',
-      stringr::str_remove(
-        stringr::str_remove(
-          pkg_dir_name[1],
-          '__[:graph:]*'
+      abbreviate(
+        stringr::str_remove_all(
+          stringr::str_remove(
+            stringr::str_remove(
+              pkg_dir_name[1],
+              '__[:graph:]*'
+            ),
+            '([:graph:]*/)*'
+          ),
+          '_'
         ),
-        '([:graph:]*/)*'
+        10
       )
     )
     
