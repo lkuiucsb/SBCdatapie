@@ -37,7 +37,11 @@ kable(head(df, 10))
 #### Column-wise summaries: numerical variables
 
 ```{r echo=FALSE}
+if (length(dt1) > 0) {
 kable(as.data.frame(dt1))
+} else if (length(dt1) == 0) {
+  print("No numerical variables found.")
+}
 ```
 
 &nbsp;
@@ -45,7 +49,11 @@ kable(as.data.frame(dt1))
 #### Column-wise summaries: Categorical and character variables
 
 ```{r}
+if (length(dt3) > 0) {
 kable(dt3,n=5e2)
+} else if (length(dt3) == 0) {
+  print("No categorical/character variables found.")
+}
 ```
 
 &nbsp;
@@ -53,7 +61,11 @@ kable(dt3,n=5e2)
 #### Column-wise summaries: Levels in Categorical and character variables
 
 ```{r}
+if (length(dt2) > 0) {
 kable(dt2,n=5e2)
+} else if (length(dt2) == 0) {
+  print("No categorical/character variables found.")
+}
 ```
 
 &nbsp;
