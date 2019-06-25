@@ -2,7 +2,7 @@
 #' Wrapper function to generate complete HTML report: entity-level  plus variable-level reports for one entity.
 #'
 #' @param entity_list (list) A list object containing information on a single data entity in metajam output format.
-#' @param output_path (character) Path to save complete HTML report to. If NULL, will default to a RStudio pop-up window.
+#' @param output_path (character) Path to save complete HTML report to. If NULL, will default to <pkg dir>/output. If "ask", a Rstudio pop-up window appears allowing choice of save directory (requires RStudio >= 1.1.287).
 #'
 #' @return A HTML file with complete static on the chosen data entity.
 
@@ -57,15 +57,17 @@ static_report_complete <- function(entity_list, output_path = NULL) {
   template_path <- "./inst/rmd/static_report_template.Rmd"
   
   # set report output path. Outside of package context, this is in relation to the location of the static template
-  output_path <- "../../output/"
+  if (is.null(output_path)) {
+    output_path <- "../../output"
+  } else if (output_path == "ask") {
+    output_path <- rstudioapi::selectDirectory(caption = "Select directory to save report to.")
+  }
   
   try(rmarkdown::render(
     input = template_path,
     output_format = "html_document",
-    output_file = paste0(output_path, report_name),
+    output_dir = output_path,
+    output_file = report_name,
     envir = envir
   ))
-  #return(var_report)
-  
-  message(paste("Report generated."))
 }
