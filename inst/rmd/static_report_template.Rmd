@@ -32,9 +32,9 @@ kable(head(df, 10))
 #### Column-wise summaries: numerical variables
 
 ```{r echo=FALSE}
-if (length(dt1) > 0) {
-kable(as.data.frame(dt1))
-} else if (length(dt1) == 0) {
+if (length(entity_report[["numvars"]]) > 0) {
+kable(as.data.frame(entity_report[["numvars"]]))
+} else {
   print("No numerical variables found.")
 }
 ```
@@ -44,9 +44,9 @@ kable(as.data.frame(dt1))
 #### Column-wise: Categorical and character variables
 
 ```{r}
-if (length(dt3) > 0) {
-kable(dt3,n=5e2)
-} else if (length(dt3) == 0) {
+if (length(entity_report[["catvars"]]) > 0) {
+kable(entity_report[["catvars"]])
+} else {
   print("No categorical/character variables found.")
 }
 ```
@@ -56,9 +56,9 @@ kable(dt3,n=5e2)
 #### Column-wise: Levels in Categorical and character variables
 
 ```{r}
-if (length(dt2) > 0) {
-kable(dt2,n=5e2)
-} else if (length(dt2) == 0) {
+if (length(entity_report[["levels"]]) > 0) {
+kable(entity_report[["levels"]])
+} else {
   print("No categorical/character variables found.")
 }
 ```
@@ -86,18 +86,22 @@ xy <- space_detective(entity_list)
 ## Variable-by-variable Report
 
 ```{r results='asis'}
-for (i in 1:length(var_report)){
+for (i in 1:length(var_report)) {
    cat('\n')
    cat('\n')
    cat(paste("### Variable:", var_report[[i]][["var_name"]]))
    cat('\n')
    print(var_report[[i]][["plots"]][["x"]])
    cat('\n')
-   print(var_report[[i]][["missing"]])
-   cat('\n')
-   print(var_report[[i]][["space"]][[1]])
-   cat('\n')
-   print(var_report[[i]][["space"]][[2]])
-   cat('\n')
+   if (!is.null(var_report[[i]][["missing"]])) {
+      print(var_report[[i]][["missing"]])
+      cat('\n')
+   }
+   if (!is.null(var_report[[i]][["space"]])) {
+      print(var_report[[i]][["space"]][[1]])
+      cat('\n')
+      print(var_report[[i]][["space"]][[2]])
+      cat('\n')
+   }
 }
 ```

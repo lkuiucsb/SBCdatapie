@@ -136,7 +136,8 @@ space_plot <- function (space_cols = space_cols, df, var) {
         
       }
     } else if (xrange == 0 & yrange == 0){
-      return("Spatial range in both dimensions is zero. Spatial plots will not be generated.")
+      message("Spatial range in both dimensions is zero. Spatial plots will not be generated.")
+      return(NULL)
     }
   }
 }
