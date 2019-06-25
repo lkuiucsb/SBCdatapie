@@ -52,14 +52,14 @@ data_package_download(
 
 # Read data package into R
 pkg <- data_package_read(
-  data.pkg.path = '/Desktop/data_packages/doi_10.18739_A2DP3X'
+  data.pkg.path = '/Desktop/data_packages/AlSR200915'
 )
 
 # View data package contents
 View(pkg)
 
 # Clean up
-data_package_remove('/Desktop/data_packages/doi_10.18739_A2DP3X')
+data_package_remove('/Desktop/data_packages/AlSR200915')
 
 }
 

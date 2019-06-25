@@ -54,7 +54,7 @@ test_that("Validate output structure", {
             unlist(output, recursive = FALSE), class
           )
         )
-      ) %in% c('tbl_df', 'tbl', 'data.frame')
+      ) %in% c('tbl_df', 'tbl', 'data.frame', 'spec_tbl_df')
     )
   )
   

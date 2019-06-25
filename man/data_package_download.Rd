@@ -54,10 +54,10 @@ data_package_download(
 )
 
 # View directory contents
-dir('/Desktop/data_packages/doi_10.18739_A2DP3X')
+dir('/Desktop/data_packages/AlSR200915')
 
 # Clean up
-data_package_remove('/Desktop/data_packages/doi_10.18739_A2DP3X')
+data_package_remove('/Desktop/data_packages/AlSR200915')
 
 }
 
