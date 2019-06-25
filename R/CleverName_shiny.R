@@ -40,40 +40,41 @@ CleverName_shiny <- function( dataset = NA ) {
                      condition = "input.data_input=='1'",
                      h5("dataset 'mpg' from library(ggplot2) loaded"),
                      downloadButton("downloadData",
-                                    "Download data"))
-                 ),
-                 conditionalPanel(
-                   condition = "input.data_input=='2'",
-                   h5("Enter DOI"),
-                   textInput("doi", "e.g., doi:10.56as4f980...", NULL),
-                   actionButton("fetch_button", "Fetch Data"),
-                   selectInput("repo_file", "Select file:", 
-                               choices = "",
-                               selected = "No file selected")
-                 ),
-                 conditionalPanel(
-                   condition = "input.data_input=='3'",
-                   h5("Upload file: "),
-                   fileInput("upload", "", multiple = FALSE),
-                   selectInput("file_type", "Type of file:",
-                               list("text (csv)" = "text",
-                                    "Excel" = "Excel",
-                                    "SPSS" = "SPSS",
-                                    "Stata" = "Stata",
-                                    "SAS" = "SAS"),
-                               selected = "text"),
+                                    "Download data")
+                     ),
                    conditionalPanel(
-                     condition = "input.file_type=='text'",
-                     selectInput("upload_delim", "Delimiter:",
-                                 list("Semicolon" = ";",
-                                      "Tab" = "\t",
-                                      "Comma" = ",",
-                                      "Space" = " "),
-                                 selected = "Semicolon")),
-                   actionButton("submit_datafile_button",
-                                "Submit datafile")
-                 ),
-                 
+                     condition = "input.data_input=='2'",
+                     h5("Enter DOI"),
+                     textInput("doi", "e.g., doi:10.56as4f980...", NULL),
+                     actionButton("fetch_button", "Fetch Data"),
+                     selectInput("repo_file", "Select file:", 
+                                 choices = "",
+                                 selected = "No file selected")
+                     ),
+                   conditionalPanel(
+                     condition = "input.data_input=='3'",
+                     h5("Upload file: "),
+                     fileInput("upload", "", multiple = FALSE),
+                     selectInput("file_type", "Type of file:",
+                                 list("text (csv)" = "text",
+                                      "Excel" = "Excel",
+                                      "SPSS" = "SPSS",
+                                      "Stata" = "Stata",
+                                      "SAS" = "SAS"),
+                                 selected = "text"),
+                     conditionalPanel(
+                       condition = "input.file_type=='text'",
+                       selectInput("upload_delim", "Delimiter:",
+                                   list("Semicolon" = ";",
+                                        "Tab" = "\t",
+                                        "Comma" = ",",
+                                        "Space" = " "),
+                                   selected = "Semicolon")
+                       ),
+                     actionButton("submit_datafile_button",
+                                  "Submit datafile")
+                     )
+                   ),
                  conditionalPanel(
                    condition = "input.tabs == 'Data Summary'",
                    h4("Summary of numerical values")
