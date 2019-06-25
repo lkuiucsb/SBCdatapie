@@ -1,7 +1,7 @@
 #'
 #' Wrapper function to generate complete HTML report: entity-level  plus variable-level reports for one entity.
 #'
-#' @param data_entity_list (list) A list object containing information on a single data entity in metajam output format.
+#' @param entity_list (list) A list object containing information on a single data entity in metajam output format.
 #' @param output_path (character) Path to save complete HTML report to. If NULL, will default to a RStudio pop-up window.
 #'
 #' @return A HTML file with complete static on the chosen data entity.
