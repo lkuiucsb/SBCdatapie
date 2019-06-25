@@ -11,7 +11,6 @@
 #' @export
 
 space_plot <- function (space_cols = space_cols, df, var) {
-  theme_set(theme_bw(base_size = 7))
   
   if (is.vector(space_cols) & length(space_cols) == 2) {
     x_col <- df[[space_cols[["lon_col"]]]]
@@ -48,11 +47,6 @@ space_plot <- function (space_cols = space_cols, df, var) {
           fill = x
         )) +
         geom_tile(colour = "white", size = 0.25) +
-        theme(
-          axis.text.x = element_text(angle = 60, hjust = 1),
-          plot.background = element_blank(),
-          panel.border = element_blank()
-        ) +
         scale_fill_gradient(low = "blue",
                             high = "red",
                             na.value = "transparent") +
@@ -90,11 +84,6 @@ space_plot <- function (space_cols = space_cols, df, var) {
             fill = x
           )) +
           geom_tile(colour = "white", size = 0.25) +
-          theme(
-            axis.text.x = element_text(angle = 60, hjust = 1),
-            plot.background = element_blank(),
-            panel.border = element_blank()
-          ) +
           scale_fill_gradient(low = "blue",
                               high = "red",
                               na.value = "transparent") +
@@ -132,11 +121,6 @@ space_plot <- function (space_cols = space_cols, df, var) {
             fill = x
           )) +
           geom_tile(colour = "white", size = 0.25) +
-          theme(
-            axis.text.x = element_text(angle = 60, hjust = 1),
-            plot.background = element_blank(),
-            panel.border = element_blank()
-          ) +
           coord_fixed(ratio = 1) +
           labs(
             title = paste0(
@@ -148,7 +132,6 @@ space_plot <- function (space_cols = space_cols, df, var) {
             y = "lat (binned)"
           ) +
           guides(fill = guide_legend(paste0("Level in \n variable \"", var, "\"")))
-        
         return(list(non_na_plot, prev_plot))
         
       }
