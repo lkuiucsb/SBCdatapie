@@ -59,3 +59,12 @@ data_package_shiny_handler <- function(data.pkg.doi = NA, current.data = NULL,
   }
   data
 }
+
+# proposed method for shorting file names
+# shorten_file_name <- function(single_long_file_name){
+#   file_name_split <- str_split(single_long_file_name, pattern = "\\.")[[1]]
+#   file_name_with_ext <- file_name_split[str_detect(file_name_split, pattern = "__")]
+#   file_name_without_ext <- str_split(file_name_with_ext, pattern = "__")[[1]][1]
+#   return(file_name_without_ext)
+# }
+# file_names <- map_chr(names(data), shorten_file_name)
