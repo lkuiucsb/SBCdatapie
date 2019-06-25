@@ -25,9 +25,10 @@ Imports:
     readr,
     haven,
     readxl,
-    RColorBrewer
+    RColorBrewer,
+    metajam
 Remotes:
-    NCEAS/metajam    
+    clnsmth/metajam    
 License: MIT
 BugReports: https://github.com/IMCR-Hackathon/ggplotgui/issues
 URL: https://github.com/IMCR-Hackathon/ggplotgui
