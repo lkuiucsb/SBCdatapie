@@ -1,15 +1,31 @@
-make_var_report <- function(space_cols = space_cols, entity_data, varname) {
+#' 
+#' Generate variable-level report
+#' 
+#' @param 
+
+
+
+static_report_variable <- function(entity_df, varname, space_cols = space_cols) {
   
-  var <- entity_data[[varname]]
+  # get data from one column
+  var <- entity_df[[varname]]
   
+  # set ggplot theme
+  theme_set(theme_bw(base_size = 7) + theme(
+    axis.text.x = element_text(angle = 60, hjust = 1),
+    plot.background = element_blank(),
+    panel.border = element_blank()
+  ))
+  
+  # lifted somewhat wholesale from John's Rmd report
   if (is.numeric(var)) {
     xsummary <- make_numeric_variable_summary_df(var)
-    x <- make_numeric_histogram(entity_data, var, varname)
-    plots <- list(xsummary=xsummary, x=x)
+    x <- make_numeric_histogram(entity_df, var, varname)
+    plots <- list(xsummary = xsummary, x = x)
   } else if (is.factor(var) | is.character(var)) {
     xsummary <- make_cat_variable_summary_df(var)
-    x <- make_categorical_histogram(entity_data, var, varname)
-    plots <- list(xsummary=xsummary, x=x)
+    x <- make_categorical_histogram(entity_df, var, varname)
+    plots <- list(xsummary = xsummary, x = x)
   } else {
     plots <- NULL
   }
@@ -17,9 +33,9 @@ make_var_report <- function(space_cols = space_cols, entity_data, varname) {
   try(missing <- if (sum(plots$xsummary$num_missing) > 0) {
     make_missing_plot(var)
   })
-  # spatial heatmap function for variable
-  
-  space <- space_plot(space_cols = space_cols, df = entity_data, var = varname)
+
+  # make spatial heatmaps
+  space <- space_plot(space_cols = space_cols, df = entity_df, var = varname)
   
   var_output <- list(
     var_name = varname,
