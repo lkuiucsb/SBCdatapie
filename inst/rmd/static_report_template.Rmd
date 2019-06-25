@@ -17,14 +17,6 @@ knitr::opts_chunk$set(comment=NA, echo = F, message = F, warning = F, out.width 
 
 &nbsp;
 
-Processing began at: `r format(begin_time, '%Y-%B-%d %H:%M:%S')`.
-
-Processing finished at: `r format(end_time, '%Y-%B-%d %H:%M:%S')`.
-
-`r end_time - begin_time` minutes is how long it took to generate this report.
-
-&nbsp;
-
 ## Overall Data Table Report 
 
 &nbsp;
