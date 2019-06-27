@@ -18,16 +18,21 @@ Authors@R:
 Description: Easily explore data by creating ggplots through a (shiny-)GUI. R-code to recreate graph provided.   
 Depends: R (>= 3.3.2)
 Imports:
-    plotly,
-    tidyverse,
-    shiny,
+    cowplot,
+    dplyr,
     ggplot2,
-    stringr,
-    readr,
     haven,
-    readxl,
+    lubridate,
+    metajam,
+    plotly,
     RColorBrewer,
-    metajam
+    readr,
+    readxl,
+    scales,
+    shiny,
+    stringr,
+    tidyr,
+    tidyverse
 Remotes:
     clnsmth/metajam    
 License: MIT
