@@ -1,15 +1,16 @@
 #' make_cat_variable_summary_df
 #' 
-#' Describe what this function does
+#' Creates a dataframe that contains summary information (type, number of levels, num_valid, num_missing)
+#' about categorical variables. 
 #' 
 #' @usage
 #'   make_cat_variable_summary_df(var)
 #'
 #' @param var
-#'   Define this parameter.
+#'   The categorical vector to be summarized
 #'
 #' @return
-#'   What does this function return?
+#'   A dataframe containing summary information. 
 #' 
 #' @export
 #'
