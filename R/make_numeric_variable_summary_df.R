@@ -1,15 +1,15 @@
 #' make_numeric_variable_summary_df
 #' 
-#' Describe what this function does
+#' Creates a dataframe containing summary (median,max,min,num_valid,num_missing) information for numerical variables. 
 #' 
 #' @usage
 #'   make_numeric_variable_summary_df(var)
 #'
 #' @param var
-#'   Define this parameter.
+#'   Name of the vector containing the numbers to be summarized
 #'
 #' @return
-#'   What does this function return?
+#'   A dataframe containing the summary information. 
 #' 
 #' @export
 #'
