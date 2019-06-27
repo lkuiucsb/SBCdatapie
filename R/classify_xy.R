@@ -12,9 +12,9 @@ classify_xy <- function(list, x_or_y) {
   # set up conditions depending on whether we are looking for lat or lon
   
   if (x_or_y == "x") {
-    name_matches <- paste(c("lon", "lng", "*x", "x$"), collapse = "|")
+    name_matches <- paste(c("(lon){1,2}", "(lng){1,2}", "(^x){1,2}", "(x$){1,2}"), collapse = "|")
   } else if (x_or_y == "y") {
-    name_matches <- paste(c("lat", "*y", "y$"), collapse = "|")
+    name_matches <- paste(c("(lat){1,2}", "(^y){1,2}", "(y$){1,2}"), collapse = "|")
   } else {
     stop("Please specify either x or y as criteria to classify columns.")
   }
@@ -30,12 +30,12 @@ classify_xy <- function(list, x_or_y) {
       
       # defining condition layers
       name_cond <-
-        grepl(name_matches, c(attr_row[["attributeName"]]))
+        grepl(name_matches, c(attr_row[["attributeName"]]), ignore.case = T)
       scale_cond <-
         grepl(scale_matches,
-              c(attr_row[["measurementScale"]]))
+              c(attr_row[["measurementScale"]]), ignore.case = T)
       unit_cond <-
-        grepl(unit_matches, c(attr_row[["unit"]]))
+        grepl(unit_matches, c(attr_row[["unit"]]), ignore.case = T)
       
       if (scale_cond) {
         if (name_cond) {
@@ -56,7 +56,7 @@ classify_xy <- function(list, x_or_y) {
     
     data_only <- function (column) {
       name_cond <-
-        grepl(name_matches, colnames(column))
+        grepl(name_matches, colnames(column), ignore.case = T)
       type_cond <- is.numeric(column)
       range_cond_x <- min(column) >= -180 & max(column) <= 180
       range_cond_y <- min(column) >= -90 & max(column) <= 90

@@ -34,8 +34,8 @@ space_detective <- function(list) {
     
     if (x_hits == 1 & y_hits == 1) {
       # get target column names
-      x_col <- list[["attribute_metadata"]][which(x_detect), "attributeName"]
-      y_col <- list[["attribute_metadata"]][which(y_detect), "attributeName"]
+      x_col <- list[["attribute_metadata"]][which(as.logical(x_detect)), "attributeName"]
+      y_col <- list[["attribute_metadata"]][which(as.logical(y_detect)), "attributeName"]
       
       message(
         paste("Space detective found a single pair of columns containing spatial information. \n Latitude column: ", y_col, "\n Longitude column: ", x_col, "\n")

@@ -107,6 +107,10 @@ data_package_read <- function(data.pkg.path = NULL){
     )
   )
 
+  # Use missing codes if available; substitute with NAs
+  
+  output <- lapply(output, use_missing_code)
+  
   # Return list object --------------------------------------------------------
   
   output

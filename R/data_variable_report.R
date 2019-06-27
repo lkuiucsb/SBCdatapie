@@ -26,7 +26,7 @@ make_vector_of_categorical_variable_names<-function(df){
   attach(df,warn.conflicts = F)
   for(varname in names(df)) {
     var<-get(varname)
-    if(is.factor(var) | is_character(var)){
+    if(is.factor(var) | is.character(var)){
       cat_var_name_vector<-append(cat_var_name_vector, varname, after = length(cat_var_name_vector))
     }
   }
@@ -59,7 +59,7 @@ make_numeric_histogram<-function(df,var,varname){
   #varname=deparse(substitute(var))
   x<-ggplot(df,aes(x=var))+ xlab(varname)+
   geom_histogram(aes(y=..density..), colour="black", fill="white")+
-    geom_density(alpha=.2, fill="#FF6666") 
+    geom_density(alpha=.2, fill="#FF6666") + theme(aspect.ratio = 1/3)
   return(x)
 }
 
@@ -67,7 +67,7 @@ make_categorical_histogram<-function(df,var,varname){
   library(ggplot2)
   #varname=deparse(substitute(var))
   x<-ggplot(df,aes(x=var))+ xlab(varname)+
-    geom_bar() 
+    geom_bar() + theme(aspect.ratio = 1/3)
   return(x)
 }
 
@@ -79,7 +79,6 @@ make_categorical_histogram<-function(df,var,varname){
 # }
 
 make_missing_plot<-function(var){
-  library(ggplot2)
   is_missing<-ifelse(is.na(var),"Missing","Valid")
   obs_number<-as.numeric(rownames(as.data.frame(is_missing)))
   allones=1
@@ -87,7 +86,8 @@ make_missing_plot<-function(var){
   x<-ggplot(is_missing_df,aes(obs_number,allones,fill=is_missing))+geom_col(width=1)+
     theme(axis.text.y=element_blank(),
           axis.ticks.y=element_blank(),
-          panel.background = element_blank())+
+          panel.background = element_blank(),
+          aspect.ratio = 1/3)+
     ylab("")+
     scale_fill_manual("legend", values = c("Missing" = "black", "Valid" = "lightgreen"))
   return(x)
