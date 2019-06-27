@@ -6,10 +6,10 @@
 #'
 #' @return A HTML file with complete static on the chosen data entity.
 
-static_report_complete <- function(entity_list, output_path) {
+static_report_complete <- function(entity_list, output_path, shiny = F) {
   
   # append "File_Name" in summary metadata to report name
-  report_name <-
+  report_filename <-
     paste0("report_", entity_list[["summary_metadata"]][1, 2], ".html")
   
   # make entity-level report
@@ -29,7 +29,7 @@ static_report_complete <- function(entity_list, output_path) {
   envir <-
     list(
       entity_list = entity_list,
-      report_title = paste("Data report for", entity_list[["summary_metadata"]][1, 2]),
+      report_title = paste("Summary report for", entity_list[["summary_metadata"]][1, 2]),
       df = entity_df,
       space_cols = space_cols,
       entity_report = entity_report,
@@ -37,8 +37,14 @@ static_report_complete <- function(entity_list, output_path) {
       )
   
   # set template path. Use the first one once this is in a package.
+  
+  if (shiny == F) {
   # template_path <- system.file("rmd", "static_report_template.Rmd", package = "dummypackagename")
   template_path <- "./inst/rmd/static_report_template.Rmd"
+  } else if (shiny == T) {
+    # template_path <- system.file("rmd", "static_report_template_shiny.Rmd", package = "dummypackagename")
+    template_path <- "./inst/rmd/static_report_template_shiny.Rmd"
+  }
   
   # set report output path.
   if (output_path == "ask") {
@@ -47,9 +53,14 @@ static_report_complete <- function(entity_list, output_path) {
   
   try(rmarkdown::render(
     input = template_path,
-    output_format = "html_document",
+    #output_format = "html_document",
     output_dir = output_path,
-    output_file = report_name,
+    output_file = report_filename,
     envir = envir
   ))
+  
+  if (shiny == T) {
+    return(report_filename)
+  }
+  
 }
