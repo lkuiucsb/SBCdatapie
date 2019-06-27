@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>the Space plot — space_plot • dummyPackageName</title>
+<title>make_vector_of_Date_variable_names — make_vector_of_Date_variable_names • dummyPackageName</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="the Space plot — space_plot" />
+<meta property="og:title" content="make_vector_of_Date_variable_names — make_vector_of_Date_variable_names" />
 
-<meta property="og:description" content="Create variable specific spatial heatmaps to show data availability and data summary over the geographical study area." />
+<meta property="og:description" content="This function makes a list of POSIX class columns in a data.frame." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,35 +114,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>the Space plot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/ggplotgui/blob/master/R/space_plot.R'><code>R/space_plot.R</code></a></small>
-    <div class="hidden name"><code>space_plot.Rd</code></div>
+    <h1>make_vector_of_Date_variable_names</h1>
+    <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/ggplotgui/blob/master/R/make_vector_of_Date_variable_names.R'><code>R/make_vector_of_Date_variable_names.R</code></a></small>
+    <div class="hidden name"><code>make_vector_of_Date_variable_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create variable specific spatial heatmaps to show data availability and data summary over the geographical study area.</p>
+    <p>This function makes a list of POSIX class columns in a data.frame.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>space_plot</span>(<span class='kw'>space_cols</span> <span class='kw'>=</span> <span class='no'>space_cols</span>, <span class='no'>df</span>, <span class='no'>var</span>)</pre>
+    <pre class="usage"><span class='fu'>make_vector_of_Date_variable_names</span>(<span class='no'>df</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>space_cols</th>
-      <td><p>A character vector whose two elements are named "lat_col" and "lon_col". Outpur from <code>space_detective</code></p></td>
-    </tr>
-    <tr>
-      <th>var</th>
-      <td><p>Name of variable to make data availability and summary. Remember to enclose in quotes.</p></td>
+      <th>df</th>
+      <td><p>Define this parameter.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For all variables, function returns a data availability plot over the study area. For categorical column types, function returns an extra plot showing most prevalent level of that variable in each spatial grid cell over the study area. For numeric column types, function returns an extra plot showing mean of that variable in each spatial grid cell over the study area. Lat and lon are binned; there are 50 bins normalized to attempt to enforce equal scales along each dimension.</p>
+    <p>(list) A list of POSIX class columns in a data.frame.</p>
     
 
   </div>

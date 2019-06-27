@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>the Space plot — space_plot • dummyPackageName</title>
+<title>Download and read wrapper function — data_package_wrapper • dummyPackageName</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="the Space plot — space_plot" />
+<meta property="og:title" content="Download and read wrapper function — data_package_wrapper" />
 
-<meta property="og:description" content="Create variable specific spatial heatmaps to show data availability and data summary over the geographical study area." />
+<meta property="og:description" content="A wrapper for the data_package_download and data_package_read
+functions. In some context, combining these functions makes them easier to
+handle." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,37 +116,69 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>the Space plot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/ggplotgui/blob/master/R/space_plot.R'><code>R/space_plot.R</code></a></small>
-    <div class="hidden name"><code>space_plot.Rd</code></div>
+    <h1>Download and read wrapper function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/ggplotgui/blob/master/R/data_package_wrapper.R'><code>R/data_package_wrapper.R</code></a></small>
+    <div class="hidden name"><code>data_package_wrapper.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create variable specific spatial heatmaps to show data availability and data summary over the geographical study area.</p>
+    <p>A wrapper for the <code>data_package_download</code> and <code>data_package_read</code>
+functions. In some context, combining these functions makes them easier to
+handle.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>space_plot</span>(<span class='kw'>space_cols</span> <span class='kw'>=</span> <span class='no'>space_cols</span>, <span class='no'>df</span>, <span class='no'>var</span>)</pre>
+    <pre class="usage"><span class='fu'>data_package_wrapper</span>(<span class='no'>data.pkg.doi</span>, <span class='kw'>download.dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>space_cols</th>
-      <td><p>A character vector whose two elements are named "lat_col" and "lon_col". Outpur from <code>space_detective</code></p></td>
+      <th>data.pkg.doi</th>
+      <td><p>(character) Directory where a data package stored. Default (NULL) is
+the temporary data package directory defined by
+<code><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0(tempdir(), 'data_package')</a></code>.</p></td>
     </tr>
     <tr>
-      <th>var</th>
-      <td><p>Name of variable to make data availability and summary. Remember to enclose in quotes.</p></td>
+      <th>download.dir</th>
+      <td><p>(character) Directory to which the data package will be downloaded. 
+Default is the temporary directory specified by 
+<code><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0(tempdir(), '/data_package')</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For all variables, function returns a data availability plot over the study area. For categorical column types, function returns an extra plot showing most prevalent level of that variable in each spatial grid cell over the study area. For numeric column types, function returns an extra plot showing mean of that variable in each spatial grid cell over the study area. Lat and lon are binned; there are 50 bins normalized to attempt to enforce equal scales along each dimension.</p>
+    <p>Returns a list of tibbles containing data and metadata for a given data
+package. Attributes include information about the doi and download folder.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function does two things:
+1. It combines the <code>data_package_download()</code> and
+<code>data_package_read()</code> functions into a single function.
+2. It assigns attributes to the resulting data package, making it easier to
+track where the data came from (doi) and where it is stored locally (folder).</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>#Download data to a temporary directory and then load it to the global</span>
+<span class='co'># environment.</span>
+<span class='no'>example_package</span> <span class='kw'>&lt;-</span> <span class='fu'>data_package_wrapper</span>(<span class='kw'>data.pkg.doi</span> <span class='kw'>=</span> <span class='st'>'doi:10.18739/A2DP3X'</span>)
+
+<span class='co'>#Explicitly download to a temporary directory.</span>
+<span class='no'>example_package</span> <span class='kw'>&lt;-</span> <span class='fu'>data_package_wrapper</span>(<span class='kw'>data.pkg.doi</span> <span class='kw'>=</span> <span class='st'>'doi:10.18739/A2DP3X'</span>,
+  <span class='kw'>download.dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>())
+
+<span class='co'>#Download and load to current working directory</span>
+<span class='no'>example_package</span> <span class='kw'>&lt;-</span> <span class='fu'>data_package_wrapper</span>(<span class='kw'>data.pkg.doi</span> <span class='kw'>=</span> <span class='st'>'doi:10.18739/A2DP3X'</span>,
+  <span class='kw'>download.dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/getwd'>getwd</a></span>())
+
+<span class='co'># }</span><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -152,7 +186,11 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
