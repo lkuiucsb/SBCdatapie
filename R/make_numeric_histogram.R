@@ -10,7 +10,9 @@
 #' @param var
 #'   A numeric column contained in df that will be graphed
 #' @param varname
-#'   The colname of the column represented in var. It is used only for the X axis label. 
+#'   A string containing the name of the column to be graphed. 
+#'   This is used only for labeling the graph, so alternative 
+#'   wording can be used, if desired. 
 #'
 #' @return
 #'   A ggplot2 object containing the histogram and density plot for that column

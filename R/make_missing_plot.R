@@ -1,15 +1,16 @@
 #' make_missing_plot
 #' 
-#' Describe what this function does
+#' Creates a plot that shows where missing values occur in the data. 
+#' The plot appears as a bar with vertical lines representing valid or NA observations for a single variable. 
 #' 
 #' @usage
 #'   make_missing_plot(var)
 #'
 #' @param var
-#'   Define this parameter.
+#'   Name of the vector whose missing values are to be graphed
 #'
 #' @return
-#'   What does this function return?
+#'   A ggplot2 graph object
 #' 
 #' @export
 #'
