@@ -9,10 +9,9 @@
 #'   Define this parameter.
 #'
 #' @return
-#'   What does this function return?
+#'   (data frame) A summary table of time (POSIX, Date) objects.
 #' 
 #' @export
-#'   (data frame) A summary table of time (POSIX, Date) objects.
 #'
 
 make_time_variable_summary_df<-function(var){

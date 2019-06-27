@@ -10,7 +10,7 @@ make_time_variable_summary_df(var)
 \item{var}{Define this parameter.}
 }
 \value{
-What does this function return?
+(data frame) A summary table of time (POSIX, Date) objects.
 }
 \description{
 This function writes a summary table of time (POSIX, Date) objects
