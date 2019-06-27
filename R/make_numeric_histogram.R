@@ -1,19 +1,19 @@
 #' make_numeric_histogram
 #' 
-#' Describe what this function does
+#' Creates a histogram with density plot for numeric vectors
 #' 
 #' @usage
 #'   make_numeric_histogram(df, var, varname)
 #'
 #' @param df
-#'   Define this parameter.
+#'   A dataframe 
 #' @param var
-#'   Define this parameter.
+#'   A numeric column contained in df that will be graphed
 #' @param varname
-#'   Define this parameter.
+#'   The colname of the column represented in var. It is used only for the X axis label. 
 #'
 #' @return
-#'   What does this function return?
+#'   A ggplot2 object containing the histogram and density plot for that column
 #' 
 #' @export
 #'
