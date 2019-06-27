@@ -19,6 +19,7 @@ Description: Easily explore data by creating ggplots through a (shiny-)GUI. R-co
 Depends: R (>= 3.3.2)
 Imports:
     plotly,
+    tidyverse,
     shiny,
     ggplot2,
     stringr,

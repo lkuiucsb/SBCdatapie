@@ -4,7 +4,7 @@
 \alias{space_plot}
 \title{the Space plot}
 \usage{
-space_plot(space_cols = space_cols, var)
+space_plot(space_cols = space_cols, df, var)
 }
 \arguments{
 \item{space_cols}{A character vector whose two elements are named "lat_col" and "lon_col". Outpur from \code{\link{space_detective}}}
