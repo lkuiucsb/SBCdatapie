@@ -27,4 +27,4 @@ attributes(data_example)$doi <- NA
 attributes(data_example)$folder <- NA
 
 #Save the data
-usethis::use_data(data_example, overwrite = TRUE)
+usethis::use_data(data_example, internal = TRUE, overwrite = TRUE)
