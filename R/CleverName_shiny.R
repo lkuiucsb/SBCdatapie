@@ -84,7 +84,7 @@ CleverName_shiny <- function( dataset = NA ) {
                  ),
                  
                  conditionalPanel(
-                   condition = "input.tabs=='Plot' || input.tabs=='Interactive Plot' || input.tabs=='R-code'",
+                   condition = "input.tabs=='Plot' || input.tabs=='Interactive Plot'",
                    h4("Create visualization"),
                    selectInput(inputId = "Type",
                                label = "Type of graph:",
@@ -135,6 +135,11 @@ CleverName_shiny <- function( dataset = NA ) {
                                      value = FALSE)
                      )
                    )
+                 ),
+                 
+                 conditionalPanel(
+                   condition = "input.tabs == 'R-code'",
+                   h4("R-code")
                  ),
                  
                  conditionalPanel(
