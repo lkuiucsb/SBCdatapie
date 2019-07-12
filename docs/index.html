@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Suitability evaluation of data-package assistant • dummyPackageName</title>
+<title>Data Package Interface (for) Evaluation • dummyPackageName</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Suitability evaluation of data-package assistant">
+<script src="pkgdown.js"></script><meta property="og:title" content="Data Package Interface (for) Evaluation">
 <meta property="og:description" content="Easily explore data by creating ggplots through a (shiny-)GUI. R-code to recreate graph provided.   ">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -63,7 +63,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/IMCR-Hackathon/ggplotgui">
+  <a href="https://github.com/IMCR-Hackathon/datapie">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -81,9 +81,9 @@
   <div class="contents col-md-9">
 
 
-<div id="ggplotgui" class="section level1">
+<div id="datapie" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ggplotgui" class="anchor"></a>ggplotgui</h1></div>
+<a href="#datapie" class="anchor"></a>datapie</h1></div>
 <p>This package allows users to explore the suitibility of a data package for further inquiry via a R Shiny. Users identify data packages of interest by passing a DOI to a GUI interface and then browse summary reports and generate exploritory plots. The package also attempts to address some common shortcomings of data formats to aid suitability evaluation. Data is highly diverse and we provide no guarantee this will actually work for a given data package, but it’s worth a shot!</p>
 <div id="background" class="section level2">
 <h2 class="hasAnchor">
@@ -95,7 +95,8 @@
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
-<p>TBD</p>
+<pre><code>remotes::install_github('IMCR-Hackathon/datapie')
+</code></pre>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -145,9 +146,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/IMCR-Hackathon/ggplotgui">https://​github.com/​IMCR-Hackathon/​ggplotgui</a>
+<li>Browse source code at <br><a href="https://github.com/IMCR-Hackathon/datapie">https://​github.com/​IMCR-Hackathon/​datapie</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/IMCR-Hackathon/ggplotgui/issues">https://​github.com/​IMCR-Hackathon/​ggplotgui/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/IMCR-Hackathon/datapie/issues">https://​github.com/​IMCR-Hackathon/​datapie/​issues</a>
 </li>
 </ul>
 </div>
@@ -177,9 +178,9 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/IMCR-Hackathon/ggplotgui"><img src="https://travis-ci.com/IMCR-Hackathon/ggplotgui.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/IMCR-Hackathon/ggplotgui"><img src="https://ci.appveyor.com/api/projects/status/github/IMCR-Hackathon/ggplotgui?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
-<li><a href="https://codecov.io/github/IMCR-Hackathon/ggplotgui?branch=master"><img src="https://codecov.io/github/IMCR-Hackathon/ggplotgui/coverage.svg?branch=master" alt="codecov.io"></a></li>
+<li><a href="https://travis-ci.org/IMCR-Hackathon/datapie"><img src="https://travis-ci.com/IMCR-Hackathon/ggplotgui.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/IMCR-Hackathon/ggplotgui"><img src="https://ci.appveyor.com/api/projects/status/github/IMCR-Hackathon/datapie?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://codecov.io/github/IMCR-Hackathon/ggplotgui?branch=master"><img src="https://codecov.io/github/IMCR-Hackathon/datapie/coverage.svg?branch=master" alt="codecov.io"></a></li>
 </ul>
 </div>
 </div>

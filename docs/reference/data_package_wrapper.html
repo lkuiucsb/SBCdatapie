@@ -99,7 +99,7 @@ handle." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/IMCR-Hackathon/ggplotgui">
+  <a href="https://github.com/IMCR-Hackathon/datapie">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -117,7 +117,7 @@ handle." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download and read wrapper function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/ggplotgui/blob/master/R/data_package_wrapper.R'><code>R/data_package_wrapper.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/datapie/blob/master/R/data_package_wrapper.R'><code>R/data_package_wrapper.R</code></a></small>
     <div class="hidden name"><code>data_package_wrapper.Rd</code></div>
     </div>
 
@@ -156,8 +156,8 @@ package. Attributes include information about the doi and download folder.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function does two things:
-1. It combines the <code>data_package_download()</code> and
-<code>data_package_read()</code> functions into a single function.
+1. It combines the <code><a href='data_package_download.html'>data_package_download()</a></code> and
+<code><a href='data_package_read.html'>data_package_read()</a></code> functions into a single function.
 2. It assigns attributes to the resulting data package, making it easier to
 track where the data came from (doi) and where it is stored locally (folder).</p>
     
@@ -175,7 +175,6 @@ track where the data came from (doi) and where it is stored locally (folder).</p
 <span class='co'>#Download and load to current working directory</span>
 <span class='no'>example_package</span> <span class='kw'>&lt;-</span> <span class='fu'>data_package_wrapper</span>(<span class='kw'>data.pkg.doi</span> <span class='kw'>=</span> <span class='st'>'doi:10.18739/A2DP3X'</span>,
   <span class='kw'>download.dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/getwd'>getwd</a></span>())
-
 <span class='co'># }</span><div class='input'>
 
 </div></pre>
