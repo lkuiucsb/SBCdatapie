@@ -1,10 +1,10 @@
 <!-- This comment enables badge extraction to pkgdown site -->
 
-[![Travis-CI Build Status](https://travis-ci.com/IMCR-Hackathon/ggplotgui.svg?branch=master)](https://travis-ci.org/IMCR-Hackathon/ggplotgui)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IMCR-Hackathon/ggplotgui?branch=master&svg=true)](https://ci.appveyor.com/project/IMCR-Hackathon/ggplotgui)
-[![codecov.io](https://codecov.io/github/IMCR-Hackathon/ggplotgui/coverage.svg?branch=master)](https://codecov.io/github/IMCR-Hackathon/ggplotgui?branch=master)
+[![Travis-CI Build Status](https://travis-ci.com/IMCR-Hackathon/ggplotgui.svg?branch=master)](https://travis-ci.org/IMCR-Hackathon/datapie)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IMCR-Hackathon/datapie?branch=master&svg=true)](https://ci.appveyor.com/project/IMCR-Hackathon/ggplotgui)
+[![codecov.io](https://codecov.io/github/IMCR-Hackathon/datapie/coverage.svg?branch=master)](https://codecov.io/github/IMCR-Hackathon/ggplotgui?branch=master)
 
-# ggplotgui
+# datapie
 
 This package allows users to explore the suitibility of a data package for further inquiry via a R Shiny.
 Users identify data packages of interest by passing a DOI to a GUI interface and then browse summary reports and generate exploritory plots.

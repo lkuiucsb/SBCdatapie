@@ -4,21 +4,40 @@
 \alias{data_package_shiny_handler}
 \title{A data_package_* handler for the shiny app}
 \usage{
-data_package_shiny_handler(data.pkg.doi, current.data = NULL,
+data_package_shiny_handler(data.pkg.doi = NA, current.data = NULL,
   download.dir = NULL)
 }
 \arguments{
 \item{data.pkg.doi}{The doi of the package being downloaded.}
 
-\item{current.data}{Data current}
+\item{current.data}{Current data loaded in the app, if any.}
 
-\item{download.dir}{The download directory from the read_data_archived
-function.}
+\item{download.dir}{The download directory.}
 }
 \value{
 Returns a list of tibbles containing data and metadata for a given data
-package. Attributes include information about the doi and download folder.
+package. Attributes include information about the doi and download folder,
+where available.
 }
 \description{
 A data_package_* handler for the shiny app
+}
+\details{
+This function is largely meant to interact with the main Shiny app used in
+this package.
+
+If no inputs are provided, the function returns a default data set. The name
+of the tibble in this dataset is "Example_dataset.csv". The doi attribute is
+set to NA. The folder attribute is also set to NA.
+}
+\examples{
+\dontrun{
+#Load in the example data
+data_package <- data_package_shiny_handler()
+
+#Load an actual data set
+doi_string <- "doi:10.6073/pasta/dd7955138eb963a847b861242390a48c"
+data_package <- data_package_shiny_handler(data.pkg.doi = doi_string))
+}
+
 }

@@ -1,6 +1,6 @@
 #' Creating a graphical user interface for creating ggplot-graphs.
 #' 
-#' To run use \code{CleverName_shiny()}
+#' To run use \code{datapie_shiny()}
 #'
 #' @param dataset A dataset (optional).
 #' @return A GUI for visualizing data from \code{dataset}.
@@ -15,7 +15,7 @@
 #' @importFrom stringr str_replace_all
 #' @importFrom readr read_delim
 #' @export
-CleverName_shiny <- function( dataset = NA ) {
+datapie_shiny <- function( dataset = NA ) {
   
   ######### UI definition #############
   ui <- fluidPage(
@@ -38,7 +38,7 @@ CleverName_shiny <- function( dataset = NA ) {
                      selected = 1),
                    conditionalPanel(
                      condition = "input.data_input=='1'",
-                     h5("Sample dataset from library(clevername) is loaded."),
+                     h5("Sample dataset from library(datapie) is loaded."),
                      downloadButton("downloadData",
                                     "Download data")
                      ),
@@ -179,8 +179,8 @@ CleverName_shiny <- function( dataset = NA ) {
                          p("This is place holder text")),
                 tabPanel("About",
                          h3("EDI hackathon"),
-                         p("This extends the ggplotgui to download data directly from the EDI repository and also has additional summary and visulization functions."),
-                         h3("ggplotgui -Orginal Background"),
+                         p("This extends the datapie to download data directly from the EDI repository and also has additional summary and visulization functions."),
+                         h3("datapie -Orginal Background"),
                          p(
                            a("R", href = "https://www.r-project.org/"), "is amazing, but daunting
   for many. The programming style of R, compared to the point-and-click
@@ -922,11 +922,11 @@ CleverName_shiny <- function( dataset = NA ) {
           paste(
             "## You can use the code below to make the 'Plot' tab figure.\n\n",
             "# You will need the following package(s):\n",
-            "library(\"clevername\")\n",
+            "library(\"datapie\")\n",
             "library(\"ggplot2\")\n\n",
             "# The code below will load the sample data from\n",
-            "# library(clevername) into your current R session.\n",
-            "# df <- clevername::data_example\n\n",
+            "# library(datapie) into your current R session.\n",
+            "# df <- datapie::data_example\n\n",
             "# The code below will generate the 'Plot' tab figure.\n",
             "graph <- ",
             gg_code,
@@ -955,17 +955,17 @@ CleverName_shiny <- function( dataset = NA ) {
           paste(
             "## You can use the code below to make the 'Plot' tab figure.\n\n",
             "# You will need the following package(s):\n",
-            "library(\"clevername\")\n",
-            "library(\"ggplot2\")\n",
+            "library(\"datapie\")\n",
+            "library(\"ggplot2\")\n\n",
             "# The code below will download data from a DOI to a temporary\n",
             "# directory on your computer. The DOI in the code below is\n",
             "# the DOI you entered in the 'Raw Data' tab.\n",
-            "clevername::data_package_download(data.pkg.doi = '",
+            "datapie::data_package_download(data.pkg.doi = '",
             input$doi,
             "')\n\n",
             "# The code below will save the data from the the DOI you\n",
             "# entered in the 'Raw Data' tab to your current R session.\n",
-            "df_list <- clevername::data_package_read()\n\n",
+            "df_list <- datapie::data_package_read()\n\n",
             "# The code below will create a variable df to hold the data\n",
             "# file you selected in the 'Raw Data' tab.\n",
             "df <- df_list$",
@@ -995,8 +995,8 @@ CleverName_shiny <- function( dataset = NA ) {
         else {
           paste("We do not support R-code generation from uploaded\n",
                 "data at this time.")
-        }
-      })
+          }
+        })
 
   #####################################
   #### Download codes #################

@@ -7,11 +7,12 @@
 make_missing_plot(var)
 }
 \arguments{
-\item{var}{Define this parameter.}
+\item{var}{Name of the vector whose missing values are to be graphed}
 }
 \value{
-What does this function return?
+A ggplot2 graph object
 }
 \description{
-Describe what this function does
+Creates a plot that shows where missing values occur in the data. 
+The plot appears as a bar with vertical lines representing valid or NA observations for a single variable.
 }

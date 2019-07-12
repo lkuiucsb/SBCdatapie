@@ -4,11 +4,11 @@
     "http://schema.org"
   ],
   "@type": "SoftwareSourceCode",
-  "identifier": "dummyPackageTitle",
+  "identifier": "datapie",
   "description": "Easily explore data by creating ggplots through a (shiny-)GUI. R-code to recreate graph provided.   ",
-  "name": "dummyPackageTitle: Suitability evaluation of data-package assistant",
-  "codeRepository": "https://github.com/IMCR-Hackathon/ggplotgui",
-  "issueTracker": "https://github.com/IMCR-Hackathon/ggplotgui/issues",
+  "name": "datapie: Data Package Interface (for) Evaluation",
+  "codeRepository": "https://github.com/IMCR-Hackathon/datapie",
+  "issueTracker": "https://github.com/IMCR-Hackathon/datapie/issues",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.0.0.9000",
   "programmingLanguage": {
@@ -281,6 +281,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "shinyjs",
+      "name": "shinyjs",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=shinyjs"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "stringr",
       "name": "stringr",
       "provider": {
@@ -316,8 +328,8 @@
       "sameAs": "https://CRAN.R-project.org/package=tidyverse"
     }
   ],
-  "readme": "https://github.com/IMCR-Hackathon/ggplotgui/blob/master/README.md",
-  "fileSize": "2484.525KB",
+  "readme": "https://github.com/IMCR-Hackathon/datapie/blob/master/README.md",
+  "fileSize": "2522.031KB",
   "contIntegration": "https://travis-ci.org/gertstulp/ggplotgui",
   "copyrightHolder": {},
   "funder": {},

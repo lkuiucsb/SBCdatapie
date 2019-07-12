@@ -7,15 +7,17 @@
 make_categorical_histogram(df, var, varname)
 }
 \arguments{
-\item{df}{Define this parameter.}
+\item{df}{A dataframe}
 
-\item{var}{Define this parameter.}
+\item{var}{The col.name drawn from df of the vector to be graphed}
 
-\item{varname}{Define this parameter.}
+\item{varname}{A string containing the name of the column to be graphed. 
+This is used only for labeling the graph, so alternative 
+wording can be used if desired.}
 }
 \value{
-What does this function return?
+A ggplot2 object containing the histogram for that column
 }
 \description{
-Describe what this function does
+Creates a histogram of the frequency with which different codes occur for categorical variables.
 }

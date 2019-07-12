@@ -44,7 +44,6 @@ example_package <- data_package_wrapper(data.pkg.doi = 'doi:10.18739/A2DP3X',
 #Download and load to current working directory
 example_package <- data_package_wrapper(data.pkg.doi = 'doi:10.18739/A2DP3X',
   download.dir = getwd())
-
 }
 
 

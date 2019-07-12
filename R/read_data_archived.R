@@ -42,7 +42,7 @@ read_data_archived <- function(data.pkg.doi, download.dir = NULL){
   
   .Deprecated(
     new = c('data_package_download()', 'data_package_read()'),
-    package = 'dummyPackageTitle',
+    package = 'datapie',
     old = 'read_data_archived()'
   )
   
