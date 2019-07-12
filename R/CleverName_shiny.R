@@ -38,7 +38,7 @@ CleverName_shiny <- function( dataset = NA ) {
                      selected = 1),
                    conditionalPanel(
                      condition = "input.data_input=='1'",
-                     h5("dataset 'mpg' from library(ggplot2) loaded"),
+                     h5("Sample dataset from library(clevername) is loaded."),
                      downloadButton("downloadData",
                                     "Download data")
                      ),
@@ -248,8 +248,7 @@ CleverName_shiny <- function( dataset = NA ) {
     
     ####### Right Panel ########
     conditionalPanel(
-      condition = "input.tabs=='Plot' || input.tabs=='Interactive Plot' ||
-                    input.tabs=='R-code'",
+      condition = "input.tabs=='Plot' || input.tabs=='Interactive Plot'",
       sidebarPanel(
         width = 3,
         h4("Change aesthetics"),
@@ -889,10 +888,10 @@ CleverName_shiny <- function( dataset = NA ) {
                     count = length(value))
       )
   
-      width <- reactive ({ input$fig_width })
-      height <- reactive ({ input$fig_height })
-      width_download <- reactive ({ input$fig_width_download })
-      height_download <- reactive ({ input$fig_height_download })
+      width <- reactive({ input$fig_width })
+      height <- reactive({ input$fig_height })
+      width_download <- reactive({ input$fig_width_download })
+      height_download <- reactive({ input$fig_height_download })
   
       output$out_ggplot <- renderPlot(width = width,
                                       height = height, {
@@ -914,44 +913,91 @@ CleverName_shiny <- function( dataset = NA ) {
   #####################################
   
       output$out_r_code <- renderText({
-  
-        gg_code <- string_code()
-        gg_code <- str_replace_all(gg_code, "\\+ ", "+\n  ")
-  
-        paste(
-          "## You can use the code below to make the 'Plot' tab figure.\n\n",
-          "# You need the following package(s):\n",
-          "library(\"clever_name\")\n",
-          "library(\"ggplot2\")\n",
-          "library(\"dplyr\")\n\n",
-          "# The code below will download data from a DOI.\n",
-          "# Don't forget to replace 'doi' with the DOI of your choice\n",
-          "# (e.g., 'doi:10.6073/pasta/b7459').\n",
-          "# Some DOIs have multiple datasets, which are bundled together.\n",
-          "df_list <- clever_name::data_package_download(data.pkg.doi = doi)\n\n",
-          "# The code below will select a single dataframe from that list.\n",
-          "# Don't forget to replace 'file' with your file of choice.\n",
-          "df <- df_list...<select file>\n\n",
-          "# The code below will generate the 'Plot' tab figure:\n",
-          "graph <- ",
-          gg_code,
-          "\ngraph\n\n",
-          "# If you want the plot to be interactive\n",
-          "# like on the 'Interactive Plot' tab,\n",
-          "# you need the following package(s):\n",
-          "library(\"plotly\")\n",
-          "ggplotly(graph)\n\n",
-          "# If you would like to save your graph, you can use:\n",
-          "ggsave('my_graph.pdf', graph, width = ",
-          width_download(),
-          ", height = ",
-          height_download(),
-          ", units = 'cm')",
-          sep = ""
-        )
-  
+        
+        # data sample r-code
+        if(input$data_input == 1) {
+          gg_code <- string_code()
+          gg_code <- str_replace_all(gg_code, "\\+ ", "+\n  ")
+          
+          paste(
+            "## You can use the code below to make the 'Plot' tab figure.\n\n",
+            "# You will need the following package(s):\n",
+            "library(\"clevername\")\n",
+            "library(\"ggplot2\")\n\n",
+            "# The code below will load the sample data from\n",
+            "# library(clevername) into your current R session.\n",
+            "# df <- clevername::data_example\n\n",
+            "# The code below will generate the 'Plot' tab figure.\n",
+            "graph <- ",
+            gg_code,
+            "\ngraph\n\n",
+            "# If you want the plot to be interactive,\n",
+            "# you need the following package(s):\n",
+            "library(\"plotly\")\n\n",
+            "# The code below will generate the 'Interactive Plot'\n",
+            "# tab figure.\n",
+            "ggplotly(graph)\n\n",
+            "# The code below will save your plot.\n",
+            "ggsave('my_graph.pdf', graph, width = ",
+            width_download(),
+            ", height = ",
+            height_download(),
+            ", units = 'cm')",
+            sep = ""
+          )
+        }
+        
+        # doi data r-code
+        else if (input$data_input == 2) {
+          gg_code <- string_code()
+          gg_code <- str_replace_all(gg_code, "\\+ ", "+\n  ")
+          
+          paste(
+            "## You can use the code below to make the 'Plot' tab figure.\n\n",
+            "# You will need the following package(s):\n",
+            "library(\"clevername\")\n",
+            "library(\"ggplot2\")\n",
+            "# The code below will download data from a DOI to a temporary\n",
+            "# directory on your computer. The DOI in the code below is\n",
+            "# the DOI you entered in the 'Raw Data' tab.\n",
+            "clevername::data_package_download(data.pkg.doi = '",
+            input$doi,
+            "')\n\n",
+            "# The code below will save the data from the the DOI you\n",
+            "# entered in the 'Raw Data' tab to your current R session.\n",
+            "df_list <- clevername::data_package_read()\n\n",
+            "# The code below will create a variable df to hold the data\n",
+            "# file you selected in the 'Raw Data' tab.\n",
+            "df <- df_list$",
+            input$repo_file,
+            "$data\n\n",
+            "# The code below will generate the 'Plot' tab figure:\n",
+            "graph <- ",
+            gg_code,
+            "\ngraph\n\n",
+            "# If you want the plot to be interactive,\n",
+            "# you need the following package(s):\n",
+            "library(\"plotly\")\n\n",
+            "# The code below will generate the 'Interactive Plot'\n",
+            "# tab figure.\n",
+            "ggplotly(graph)\n\n",
+            "# The code below will save your plot.\n",
+            "ggsave('my_graph.pdf', graph, width = ",
+            width_download(),
+            ", height = ",
+            height_download(),
+            ", units = 'cm')",
+            sep = ""
+          )
+        }
+        
+        # uploaded data r-code
+        else {
+          paste("We do not support R-code generation from uploaded\n",
+                "data at this time.")
+        }
       })
-  
+
   #####################################
   #### Download codes #################
   #####################################
@@ -1029,7 +1075,6 @@ CleverName_shiny <- function( dataset = NA ) {
         }
        df2
      })
-     
      
   #for debugging purpose, uncomment the
      # output$text_output <- renderText({
