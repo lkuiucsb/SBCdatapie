@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="make_numeric_histogram — make_numeric_histogram" />
 
-<meta property="og:description" content="Describe what this function does" />
+<meta property="og:description" content="Creates a histogram with density plot for numeric vectors" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -97,7 +97,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/IMCR-Hackathon/ggplotgui">
+  <a href="https://github.com/IMCR-Hackathon/datapie">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -115,13 +115,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>make_numeric_histogram</h1>
-    <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/ggplotgui/blob/master/R/make_numeric_histogram.R'><code>R/make_numeric_histogram.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/datapie/blob/master/R/make_numeric_histogram.R'><code>R/make_numeric_histogram.R</code></a></small>
     <div class="hidden name"><code>make_numeric_histogram.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Describe what this function does</p>
+    <p>Creates a histogram with density plot for numeric vectors</p>
     
     </div>
 
@@ -132,21 +132,23 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>Define this parameter.</p></td>
+      <td><p>A dataframe</p></td>
     </tr>
     <tr>
       <th>var</th>
-      <td><p>Define this parameter.</p></td>
+      <td><p>A numeric column contained in df that will be graphed</p></td>
     </tr>
     <tr>
       <th>varname</th>
-      <td><p>Define this parameter.</p></td>
+      <td><p>A string containing the name of the column to be graphed. 
+This is used only for labeling the graph, so alternative 
+wording can be used, if desired.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>What does this function return?</p>
+    <p>A ggplot2 object containing the histogram and density plot for that column</p>
     
 
   </div>
