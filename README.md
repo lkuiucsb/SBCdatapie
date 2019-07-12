@@ -24,7 +24,10 @@ Access to data packages on DataOne member notes is provided through the package 
 
 ## Install
 
-TBD
+```
+remotes::install_github('IMCR-Hackathon/datapie')
+
+```
 
 ## Usage
 
