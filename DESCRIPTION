@@ -33,7 +33,8 @@ Imports:
     shinyjs,
     stringr,
     tidyr,
-    tidyverse
+    tidyverse,
+    usethis
 Remotes:
     clnsmth/metajam    
 License: MIT
