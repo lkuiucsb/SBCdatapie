@@ -7,15 +7,17 @@
 make_numeric_histogram(df, var, varname)
 }
 \arguments{
-\item{df}{Define this parameter.}
+\item{df}{A dataframe}
 
-\item{var}{Define this parameter.}
+\item{var}{A numeric column contained in df that will be graphed}
 
-\item{varname}{Define this parameter.}
+\item{varname}{A string containing the name of the column to be graphed. 
+This is used only for labeling the graph, so alternative 
+wording can be used, if desired.}
 }
 \value{
-What does this function return?
+A ggplot2 object containing the histogram and density plot for that column
 }
 \description{
-Describe what this function does
+Creates a histogram with density plot for numeric vectors
 }

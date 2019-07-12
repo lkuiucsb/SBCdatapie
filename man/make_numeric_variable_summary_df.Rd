@@ -7,11 +7,11 @@
 make_numeric_variable_summary_df(var)
 }
 \arguments{
-\item{var}{Define this parameter.}
+\item{var}{Name of the vector containing the numbers to be summarized}
 }
 \value{
-What does this function return?
+A dataframe containing the summary information.
 }
 \description{
-Describe what this function does
+Creates a dataframe containing summary (median,max,min,num_valid,num_missing) information for numerical variables.
 }

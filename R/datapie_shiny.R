@@ -1,6 +1,6 @@
 #' Creating a graphical user interface for creating ggplot-graphs.
 #' 
-#' To run use \code{CleverName_shiny()}
+#' To run use \code{datapie_shiny()}
 #'
 #' @param dataset A dataset (optional).
 #' @return A GUI for visualizing data from \code{dataset}.
@@ -15,7 +15,7 @@
 #' @importFrom stringr str_replace_all
 #' @importFrom readr read_delim
 #' @export
-CleverName_shiny <- function( dataset = NA ) {
+datapie_shiny <- function( dataset = NA ) {
   
   ######### UI definition #############
   ui <- fluidPage(
@@ -38,7 +38,7 @@ CleverName_shiny <- function( dataset = NA ) {
                      selected = 1),
                    conditionalPanel(
                      condition = "input.data_input=='1'",
-                     h5("dataset 'mpg' from library(ggplot2) loaded"),
+                     h5("dataset 'mpg' from library(datapie) loaded"),
                      downloadButton("downloadData",
                                     "Download data")
                      ),
@@ -174,8 +174,8 @@ CleverName_shiny <- function( dataset = NA ) {
                          p("This is place holder text")),
                 tabPanel("About",
                          h3("EDI hackathon"),
-                         p("This extends the ggplotgui to download data directly from the EDI repository and also has additional summary and visulization functions."),
-                         h3("ggplotgui -Orginal Background"),
+                         p("This extends the datapie to download data directly from the EDI repository and also has additional summary and visulization functions."),
+                         h3("datapie -Orginal Background"),
                          p(
                            a("R", href = "https://www.r-project.org/"), "is amazing, but daunting
   for many. The programming style of R, compared to the point-and-click
@@ -916,7 +916,7 @@ CleverName_shiny <- function( dataset = NA ) {
         paste(
           "## You can use the code below to make the 'Plot' tab figure.\n\n",
           "# You need the following package(s):\n",
-          "library(\"clever_name\")\n",
+          "library(\"datapie\")\n",
           "library(\"ggplot2\")\n",
           "library(\"dplyr\")\n\n",
           "# The code below will download data from a DOI.\n",

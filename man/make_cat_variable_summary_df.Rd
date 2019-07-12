@@ -7,11 +7,12 @@
 make_cat_variable_summary_df(var)
 }
 \arguments{
-\item{var}{Define this parameter.}
+\item{var}{The categorical vector to be summarized}
 }
 \value{
-What does this function return?
+A dataframe containing summary information.
 }
 \description{
-Describe what this function does
+Creates a dataframe that contains summary information (type, number of levels, num_valid, num_missing)
+about categorical variables.
 }

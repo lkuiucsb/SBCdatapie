@@ -1,4 +1,3 @@
 library(testthat)
-library(dummyPackageTitle)
 
-test_check("dummyPackageTitle")
+test_check("datapie")
