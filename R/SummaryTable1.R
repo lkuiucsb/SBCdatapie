@@ -10,16 +10,18 @@
 #'
 #' @return
 #'   What does this function return?
+#'   
+#' @import magrittr
 #' 
 #' @export
 #'
 
 SummaryTable1<-function(data.df1)  {
   SummaryTable_Numeric <- data.df1 %>% 
-    select_if(is.numeric) %>%
-    gather(key="column_name", value='value') %>%
-    group_by(column_name) %>%
-    summarize(min=min(value, na.rm=TRUE),
+    dplyr::select_if(is.numeric) %>%
+    tidyr::gather(key="column_name", value='value') %>%
+    dplyr::group_by(column_name) %>%
+    dplyr::summarize(min=min(value, na.rm=TRUE),
               quantile_25 = quantile(value, 0.25, na.rm=TRUE),
               quantile_50 = quantile(value, 0.50, na.rm=TRUE),
               quantile_75 = quantile(value, 0.75, na.rm=TRUE),

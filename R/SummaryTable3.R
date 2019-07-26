@@ -11,16 +11,18 @@
 #' @return
 #'   What does this function return?
 #' 
+#' @import magrittr
+#' 
 #' @export
 #'
 
 SummaryTable3<-function(data.df2)  {
   SummaryTable_Categorical <- data.df2 %>% 
-    select_if(~!is.numeric(.) & length(unique(.)) < 50) %>%
-    gather(key="column_name", value='level') %>%
-    group_by(column_name, level) %>%
+    dplyr::select_if(~!is.numeric(.) & length(unique(.)) < 50) %>%
+    tidyr::gather(key="column_name", value='level') %>%
+    dplyr::group_by(column_name, level) %>%
     tally %>%
-    ungroup() %>% group_by(column_name) %>%
+    dplyr::ungroup() %>% group_by(column_name) %>%
     mutate(n_MainCategories = length(level),
            missingCount = ifelse(any(is.na(level)), n[is.na(level)], 0)
     )

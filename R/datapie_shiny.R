@@ -11,6 +11,7 @@
 #' @import readxl
 #' @import haven
 #' @import RColorBrewer
+#' @import magrittr
 #' @importFrom plotly ggplotly plotlyOutput renderPlotly
 #' @importFrom stringr str_replace_all
 #' @importFrom readr read_delim

@@ -11,15 +11,17 @@
 #' @return
 #'   What does this function return?
 #' 
+#' @import magrittr
+#' 
 #' @export
 #'
 
 SummaryTable2<-function(data.df3)  {
   SummaryTable_Categorical_Individual <- data.df3 %>% 
-    select_if(~!is.numeric(.) & length(unique(.)) < 50) %>%
-    gather(key="column_name", value="level") %>%
-    group_by(column_name) %>%
-    summarize(Total_Values = length(level),
+    dplyr::select_if(~!is.numeric(.) & length(unique(.)) < 50) %>%
+    tidyr::gather(key="column_name", value="level") %>%
+    dplyr::group_by(column_name) %>%
+    dplyr::summarize(Total_Values = length(level),
               n_Categories = length(unique(level)),
               missingCount = sum(is.na(level))
     )

@@ -11,7 +11,7 @@ static_report_variable(entity_df, varname, space_cols = space_cols)
 
 \item{varname}{(character) Name of variable of interest.}
 
-\item{space_cols}{(character vector) Output from \code{\link{space_detective}}. Where data has explicit spatial columns, a two-element character vector indicating column names containing longitudes and latitudes. Otherwise, spatial plots will not be generated.}
+\item{space_cols}{(character vector) Output from \code{space_detective}. Where data has explicit spatial columns, a two-element character vector indicating column names containing longitudes and latitudes. Otherwise, spatial plots will not be generated.}
 }
 \value{
 A list object containing variable name and relevant plots.

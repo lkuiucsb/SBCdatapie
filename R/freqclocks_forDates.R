@@ -21,7 +21,7 @@
 freqclocks_forDates <- function(df,var,varname) {
   na.df <- as.data.frame(!is.na(df))
   na.df[,varname] <- df[,varname]
-  long.df <- gather(na.df, key = column.name, value = count, -varname)
+  long.df <- tidyr::gather(na.df, key = column.name, value = count, -varname)
   
   freq.timeline <- ggplot(long.df[long.df$count %in% TRUE,], aes(x = long.df[long.df$count %in% TRUE,1], group = column.name)) + 
     theme_bw() +
