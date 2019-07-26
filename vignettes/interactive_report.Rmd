@@ -1,6 +1,5 @@
 ---
 title: "Interactive report"
-author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
