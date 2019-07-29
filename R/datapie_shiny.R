@@ -502,8 +502,6 @@ datapie_shiny <- function( dataset = NA ) {
     observeEvent(input$fetch_button, {
       #populate the object
       values$shiny_data <- list_shiny()
-      #Clear the console of any messages
-      shinyjs::html(id = "message_text", html = "")
     })
     
     #Update the data package columns to be selected
