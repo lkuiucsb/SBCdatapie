@@ -24,7 +24,7 @@ datapie_shiny <- function( dataset = NA ) {
     shinyjs::useShinyjs(),
     
     ###### Application title ########
-    headerPanel("EDI Data Viewer"),
+    headerPanel("datapie"),
     
     ###### Left panel: loading data and main graphing options ########
     sidebarPanel(width = 3,
