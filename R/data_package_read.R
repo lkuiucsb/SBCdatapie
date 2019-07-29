@@ -106,13 +106,37 @@ data_package_read <- function(data.pkg.path = NULL){
       '.'
     )
   )
+  
+  # Remove unreadable objects (e.g. xlsx)
+  
+  fnames_out <- rep(NA_character_, length(output))
+  for (i in seq_along(output)){
+    if (!is.null(attr(output[[i]]$data, which = 'problems'))){
+      fnames_out[i] <- names(output)[i]
+      output[[i]] <- NULL
+    }
+  }
 
-  # Use missing codes if available; substitute with NAs
+  # FIXME: This use_missing_code() does not work. Please test and try again. 
+  # # Use missing codes if available; substitute with NAs
+  # 
+  # output <- lapply(output, use_missing_code)
   
-  output <- lapply(output, use_missing_code)
+  # Return --------------------------------------------------------------------
   
-  # Return list object --------------------------------------------------------
+  if (any(!is.na(fnames_out))){
+    fnames_out <- fnames_out[!is.na(fnames_out)]
+    message(
+      paste0(
+        'Sorry ... "', 
+        fnames_out, 
+        '" is an unsupported file type and can not be read at this time.',
+        collapse = '<br>'
+      )
+    )
+  }
   
+  message('Done.')
   output
   
 }
