@@ -34,10 +34,10 @@ use_missing_code <- function(entity_list) {
     for (i in 1:length(colnames(dat))) {
       
       # temporarily excluding dateTime variables: method not applicable to POSIXct variables
-      if (attrs[1, "measurementScale"] != "dateTime") {
+      if (attrs[indices[i], "measurementScale"] != "dateTime") {
         
         # get missingValueCode
-        code <- attrs[1, "missingValueCode"]
+        code <- attrs[indices[i], "missingValueCode"]
         
         # substitute where data matches code with NAs
         is.na(dat[[i]]) <-
