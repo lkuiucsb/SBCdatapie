@@ -1,9 +1,15 @@
 #'
-#' Column-wise substitution of NAs for missing codes, if specified in attribute metadata.
-#'
+#' Substitudes missing codes with NAs.
+#' This function performs column-wise substitution of NAs for missing values codes, if specified in attribute metadata.
+#' 
+#' @usage 
+#'   use_missing_code(
+#'     entity_list
+#'     )
+#'     
 #' @param entity_list (list) A list object containing information on a single data entity in metajam output format.
 #'
-#' @return If successful: a list object but with NAs in the right places in data. Otherwise, a list object identical to input.
+#' @return (list) If attribute metadata is present and missing codes are specified: a list object but with NAs substituted for missing codes. Otherwise, a list object identical to input.
 #'
 #' @export
 
@@ -46,9 +52,14 @@ use_missing_code <- function(entity_list) {
 
 # ----------------------------------------------------------------------------------------------------------------
 
-#' match_names
-#' Match indices of column names in the data and attributeName's specified in metadata.
-#'
+#' Match data and metadata attribute names.
+#' This function matches indices of column names in the data and attributeName's specified in metadata.
+#' 
+#' @usage 
+#'   match_names(
+#'     entity_list
+#'     )
+#' 
 #' @param entity_list (list) A list object containing information on a single data entity in metajam output format.
 #'
 #' @return (vector) A numeric vector with row indices in attribute metadata to match column indices in data.
