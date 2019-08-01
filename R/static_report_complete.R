@@ -39,11 +39,11 @@ static_report_complete <- function(entity_list, output_path, shiny = F) {
   # set template path. Use the first one once this is in a package.
   
   if (shiny == F) {
-  # template_path <- system.file("rmd", "static_report_template.Rmd", package = "dummypackagename")
-  template_path <- "./inst/rmd/static_report_template.Rmd"
+  template_path <- system.file("rmd", "static_report_template.Rmd", package = "datapie")
+  # template_path <- "./inst/rmd/static_report_template.Rmd"
   } else if (shiny == T) {
-    # template_path <- system.file("rmd", "static_report_template_shiny.Rmd", package = "dummypackagename")
-    template_path <- "./inst/rmd/static_report_template_shiny.Rmd"
+   template_path <- system.file("rmd", "static_report_template_shiny.Rmd", package = "datapie")
+    # template_path <- "./inst/rmd/static_report_template_shiny.Rmd"
   }
   
   # set report output path.
