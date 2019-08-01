@@ -7,6 +7,7 @@
 #' 
 #' @return A character vector whose two elements are named "lat_col" and "lon_col", indicating the names of columns containing lat and lon information respectively, or an error message if not detected or if we aren't equipped to deal with the number of hits we got. 
 #'
+#' @export
 
 space_detective <- function(list) {
   x_detect <- classify_xy(list, "x")
