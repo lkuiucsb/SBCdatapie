@@ -566,6 +566,11 @@ datapie_shiny <- function( dataset = NA ) {
           # if using data from DOI
           
         } else if (input$data_input == 2) {
+          
+          if (is.null(list_shiny()[[input$repo_file]])) {
+            return("In order to generate a report, please select a data table in this data package DOI from the drop-down menu in the Raw Data tab.")
+          } else {
+            
           report_filename <- paste0(list_shiny()[[input$repo_file]][["summary_metadata"]][1, 2], ".html")
           
           # ---
@@ -593,7 +598,7 @@ datapie_shiny <- function( dataset = NA ) {
                                                     },
                                                     contentType = "text/HTML")
           return(includeHTML(paste0(temp_output, report_filename)))
-          
+          }
           # ------
           # if using uploaded data, output message
           
