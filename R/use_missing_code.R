@@ -82,11 +82,24 @@ match_names <- function(entity_list) {
   # ---
   # proceed only if there are mismatches
   if (length(mismatches) != 0) {
-  # fuzzy matching for matching indices, only where there wasn't an exact match earlier
+    
+  # ---  
+  # initialize 
+    
   x <- c()
   for (i in 1:length(mismatches)) {
-    x <-
-      c(x, agrep(cols[mismatches][i], cols_attr[mismatches]))
+    
+    # ---
+    # fuzzy matching for matching indices, only where there wasn't an exact match earlier
+    attr_index <- agrep(cols[mismatches][i], cols_attr[mismatches])
+    
+    # sub in matched index only if there's exactly one match
+    if (length(attr_index) == 1) {
+    x <- c(x, attr_index)
+    } else {
+      # otherwise, put in the exact same index we're looping through. FIXME: do something more intelligent here
+      x <- c(x, mismatches[i])
+    }
   }
   # insert matched indices back in
   indices[mismatches] <- indices[mismatches[x]]
