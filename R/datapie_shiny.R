@@ -524,19 +524,22 @@ datapie_shiny <- function( dataset = NA ) {
     
     get_report <-
       
-      
       # do all this once "generate report" is clicked
       
       eventReactive(input$generate_example_report, {
         
+        # ---
+        # create report output folder within tempdir
         temp_output <- paste0(tempdir(), "/reports_output/")
         
+        # -------
         # if using sample data 
         
         if (input$data_input == 1) {
           report_filename <- paste0("report_", data_example[[1]][["summary_metadata"]][1, 2], ".html")
           
-          # check for existing report 
+          # ---
+          # check for existing report, otherwise call static_report_complete
           
           if (!file.exists(paste0(temp_output, report_filename))) {
             report_filename <-
@@ -546,24 +549,44 @@ datapie_shiny <- function( dataset = NA ) {
                 shiny = T
               )
           }
+          
+          # ---
+          # handle download
           output$download_report <- downloadHandler(filename = report_filename,
                                                     content <- function(file) {
                                                       file.copy(paste0(temp_output, report_filename), file)
                                                     },
                                                     contentType = "text/HTML")
+          
+          # ---
+          # return HTML output report
           return(includeHTML(paste0(temp_output, report_filename)))
           
+          # ------
           # if using data from DOI
           
         } else if (input$data_input == 2) {
           report_filename <- paste0(list_shiny()[[input$repo_file]][["summary_metadata"]][1, 2], ".html")
+          
+          # ---
+          # check for existing report, otherwise call static_report_complete
+          
           if (!file.exists(paste0(temp_output, report_filename))) {
+            
+            # ---
+            # get user-selected data entity from list of entities within package
+            
           entity_list <- list_shiny()[[input$repo_file]]
+          
           report_filename <-
             try(static_report_complete(entity_list = entity_list,
                                        output_path = temp_output,
                                        shiny = T))
           }
+          
+          # ---
+          # handle download 
+          
           output$download_report <- downloadHandler(filename = report_filename,
                                                     content <- function(file) {
                                                       file.copy(paste0(temp_output, report_filename), file)
@@ -571,14 +594,15 @@ datapie_shiny <- function( dataset = NA ) {
                                                     contentType = "text/HTML")
           return(includeHTML(paste0(temp_output, report_filename)))
           
-          # if using uploaded data
+          # ------
+          # if using uploaded data, output message
           
         } else if (input$data_input == 3) {
           return("Sorry, we don't currently support report generation for user-uploaded data.")
         }
       })
     
-    # render 
+    # render HTMl static report
     
     output$report_html <- renderUI({
       get_report()
