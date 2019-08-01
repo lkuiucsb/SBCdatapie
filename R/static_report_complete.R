@@ -5,6 +5,8 @@
 #' @param output_path (character) Path to save complete HTML report to. If "ask", a Rstudio pop-up window appears allowing choice of save directory (requires RStudio >= 1.1.287).
 #'
 #' @return A HTML file with complete static on the chosen data entity.
+#' 
+#' @export
 
 static_report_complete <- function(entity_list, output_path, shiny = F) {
   
