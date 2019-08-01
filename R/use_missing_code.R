@@ -16,14 +16,14 @@
 use_missing_code <- function(entity_list) {
   
   # ---
-  # subset into metadata and data
-  attrs <- entity_list[["attribute_metadata"]]
-  dat <- entity_list[["data"]]
-  
-  # ---
   # check for attribute metadata and missingValueCode field
   if ("attribute_metadata" %in% names(entity_list) &
-      "missingValueCode" %in% names(attrs)) {
+      "missingValueCode" %in% names(entity_list[["attribute_metadata"]])) {
+    
+    # ---
+    # subset into metadata and data
+    attrs <- entity_list[["attribute_metadata"]]
+    dat <- entity_list[["data"]]
     
     # ---
     # use match_names
@@ -46,8 +46,10 @@ use_missing_code <- function(entity_list) {
     }
   }
   
+  # ---
+  # return the same list but with NAs substituted for missing codes, or as-is if not successful
   return(entity_list)
-  
+
 }
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -76,8 +78,7 @@ match_names <- function(entity_list) {
   # ---
   # get indices of mismatched names or order
   mismatches <- which(!(cols == cols_attr))
-  
-  
+
   # ---
   # proceed only if there are mismatches
   if (length(mismatches) != 0) {
