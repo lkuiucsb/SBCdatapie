@@ -530,7 +530,7 @@ datapie_shiny <- function( dataset = NA ) {
         
         # ---
         # create report output folder within tempdir
-        temp_output <- paste0(tempdir(), "/reports_output/")
+        temp_output <- file.path(tempdir(), "reports_output")
         
         # -------
         # if using sample data 
@@ -541,7 +541,7 @@ datapie_shiny <- function( dataset = NA ) {
           # ---
           # check for existing report, otherwise call static_report_complete
           
-          if (!file.exists(paste0(temp_output, report_filename))) {
+          if (!file.exists(file.path(temp_output, report_filename))) {
             report_filename <-
               static_report_complete(
                 entity_list = data_example[[1]],
@@ -554,13 +554,13 @@ datapie_shiny <- function( dataset = NA ) {
           # handle download
           output$download_report <- downloadHandler(filename = report_filename,
                                                     content <- function(file) {
-                                                      file.copy(paste0(temp_output, report_filename), file)
+                                                      file.copy(file.path(temp_output, report_filename), file)
                                                     },
                                                     contentType = "text/HTML")
           
           # ---
           # return HTML output report
-          return(includeHTML(paste0(temp_output, report_filename)))
+          return(includeHTML(file.path(temp_output, report_filename)))
           
           # ------
           # if using data from DOI
@@ -576,7 +576,7 @@ datapie_shiny <- function( dataset = NA ) {
           # ---
           # check for existing report, otherwise call static_report_complete
           
-          if (!file.exists(paste0(temp_output, report_filename))) {
+          if (!file.exists(file.path(temp_output, report_filename))) {
             
             # ---
             # get user-selected data entity from list of entities within package
@@ -594,10 +594,10 @@ datapie_shiny <- function( dataset = NA ) {
           
           output$download_report <- downloadHandler(filename = report_filename,
                                                     content <- function(file) {
-                                                      file.copy(paste0(temp_output, report_filename), file)
+                                                      file.copy(file.path(temp_output, report_filename), file)
                                                     },
                                                     contentType = "text/HTML")
-          return(includeHTML(paste0(temp_output, report_filename)))
+          return(includeHTML(file.path(temp_output, report_filename)))
           }
           # ------
           # if using uploaded data, output message
