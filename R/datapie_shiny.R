@@ -571,7 +571,7 @@ datapie_shiny <- function( dataset = NA ) {
             return("In order to generate a report, please select a data table in this data package DOI from the drop-down menu in the Raw Data tab.")
           } else {
             
-          report_filename <- paste0(list_shiny()[[input$repo_file]][["summary_metadata"]][1, 2], ".html")
+          report_filename <- paste0("report_", list_shiny()[[input$repo_file]][["summary_metadata"]][1, 2], ".html")
           
           # ---
           # check for existing report, otherwise call static_report_complete
