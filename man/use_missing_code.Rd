@@ -2,16 +2,20 @@
 % Please edit documentation in R/use_missing_code.R
 \name{use_missing_code}
 \alias{use_missing_code}
-\title{Column-wise substitute NAs for missing codes, if specified in attribute metadata.}
+\title{Substitudes missing codes with NAs.
+This function performs column-wise substitution of NAs for missing values codes, if specified in attribute metadata.}
 \usage{
-use_missing_code(entity_list)
+use_missing_code(
+    entity_list
+    )
 }
 \arguments{
 \item{entity_list}{(list) A list object containing information on a single data entity in metajam output format.}
 }
 \value{
-If successful: a list object but with NAs in the right places in data. Otherwise, a list object identical to input.
+(list) If attribute metadata is present and missing codes are specified: a list object but with NAs substituted for missing codes. Otherwise, a list object identical to input.
 }
 \description{
-Column-wise substitute NAs for missing codes, if specified in attribute metadata.
+Substitudes missing codes with NAs.
+This function performs column-wise substitution of NAs for missing values codes, if specified in attribute metadata.
 }

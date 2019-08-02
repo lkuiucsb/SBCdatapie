@@ -65,7 +65,7 @@ kable(entity_report[["levels"]])
 ## Spatial information
 
 ```{r}
-xy <- space_detective(entity_list)
+xy <- datapie::space_detective(entity_list)
 ```
 
 

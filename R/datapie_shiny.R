@@ -558,21 +558,24 @@ datapie_shiny <- function( dataset = NA ) {
     
     get_report <-
       
-      
       # do all this once "generate report" is clicked
       
       eventReactive(input$generate_example_report, {
         
-        temp_output <- paste0(tempdir(), "/reports_output/")
+        # ---
+        # create report output folder within tempdir
+        temp_output <- file.path(tempdir(), "reports_output")
         
+        # -------
         # if using sample data 
         
         if (input$data_input == 1) {
           report_filename <- paste0("report_", data_example[[1]][["summary_metadata"]][1, 2], ".html")
           
-          # check for existing report 
+          # ---
+          # check for existing report, otherwise call static_report_complete
           
-          if (!file.exists(paste0(temp_output, report_filename))) {
+          if (!file.exists(file.path(temp_output, report_filename))) {
             report_filename <-
               static_report_complete(
                 entity_list = data_example[[1]],
@@ -580,39 +583,65 @@ datapie_shiny <- function( dataset = NA ) {
                 shiny = T
               )
           }
+          
+          # ---
+          # handle download
           output$download_report <- downloadHandler(filename = report_filename,
                                                     content <- function(file) {
-                                                      file.copy(paste0(temp_output, report_filename), file)
+                                                      file.copy(file.path(temp_output, report_filename), file)
                                                     },
                                                     contentType = "text/HTML")
-          return(includeHTML(paste0(temp_output, report_filename)))
           
+          # ---
+          # return HTML output report
+          return(includeHTML(file.path(temp_output, report_filename)))
+          
+          # ------
           # if using data from DOI
           
         } else if (input$data_input == 2) {
-          report_filename <- paste0(list_shiny()[[input$repo_file]][["summary_metadata"]][1, 2], ".html")
-          if (!file.exists(paste0(temp_output, report_filename))) {
+          
+          if (is.null(list_shiny()[[input$repo_file]])) {
+            return("In order to generate a report, please select a data table in this data package DOI from the drop-down menu in the Raw Data tab.")
+          } else {
+            
+          report_filename <- paste0("report_", list_shiny()[[input$repo_file]][["summary_metadata"]][1, 2], ".html")
+          
+          # ---
+          # check for existing report, otherwise call static_report_complete
+          
+          if (!file.exists(file.path(temp_output, report_filename))) {
+            
+            # ---
+            # get user-selected data entity from list of entities within package
+            
           entity_list <- list_shiny()[[input$repo_file]]
+          
           report_filename <-
             try(static_report_complete(entity_list = entity_list,
                                        output_path = temp_output,
                                        shiny = T))
           }
+          
+          # ---
+          # handle download 
+          
           output$download_report <- downloadHandler(filename = report_filename,
                                                     content <- function(file) {
-                                                      file.copy(paste0(temp_output, report_filename), file)
+                                                      file.copy(file.path(temp_output, report_filename), file)
                                                     },
                                                     contentType = "text/HTML")
-          return(includeHTML(paste0(temp_output, report_filename)))
-          
-          # if using uploaded data
+          return(includeHTML(file.path(temp_output, report_filename)))
+          }
+          # ------
+          # if using uploaded data, output message
           
         } else if (input$data_input == 3) {
           return("Sorry, we don't currently support report generation for user-uploaded data.")
         }
       })
     
-    # render 
+    # render HTMl static report
     
     output$report_html <- renderUI({
       get_report()
