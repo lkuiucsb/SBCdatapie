@@ -48,6 +48,8 @@ datapie_shiny <- function( dataset = NA ) {
                      h5("Enter DOI"),
                      textInput("doi", "e.g., doi:10.56as4f980...", NULL),
                      actionButton("fetch_button", "Fetch Data"),
+                     shinyFiles::shinyDirButton("dir", "Save Data", "Upload"),
+                     textOutput("text"),
                      selectInput("repo_file", "Select file:", 
                                  choices = "",
                                  selected = "No file selected")
@@ -515,6 +517,38 @@ datapie_shiny <- function( dataset = NA ) {
         "repo_file",
         choices = c("No file selected", file_names),
         selected = 'No file selected')
+    })
+    
+    ################################################
+    ########## DOWNLOAD DATA PACKAGE ###############
+    ################################################
+    
+    # Choose a local path to which the data package will be "downloaded" (the
+    # data package is actually being copied form the tempdir() to a user 
+    # specified location.
+    shinyFiles::shinyDirChoose(input, 'dir', roots = c(home = '~'),
+                               filetypes = c('', 'txt', 'bigWig', "tsv", "csv", "bw"))
+    global <- reactiveValues(datapath = getwd())
+    dir <- reactive(input$dir)
+    output$dir <- renderText({global$datapath})
+    observeEvent(ignoreNULL = TRUE, eventExpr = {input$dir},
+                 handlerExpr = {
+                   if (!"path" %in% names(dir())) return()
+                   home <- normalizePath("~")
+                   global$datapath <-
+                     file.path(home, paste(unlist(dir()$path[-1]), 
+                                           collapse = .Platform$file.sep))})
+    text_reactive <- eventReactive(input$dir, {
+      suppressMessages(data_package_copy(global$datapath))})
+    output$text <- renderText({
+      if (global$datapath != getwd()){
+        msg <- text_reactive()
+        if (isTRUE(msg)){
+          'Download complete'
+        } else {
+          'Data package already exists'
+        }
+      }
     })
     
     ################################################
