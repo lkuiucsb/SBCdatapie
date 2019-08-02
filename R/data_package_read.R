@@ -107,15 +107,15 @@ data_package_read <- function(data.pkg.path = NULL){
     )
   )
   
-  # Remove unreadable objects (e.g. xlsx)
-  
-  fnames_out <- rep(NA_character_, length(output))
-  for (i in seq_along(output)){
-    if (!is.null(attr(output[[i]]$data, which = 'problems'))){
-      fnames_out[i] <- names(output)[i]
-      output[[i]] <- NULL
-    }
-  }
+  # # Remove unreadable objects (e.g. xlsx)
+  # 
+  # fnames_out <- rep(NA_character_, length(output))
+  # for (i in seq_along(output)){
+  #   if (!is.null(attr(output[[i]]$data, which = 'problems'))){
+  #     fnames_out[i] <- names(output)[i]
+  #     output[[i]] <- NULL
+  #   }
+  # }
 
   # Use missing codes if available; substitute with NAs
 
