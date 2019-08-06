@@ -91,53 +91,39 @@ datapie_shiny <- function( dataset = NA ) {
                    h4("Create visualization"),
                    selectInput(inputId = "Type",
                                label = "Type of graph:",
-                               choices = c("Boxplot", "Histogram", "Scatter"), # c("Boxplot", "Density", "Dot + Error", "Dotplot", "Histogram", "Scatter", "Violin"),
+                               choices = c("Boxplot", "Histogram", "Scatter"),
                                selected = "Histogram"),
                    selectInput("x_var", "X-variable", choices = ""),
                    selectInput("x_cast", "X-coerce", choices = c('default','character', 'numeric', 'date')),
-                   
-                   conditionalPanel(condition = "input.Type!='Histogram'", # "input.Type!='Density' && input.Type!='Histogram'",
-                                    selectInput("y_var", "Y-variable", choices = ""),
-                                    selectInput("y_cast", "Y-coerce", choices = c('default', 'character', 'numeric', 'date'))
-                   ),
-                   conditionalPanel(condition = "input.Type =='Histogram'", # "input.Type!='Density' && input.Type!='Histogram'",
-                                    p("No y-variable relevant")
-                   ),
-                   selectInput("group", "Group (or color)", choices = ""),
-                   selectInput("facet_row", "Facet Row", choices = ""),
-                   selectInput("facet_col", "Facet Column", choices = ""),
-                   
-                   
-                   uiOutput("data_range"),
-                   #textOutput("text_output"),
-                   
                    conditionalPanel(
-                     condition = "input.Type == 'Boxplot'", # "input.Type == 'Boxplot' || input.Type == 'Violin' || input.Type == 'Dot + Error'",
-                     checkboxInput(inputId = "jitter",
-                                   label = strong("Show data points (jittered)"),
-                                   value = FALSE)
-                   ),
-                   conditionalPanel(
-                     condition = "input.Type == 'Scatter' || input.Type == 'Histogram'", # "input.Type == 'Density' || input.Type == 'Histogram'",
-                     sliderInput("alpha", "Opacity:", min = 0, max = 1, value = 0.8)
-                   ),
-                   conditionalPanel(
-                     condition = "input.Type == 'Scatter'",
-                     checkboxInput(inputId = "line",
-                                   label = strong("Show regression line"),
-                                   value = FALSE),
+                     condition = "input.Type!='Histogram'",
+                     selectInput("y_var", "Y-variable", choices = ""),
+                     selectInput("y_cast", "Y-coerce", choices = c('default', 'character', 'numeric', 'date')),
+                     selectInput("group", "Group (or color)", choices = ""),
+                     selectInput("facet_row", "Facet Row", choices = ""),
+                     selectInput("facet_col", "Facet Column", choices = ""),
                      conditionalPanel(
-                       condition = "input.line == true",
-                       selectInput("smooth", "Smoothening function",
-                                   choices = c("lm", "loess", "gam"))
-                     ),
+                       condition = "input.Type == 'Boxplot'",
+                       checkboxInput(inputId = "jitter",
+                                     label = strong("Show data points (jittered)"),
+                                     value = FALSE)),
                      conditionalPanel(
-                       condition = "input.line == true",
-                       checkboxInput(inputId = "se",
-                                     label = strong("Show confidence interval"),
-                                     value = FALSE)
-                     )
-                   )
+                       condition = "input.Type == 'Scatter'",
+                       checkboxInput(inputId = "line",
+                                     label = strong("Show regression line"),
+                                     value = FALSE),
+                       conditionalPanel(
+                         condition = "input.line == true",
+                         selectInput("smooth", "Smoothening function",
+                                     choices = c("lm", "loess", "gam"))),
+                       conditionalPanel(
+                         condition = "input.line == true",
+                         checkboxInput(inputId = "se",
+                                       label = strong("Show confidence interval"),
+                                       value = FALSE))
+                       )
+                   ),
+                   sliderInput("alpha", "Opacity:", min = 0, max = 1, value = 0.8)
                  ),
                  
                  conditionalPanel(
@@ -765,18 +751,17 @@ datapie_shiny <- function( dataset = NA ) {
         if (gg_fil || input$Type == "Scatter")
           jitt <- FALSE else jitt <- input$jitter
         
-        
         p <- paste(
           "ggplot(df, aes(",
-            if(input$x_cast == 'character'){
-              "x = as.character(input$x_var)"
-            }else if(input$x_cast == 'numeric'){
-              "x = as.numeric(input$x_var)"
-            }else if(input$x_cast == 'Date'){
-              "x = as.Date(input$x_var)"
-            }else{
-              "x = input$x_var"
-            },
+          if(input$x_cast == 'character'){
+            "x = as.character(input$x_var)"
+          }else if(input$x_cast == 'numeric'){
+            "x = as.numeric(input$x_var)"
+          }else if(input$x_cast == 'Date'){
+            "x = as.Date(input$x_var)"
+          }else{
+            "x = input$x_var"
+          },
           if (!gg_x_y) {
             if(input$y_cast == 'character'){
               ", y = as.character(input$y_var)"
@@ -788,44 +773,96 @@ datapie_shiny <- function( dataset = NA ) {
               ", y = input$y_var"
             }
           },
-          if (input$group != "." && gg_fil) {
+          if (input$group != "." && gg_fil){
             ", fill = input$group"
-          } else if (input$group != "." && !gg_fil) {
+          } else if (input$group != "." && !gg_fil){
             ", color = input$group"
           },
           ")) + ",
-          if (input$Type == "Histogram")
+          if (input$Type == "Histogram"){
             if(is.numeric(df_shiny()[,input$x_var])){
               paste("geom_histogram(alpha = input$alpha, ",
                     "binwidth = input$binwidth)", sep = "")
             }else{
               paste("geom_histogram(alpha = input$alpha, stat='count')", sep = "")
-              },
-          # if (input$Type == "Density")
-          #   paste("geom_density(position = 'identity', alpha = input$alpha, ",
-          #         "adjust = input$adj_bw)", sep = ""),
-          if (input$Type == "Boxplot")
-              "geom_boxplot()",
-          #   "geom_boxplot(notch = input$notch)",
-          # if (input$Type == "Violin")
-          #   "geom_violin(adjust = input$adj_bw)",
-          # if (input$Type == "Dotplot")
-          #   paste("geom_dotplot(binaxis = 'y', binwidth = input$binwidth, ",
-          #         "stackdir = 'input$dot_dir')", sep = ""),
-          # if (input$Type == "Dot + Error")
-          #   paste("geom_point(stat = 'summary', fun.y = 'mean') +\n  ",
-          #         "geom_errorbar(stat = 'summary', fun.data = 'mean_se', ", "
-          #         width=0, fun.args = list(mult = input$CI))", sep = ""),
-          if (input$Type == "Scatter")
-            "geom_point(alpha = input$alpha, size = 2)",
-          if (input$Type == "Scatter" && input$line)
-            "+ geom_smooth(se = input$se, method = 'input$smooth')",
-          if (jitt)
+            }
+          },
+          if (input$Type == "Boxplot"){
+            "geom_boxplot()"
+          },
+          if (input$Type == "Scatter"){
+            "geom_point(alpha = input$alpha, size = 2)"
+          },
+          if (input$Type == "Scatter" && input$line){
+            "+ geom_smooth(se = input$se, method = 'input$smooth')"
+          },
+          if (jitt){
             paste(" + geom_jitter(size = input$size_jitter, ",
                   "alpha = input$opac_jitter, width = input$width_jitter, ",
-                  "color = 'input$col_jitter')", sep = ""),
+                  "color = 'input$col_jitter')", sep = "")
+          },
           sep = ""
         )
+        # p <- paste(
+        #   "ggplot(df, aes(",
+        #     if(input$x_cast == 'character'){
+        #       "x = as.character(input$x_var)"
+        #     }else if(input$x_cast == 'numeric'){
+        #       "x = as.numeric(input$x_var)"
+        #     }else if(input$x_cast == 'Date'){
+        #       "x = as.Date(input$x_var)"
+        #     }else{
+        #       "x = input$x_var"
+        #     },
+        #   if (!gg_x_y) {
+        #     if(input$y_cast == 'character'){
+        #       ", y = as.character(input$y_var)"
+        #     }else if(input$y_cast == 'numeric'){
+        #       ", y = as.numeric(input$y_var)"
+        #     }else if(input$y_cast == 'Date'){
+        #       ", y = as.Date(input$y_var)"
+        #     }else{
+        #       ", y = input$y_var"
+        #     }
+        #   },
+        #   if (input$group != "." && gg_fil) {
+        #     ", fill = input$group"
+        #   } else if (input$group != "." && !gg_fil) {
+        #     ", color = input$group"
+        #   },
+        #   ")) + ",
+        #   if (input$Type == "Histogram")
+        #     if(is.numeric(df_shiny()[,input$x_var])){
+        #       paste("geom_histogram(alpha = input$alpha, ",
+        #             "binwidth = input$binwidth)", sep = "")
+        #     }else{
+        #       paste("geom_histogram(alpha = input$alpha, stat='count')", sep = "")
+        #       },
+        #   # if (input$Type == "Density")
+        #   #   paste("geom_density(position = 'identity', alpha = input$alpha, ",
+        #   #         "adjust = input$adj_bw)", sep = ""),
+        #   if (input$Type == "Boxplot")
+        #       "geom_boxplot()",
+        #   #   "geom_boxplot(notch = input$notch)",
+        #   # if (input$Type == "Violin")
+        #   #   "geom_violin(adjust = input$adj_bw)",
+        #   # if (input$Type == "Dotplot")
+        #   #   paste("geom_dotplot(binaxis = 'y', binwidth = input$binwidth, ",
+        #   #         "stackdir = 'input$dot_dir')", sep = ""),
+        #   # if (input$Type == "Dot + Error")
+        #   #   paste("geom_point(stat = 'summary', fun.y = 'mean') +\n  ",
+        #   #         "geom_errorbar(stat = 'summary', fun.data = 'mean_se', ", "
+        #   #         width=0, fun.args = list(mult = input$CI))", sep = ""),
+        #   if (input$Type == "Scatter")
+        #     "geom_point(alpha = input$alpha, size = 2)",
+        #   if (input$Type == "Scatter" && input$line)
+        #     "+ geom_smooth(se = input$se, method = 'input$smooth')",
+        #   if (jitt)
+        #     paste(" + geom_jitter(size = input$size_jitter, ",
+        #           "alpha = input$opac_jitter, width = input$width_jitter, ",
+        #           "color = 'input$col_jitter')", sep = ""),
+        #   sep = ""
+        # )
   
         # if at least one facet column/row is specified, add it
         facets <- paste(input$facet_row, "~", input$facet_col)
@@ -1100,43 +1137,43 @@ datapie_shiny <- function( dataset = NA ) {
   ### scale bar #################
   ###############################
   
-  output$data_range <- renderUI({
-    # If missing input, return to avoid error later in function
-    if(is.null(input$x_var))
-      return()
-  
-    # Get the data set with the selected column
-    df<-df_shiny()
-    
-    if (input$x_var!="") {
-    df1 <- unlist(df[,input$x_var])
-  
-      if (!is.character(df1)&input$x_cast!="character") {
-        sliderInput("range", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
-        } else {
-           h5("No scale bar for categorical variable")
-      }
-    } else {return()}
-  })
+  # output$data_range <- renderUI({
+  #   # If missing input, return to avoid error later in function
+  #   if(is.null(input$x_var))
+  #     return()
+  # 
+  #   # Get the data set with the selected column
+  #   df<-df_shiny()
+  #   
+  #   if (input$x_var!="") {
+  #   df1 <- unlist(df[,input$x_var])
+  # 
+  #     if (!is.character(df1)&input$x_cast!="character") {
+  #       sliderInput("range", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
+  #       } else {
+  #          h5("No scale bar for categorical variable")
+  #     }
+  #   } else {return()}
+  # })
   
   ####################################
   ####subset data from scale bar ####
   #####################################
      
-    get_subset <- reactive({
-       
-       min_value <- input$range[1] 
-       max_value <- input$range[2]
-       
-       df <- df_shiny() 
-  
-        if (!is.null(min_value)) {
-        df2<-df %>% filter(df[,input$x_var]>=min_value&df[,input$x_var]<=max_value)
-        } else {
-          df2<-df
-        }
-       df2
-     })
+    # get_subset <- reactive({
+    #    
+    #    min_value <- input$range[1] 
+    #    max_value <- input$range[2]
+    #    
+    #    df <- df_shiny() 
+    # 
+    #     if (!is.null(min_value)) {
+    #     df2<-df %>% filter(df[,input$x_var]>=min_value&df[,input$x_var]<=max_value)
+    #     } else {
+    #       df2<-df
+    #     }
+    #    df2
+    #  })
      
   #for debugging purpose, uncomment the
      # output$text_output <- renderText({
