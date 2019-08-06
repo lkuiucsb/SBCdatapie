@@ -108,10 +108,11 @@ data_package_read <- function(data.pkg.path = NULL){
   )
   
   # Remove unreadable objects (e.g. xlsx)
-  
+
   fnames_out <- rep(NA_character_, length(output))
   for (i in seq_along(output)){
-    if (!is.null(attr(output[[i]]$data, which = 'problems'))){
+    if (!is.null(attr(output[[i]]$data, which = 'problems')) &
+        (ncol(output[[i]]$data) == 1)){
       fnames_out[i] <- names(output)[i]
       output[[i]] <- NULL
     }
@@ -127,8 +128,8 @@ data_package_read <- function(data.pkg.path = NULL){
     fnames_out <- fnames_out[!is.na(fnames_out)]
     message(
       paste0(
-        'Sorry ... "', 
-        fnames_out, 
+        'Sorry ... "',
+        fnames_out,
         '" is an unsupported file type and can not be read at this time.',
         collapse = '<br>'
       )

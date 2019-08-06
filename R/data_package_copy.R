@@ -44,7 +44,8 @@ data_package_copy <- function(copy.dir){
     
     file.copy(
       from = paste0(tempdir(), '/data_package/.'),
-      to = copy.dir, 
+      to = copy.dir,
+      overwrite = FALSE,
       recursive = TRUE
     )
     
