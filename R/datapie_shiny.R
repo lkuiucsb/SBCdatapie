@@ -958,7 +958,7 @@ datapie_shiny <- function( dataset = NA ) {
       output$out_ggplot <- renderPlot(width = width,
                                       height = height, {
         # evaluate the string RCode as code
-        df <- get_subset()
+        df <- df_shiny()
         p <- eval(parse(text = string_code()))
         p
       })
