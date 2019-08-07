@@ -95,35 +95,50 @@ datapie_shiny <- function( dataset = NA ) {
                                selected = "Histogram"),
                    selectInput("x_var", "X-variable", choices = ""),
                    selectInput("x_cast", "X-coerce", choices = c('default','character', 'numeric', 'date')),
-                   conditionalPanel(
-                     condition = "input.Type!='Histogram'",
-                     selectInput("y_var", "Y-variable", choices = ""),
-                     selectInput("y_cast", "Y-coerce", choices = c('default', 'character', 'numeric', 'date')),
-                     selectInput("group", "Group (or color)", choices = ""),
-                     selectInput("facet_row", "Facet Row", choices = ""),
-                     selectInput("facet_col", "Facet Column", choices = ""),
-                     conditionalPanel(
-                       condition = "input.Type == 'Boxplot'",
-                       checkboxInput(inputId = "jitter",
-                                     label = strong("Show data points (jittered)"),
-                                     value = FALSE)),
-                     conditionalPanel(
-                       condition = "input.Type == 'Scatter'",
-                       checkboxInput(inputId = "line",
-                                     label = strong("Show regression line"),
-                                     value = FALSE),
-                       conditionalPanel(
-                         condition = "input.line == true",
-                         selectInput("smooth", "Smoothening function",
-                                     choices = c("lm", "loess", "gam"))),
-                       conditionalPanel(
-                         condition = "input.line == true",
-                         checkboxInput(inputId = "se",
-                                       label = strong("Show confidence interval"),
-                                       value = FALSE))
-                       )
+                   conditionalPanel(condition = "input.Type!='Histogram'", # "input.Type!='Density' && input.Type!='Histogram'",
+                                    selectInput("y_var", "Y-variable", choices = ""),
+                                    selectInput("y_cast", "Y-coerce", choices = c('default', 'character', 'numeric', 'date'))
                    ),
-                   sliderInput("alpha", "Opacity:", min = 0, max = 1, value = 0.8)
+                   conditionalPanel(condition = "input.Type =='Histogram'", # "input.Type!='Density' && input.Type!='Histogram'",
+                                    p("No yvariable relevant")
+                   ),
+                   selectInput("group", "Group (or color)", choices = ""),
+                   selectInput("facet_row", "Facet Row", choices = ""),
+                   selectInput("facet_col", "Facet Column", choices = ""),
+                   
+                   
+                   uiOutput("data_range"),
+                   #textOutput("text_output"),
+                   
+                   conditionalPanel(
+                     condition = "input.Type == 'Boxplot'", # "input.Type == 'Boxplot' || input.Type == 'Violin' || input.Type == 'Dot + Error'",
+                     checkboxInput(inputId = "jitter",
+                                   label = strong("Show data points (jittered)"),
+                                   value = FALSE)
+                   ),
+                   conditionalPanel(
+                     condition = "input.Type == 'Scatter' || input.Type == 'Histogram'", # "input.Type == 'Density' || input.Type == 'Histogram'",
+                     sliderInput("alpha", "Opacity:", min = 0, max = 1, value = 0.8)
+                   ),
+                   conditionalPanel(
+                     condition = "input.Type == 'Scatter'",
+                     checkboxInput(inputId = "line",
+                                   label = strong("Show regression line"),
+                                   value = FALSE),
+                     conditionalPanel(
+                       condition = "input.line == true",
+                       selectInput("smooth", "Smoothening function",
+                                   choices = c("lm", "loess", "gam"))
+                     ),
+                     conditionalPanel(
+                       condition = "input.line == true",
+                       checkboxInput(inputId = "se",
+                                     label = strong("Show confidence interval"),
+                                     value = FALSE)
+                     )
+                   )
+                     
+                   
                  ),
                  
                  conditionalPanel(
@@ -1010,14 +1025,14 @@ datapie_shiny <- function( dataset = NA ) {
       output$out_ggplot <- renderPlot(width = width,
                                       height = height, {
         # evaluate the string RCode as code
-        df <- df_shiny()
+        df <- get_subset() #note: this is a subset of data from df_shiny as we select the range of interest()
         p <- eval(parse(text = string_code()))
         p
       })
   
       output$out_plotly <- renderPlotly({
         # evaluate the string RCode as code
-        df <- df_shiny()
+        df <- get_subset()#note: this is a subset of data from df_shiny as we select the range of interest()
         p <- eval(parse(text = string_code()))
         ggplotly(p)
       })
@@ -1152,43 +1167,43 @@ datapie_shiny <- function( dataset = NA ) {
   ### scale bar #################
   ###############################
   
-  # output$data_range <- renderUI({
-  #   # If missing input, return to avoid error later in function
-  #   if(is.null(input$x_var))
-  #     return()
-  # 
-  #   # Get the data set with the selected column
-  #   df<-df_shiny()
-  #   
-  #   if (input$x_var!="") {
-  #   df1 <- unlist(df[,input$x_var])
-  # 
-  #     if (!is.character(df1)&input$x_cast!="character") {
-  #       sliderInput("range", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
-  #       } else {
-  #          h5("No scale bar for categorical variable")
-  #     }
-  #   } else {return()}
-  # })
+   output$data_range <- renderUI({
+     # If missing input, return to avoid error later in function
+     if(is.null(input$x_var))
+       return()
+     
+     # Get the data set with the selected column
+     df<-df_shiny()
+     
+     if (input$x_var!="") {
+       df1 <-df[[input$x_var]]
+       
+       if (class(df1)[1]=="numeric") {
+         sliderInput("range", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
+       } else {
+         h5("No scale bar for nonnumerical variable")
+       }
+     } else {return()}
+   })
   
   ####################################
   ####subset data from scale bar ####
   #####################################
      
-    # get_subset <- reactive({
-    #    
-    #    min_value <- input$range[1] 
-    #    max_value <- input$range[2]
-    #    
-    #    df <- df_shiny() 
-    # 
-    #     if (!is.null(min_value)) {
-    #     df2<-df %>% filter(df[,input$x_var]>=min_value&df[,input$x_var]<=max_value)
-    #     } else {
-    #       df2<-df
-    #     }
-    #    df2
-    #  })
+   get_subset <- reactive({
+     min_value <- input$range[1]
+     max_value <- input$range[2]
+     
+     df <- df_shiny()
+     
+     if (class(df[[input$x_var]])[1]=="numeric"&!is.null(min_value)) {
+       df2<-df %>% plotly::filter(df[,input$x_var]>=min_value&df[,input$x_var]<=max_value)
+     } else {
+       df2<-df
+     }
+     df2
+     
+   })
      
   #for debugging purpose, uncomment the
      # output$text_output <- renderText({
