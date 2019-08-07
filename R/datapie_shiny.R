@@ -221,7 +221,7 @@ datapie_shiny <- function( dataset = NA ) {
                            generates a report describing the data. This is not intended 
                            to replace a full analysis in R or comparable statistical 
                            packages; however, it is intended to allow the user to 
-                           quickly access whether data is suitable for their research needs."),
+                           quickly assess whether data is suitable for their research needs."),
                          p("For the web application quick start guide, please visit the 
                            “Help” tab above."),
                          p("For detailed information on the", code("datapie"), 
@@ -231,10 +231,10 @@ datapie_shiny <- function( dataset = NA ) {
                          p("To report a bug please submit an issue on GitHub here: ", 
                            a("https://github.com/IMCR-Hackathon/datapie/issues", href = "https://github.com/IMCR-Hackathon/datapie/issues")),
                          h3("Contributors (in alphabetical order)"),
-                         p("Alesia Hallmark, Li Kui, Jason Mercer, An Nguyen, John Porter, 
-                           Sheila Saia, Colin Smith*, Kathe Todd-Brown, Kristin Vanderbuilt*, and 
+                         p("Alesia Hallmark, Li Kui, Jason Mercer, An T. Nguyen, John Porter, 
+                           Sheila Saia, Colin Smith*, Kathe Todd-Brown, Kristin Vanderbilt*, and 
                            Jocelyn Wardrup"),
-                         p("*Indicates package maintainer. Please visit ", a("https://imcr-hackathon.github.io/datapie/", href = "https://imcr-hackathon.github.io/datapie/"),
+                         p("*Indicates package maintainer(s). Please visit ", a("https://imcr-hackathon.github.io/datapie/", href = "https://imcr-hackathon.github.io/datapie/"),
                            " for up-to-date contact information."),
                          h3("Acknowledgements"),
                          p("This work adheres to the Findable Accessible Interoperable Reusable (FAIR) 
