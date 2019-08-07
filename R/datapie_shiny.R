@@ -147,12 +147,12 @@ datapie_shiny <- function( dataset = NA ) {
               tabsetPanel(
                 type = "tabs",
                 tabPanel("Raw Data",
-                  dataTableOutput("out_table"),
-                  textOutput("message_text")),
+                         dataTableOutput("out_table"),
+                         textOutput("message_text")),
                 tabPanel("Summary Report", 
                          #dataTableOutput("summary_table"),
                          htmlOutput("report_html")
-                         ),
+                ),
                 tabPanel("Plot",
                          mainPanel(
                            downloadButton("download_plot_PDF",
@@ -167,73 +167,88 @@ datapie_shiny <- function( dataset = NA ) {
                 tabPanel("Help",
                          p("This is place holder text")),
                 tabPanel("About",
-                         h3("EDI hackathon"),
-                         p("This extends the datapie to download data directly from the EDI repository and also has additional summary and visulization functions."),
-                         h3("datapie -Orginal Background"),
-                         p(
-                           a("R", href = "https://www.r-project.org/"), "is amazing, but daunting
-  for many. The programming style of R, compared to the point-and-click
-  style of typical software, is a hurdle for many. Perhaps particularly so
-  for those in the social sciences, whose statistical needs are often met by
-  other software packages. Yet such packages are often very limited in terms
-  of their options to visualize the data at hand. I believe that the amazing
-  visualization-capabilities of R might be one way to get more people to use it.
-  To lower the barrier to start using R, this package allows users to visualize
-  their data using an online graphical user interface (GUI) that makes use of
-  R's visualization package",
-                           a("ggplot", href = "http://ggplot2.org/"),
-                           ". There are two ways of using this functionality: 1) online, where users
-  can upload their data and visualize it without needing R, by visiting ",
-                           a("this website",
-                             href = "https://site.shinyserver.dck.gmw.rug.nl/ggplotgui/"),
-                           "; 2) from within the R-environment (by using the ", code("ggplot_shiny()"),
-                           "function). Importantly, the R-code will also be provided such that the user
-  can recreate the graphs within the R-environment. The main aim (or hope) is
-  to get more people using R and its wonderful (graphing) capabilities."
-                         ),
-                         h3("App info"),
-                         p(
-                           "This application was built in ",
-                           a("R", href = "https://www.r-project.org/"),
-                           "version 3.3.2, and uses the following packages: ",
-                           a("ggplot2", href = "http://ggplot2.tidyverse.org/"), ",",
-                           a("Shiny", href = "http://www.rstudio.com/shiny/"), ",",
-                           a("stringr", href = "http://stringr.tidyverse.org/"), ",",
-                           a("plotly", href = "https://plot.ly/r/"), ",",
-                           a("readr", href = "http://readr.tidyverse.org/"), ",",
-                           a("readxl", href = "http://readxl.tidyverse.org/"), ",",
-                           a("haven", href = "http://haven.tidyverse.org/"), ", and",
-                           a("RColorBrewer.", href = "http://stringr.tidyverse.org/")
-                         ),
-                         p(
-                           "This application was created by ",
-                           a("Gert Stulp", href = "http://www.gertstulp.com/"),
-                           ". Please do report bugs and send feature requests to ",
-                           a("g.stulp[at]rug.nl", href = "mailto:g.stulp@rug.nl"),
-                           ". Visit ",
-                           a("https://github.com/gertstulp/ggplotgui",
-                             href = "https://github.com/gertstulp/ggplotgui"),
-                           "for further description and code."
-                         ),
+                         h3(""),
+                         p("Welcome to the Environmental Data Initiative’s web 
+                           application to aid data description and exploration."),
+                         h3("About the Environmental Data Initiative"),
+                         p("Funded by the National Science Foundation (NSF), the 
+                           Environmental Data Initiative’s (EDI) goal is to support 
+                           the environmental and ecological research community by (1) 
+                           accelerating the pace of information management and (2) 
+                           providing a robust and secure data repository that facilitates 
+                           data discovery and reuse. One barrier to information management 
+                           in the ecological community is the need for information 
+                           managers to regularly write new code for new information 
+                           management tasks. Unfortunately, there is little reuse of 
+                           this code. To improve discoverability and access of 
+                           information management code, EDI initiated the Information 
+                           Management Code Registry (IMCR), where users can search over 
+                           80 entries in the registry for software with particular 
+                           information management uses. IMCR is hosted in Ontosoft, a 
+                           metadata authoring and discovery system for software that 
+                           was developed by NSF’s EarthCube project. The IMCR has become 
+                           a community-supported resource, with considerable input from 
+                           scientists and informaticians affiliated with the Earth Science 
+                           Information Partners IMCR group. More specifically, when the 
+                           community identifies a need for software to manage or re-use 
+                           data housed in data repositories, EDI often supports hackathons 
+                           to produce this code, as is the case with", code("datapie"), "."),
+                         p("For inforation about EDI, please visit: ", 
+                           a("https://environmentaldatainitiative.org/", href = "https://environmentaldatainitiative.org/")),
+                         p("For information about IMCR, please visit: ", 
+                           a("http://wiki.esipfed.org/index.php/IM_Code_Registry", href = "http://wiki.esipfed.org/index.php/IM_Code_Registry")),
+                         h3("About the 2019 Environmental Data Initiative Hackathon"),
+                         p("The goal of the 2019 EDI Hackathon was to improve methods to 
+                           visualize data from ", a("DataOne", href = "https://www.dataone.org/"), 
+                           " and other environmental data repositories. This new code 
+                           and associated software tool would be available through IMCR. 
+                           Also, it would encourage more scientists to review and 
+                           interpret publicly available environmental datasets, and 
+                           ultimately, advance environmental and ecology research."),
+                         h3("About the R datapie Package"),
+                         p(code("datapie"), "which stands for Data Package Interface (for) 
+                           Evaluation (“Easy as pie!”), was developed through the 2019 
+                           EDI Hackathon event which occurred June 9 to 13, 2019 in 
+                           Albuquerque, New Mexico. The R package was first released on 
+                           August 8, 2019."),
+                         p("The", code("datapie"), "R package and interactive web application 
+                           help researchers and other data users who wish to reuse existing 
+                           data packages that are archived on DataOne or an ", a("affiliated member node.", href = "https://www.dataone.org/current-member-nodes#uploads"),
+                           "The interactive web application (1) downloads identified 
+                           DOIs registered on DataOne or member nodes, (2) reads data into 
+                           the web application, (3) provides summary statistics and basic graphics 
+                           describing datasets associated with the DOI, and (4) 
+                           generates a report describing the data. This is not intended 
+                           to replace a full analysis in R or comparable statistical 
+                           packages; however, it is intended to allow the user to 
+                           quickly access whether data is suitable for their research needs."),
+                         p("For the web application quick start guide, please visit the 
+                           “Help” tab above."),
+                         p("For detailed information on the", code("datapie"), 
+                           "R package, including background, use, and how to cite it, 
+                           please visit: ", 
+                           a("https://imcr-hackathon.github.io/datapie/", href = "https://imcr-hackathon.github.io/datapie/")),
+                         p("To report a bug please submit an issue on GitHub here: ", 
+                           a("https://github.com/IMCR-Hackathon/datapie/issues", href = "https://github.com/IMCR-Hackathon/datapie/issues")),
+                         h3("Contributors (in alphabetical order)"),
+                         p("Alesia Hallmark, Li Kui, Jason Mercer, An Nguyen, John Porter, 
+                           Sheila Saia, Colin Smith*, Kathe Todd-Brown, Kristin Vanderbuilt*, and 
+                           Jocelyn Wardrup"),
+                         p("*Indicates package maintainer. Please visit ", a("https://imcr-hackathon.github.io/datapie/", href = "https://imcr-hackathon.github.io/datapie/"),
+                           " for up-to-date contact information."),
                          h3("Acknowledgements"),
-                         p(
-                           "Thanks to Wilmer Joling for setting up the ",
-                           a("website", href = "https://site.shinyserver.dck.gmw.rug.nl/ggplotgui/"),
-                           "which is based on the magical but incomprehensible",
-                           a("docker", href = "https://www.docker.com/"),
-                           ". Thanks to ",
-                           a("Hadley Wicham", href = "http://hadley.nz/"),
-                           " for making such good packages (and open access
-  books describing them), that allow even low-skilled
-  and low-talented programmers like myself to be able to
-  contribute to R"
-                         )
-                ),
+                         p("This work adheres to the Findable Accessible Interoperable Reusable (FAIR) 
+                           initiative. We thank Dr. Gert Stulp, the author of the", code("ggplotgui"), "R package, 
+                           for sharing source code that we used (with Dr. Stulp’s permission) to meet 
+                           our project goals. Dr. Stulp's application is accessible here: ", 
+                           a("https://site.shinyserver.dck.gmw.rug.nl/ggplotgui/", href = "https://site.shinyserver.dck.gmw.rug.nl/ggplotgui/")),
+                         h3("")
+                         ),
                 id = "tabs"
-              ),
+                         ),
               conditionalPanel(condition="$('html').hasClass('shiny-busy')",
                                tags$div("Loading...",id="loadmessage"))
-    ), #close mainPanel
+                         ), #close mainPanel
     
     ####### Right Panel ########
     conditionalPanel(
