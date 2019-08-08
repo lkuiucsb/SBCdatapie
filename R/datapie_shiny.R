@@ -98,7 +98,7 @@ datapie_shiny <- function( dataset = NA ) {
                                     selectInput("y_cast", "Y-coerce", choices = c('default', 'character', 'numeric', 'date'))
                    ),
                    conditionalPanel(condition = "input.Type =='Histogram'", # "input.Type!='Density' && input.Type!='Histogram'",
-                                    p("No yvariable relevant")
+                                    p("No Y-variable relevant")
                    ),
                    selectInput("group", "Group (or color)", choices = ""),
                    selectInput("facet_row", "Facet Row", choices = ""),
@@ -890,8 +890,8 @@ datapie_shiny <- function( dataset = NA ) {
         # )
   
         # if at least one facet column/row is specified, add it
-        facets <- paste(input$facet_row, "~", input$facet_col)
-        if (facets != ". ~ .")
+        facets <- gsub("`.`",".",paste0('`',input$facet_row,'`',"~", '`',input$facet_col,'`'),fixed=T)
+        if (facets != ".~.")  # remove the space
           p <- paste(p, "+ facet_grid(", facets, ")")
   
         # if labels specified
