@@ -779,29 +779,29 @@ datapie_shiny <- function( dataset = NA ) {
         p <- paste(
           "ggplot(df, aes(",
           if(input$x_cast == 'character'){
-            "x = as.character('input$x_var')"
+            "x = as.character(`input$x_var`)"
           }else if(input$x_cast == 'numeric'){
-            "x = as.numeric('input$x_var')"
+            "x = as.numeric(`input$x_var`)"
           }else if(input$x_cast == 'Date'){
-            "x = as.Date('input$x_var')"
+            "x = as.Date(`input$x_var`)"
           }else{
-            "x = 'input$x_var'"
+            "x = `input$x_var`"
           },
           if (!gg_x_y) {
             if(input$y_cast == 'character'){
-              ", y = as.character('input$y_var')"
+              ", y = as.character(`input$y_var`)"
             }else if(input$y_cast == 'numeric'){
-              ", y = as.numeric('input$y_var')"
+              ", y = as.numeric(`input$y_var`)"
             }else if(input$y_cast == 'Date'){
-              ", y = as.Date('input$y_var')"
+              ", y = as.Date(`input$y_var`)"
             }else{
-              ", y = 'input$y_var'"
+              ", y = `input$y_var`"
             }
           },
           if (input$group != "." && gg_fil){
-            ", fill = 'input$group'"
+            ", fill = `input$group`"
           } else if (input$group != "." && !gg_fil){
-            ", color = 'input$group'"
+            ", color = `input$group`"
           },
           ")) + ",
           if (input$Type == "Histogram"){
