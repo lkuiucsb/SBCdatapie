@@ -14,16 +14,17 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.5.2",
+    "version": "3.6.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.5.2 (2018-12-20)",
+  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
   "author": [
     {
       "@type": "Person",
       "givenName": "Colin A.",
       "familyName": "Smith",
-      "email": "colin.smith@wisc.edu"
+      "email": "colin.smith@wisc.edu",
+      "@id": "https://orcid.org/0000-0003-2261-9931"
     },
     {
       "@type": "Person",
@@ -93,7 +94,8 @@
       "@type": "Person",
       "givenName": "Colin A.",
       "familyName": "Smith",
-      "email": "colin.smith@wisc.edu"
+      "email": "colin.smith@wisc.edu",
+      "@id": "https://orcid.org/0000-0003-2261-9931"
     }
   ],
   "softwareSuggestions": [
@@ -203,6 +205,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "magrittr",
+      "name": "magrittr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=magrittr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "metajam",
       "name": "metajam",
       "sameAs": "https://github.com/clnsmth/metajam"
@@ -281,6 +295,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "shinyFiles",
+      "name": "shinyFiles",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=shinyFiles"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "shinyjs",
       "name": "shinyjs",
       "provider": {
@@ -326,12 +352,24 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyverse"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "usethis",
+      "name": "usethis",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=usethis"
     }
   ],
   "readme": "https://github.com/IMCR-Hackathon/datapie/blob/master/README.md",
-  "fileSize": "2522.031KB",
+  "fileSize": "2679.272KB",
   "contIntegration": "https://travis-ci.org/gertstulp/ggplotgui",
   "copyrightHolder": {},
   "funder": {},
-  "releaseNotes": "https://github.com/IMCR-Hackathon/ggplotgui/blob/master/NEWS.md"
+  "releaseNotes": "https://github.com/IMCR-Hackathon/datapie/blob/master/NEWS.md"
 }
