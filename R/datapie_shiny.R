@@ -29,34 +29,32 @@ datapie_shiny <- function( dataset = NA ) {
     ###### Left panel: loading data and main graphing options ########
     sidebarPanel(width = 3,
                  conditionalPanel(
-                   condition = "input.tabs=='Raw Data'",
-                   h4("Raw Data"),
+                   condition = "input.tabs=='Data'",
+                   h4("Data loading options"),
                    radioButtons(
                      "data_input", "",
-                     choices = list("Load sample data" = 1,
+                     choices = list("Use sample data" = 1,
                                     "Fetch data from DOI" = 2,
-                                    "Upload text file" = 3), #, "Paste text file" = 4), 
+                                    "Upload data" = 3), #, "Paste text file" = 4), 
                      selected = 1),
                    conditionalPanel(
                      condition = "input.data_input=='1'",
-                     h5("Sample dataset from library(datapie) is loaded."),
-                     downloadButton("downloadData",
-                                    "Download data")
+                     h5("Sample data is loaded.")
                      ),
                    conditionalPanel(
                      condition = "input.data_input=='2'",
-                     h5("Enter DOI"),
-                     textInput("doi", "e.g., doi:10.56as4f980...", NULL),
+                     h5("Enter data package DOI:"),
+                     textInput(inputId = "doi", label = NULL, placeholder = "doi:10.18739/A2DP3X"),
                      actionButton("fetch_button", "Fetch Data"),
                      shinyFiles::shinyDirButton("dir", "Save Data", "Upload"),
                      textOutput("text"),
-                     selectInput("repo_file", "Select file:", 
+                     selectInput("repo_file", "Select data object:", 
                                  choices = "",
-                                 selected = "No file selected")
+                                 selected = "No object selected")
                      ),
                    conditionalPanel(
                      condition = "input.data_input=='3'",
-                     h5("Upload file: "),
+                     h5("Upload file from your computer: "),
                      fileInput("upload", "", multiple = FALSE),
                      selectInput("file_type", "Type of file:",
                                  list("text (csv)" = "text",
@@ -79,10 +77,10 @@ datapie_shiny <- function( dataset = NA ) {
                      )
                    ),
                  conditionalPanel(
-                   condition = "input.tabs == 'Summary Report'",
+                   condition = "input.tabs == 'Report'",
                    h4("Overall and variable-by-variable summaries and plots"),
                    actionButton("generate_example_report", "Generate report"),
-                   h4("If using DOI, remember to select a file. Now wait. Once report shows up you can view and click on download."),
+                   h4("If using DOI, remember to select a file. Now wait. Once report shows up you can view and download."),
                    downloadButton("download_report", "Download report (HTML)")
                  ),
                  
@@ -136,24 +134,28 @@ datapie_shiny <- function( dataset = NA ) {
                                      label = strong("Show confidence interval"),
                                      value = FALSE)
                      )
-                   )
-                     
+                   ),
+                   downloadButton("download_plot_PDF",
+                                  "Download pdf of figure"),
+                   
+                   downloadButton("download_plot_Tiff",
+                                  "Download tiff of figure")
                    
                  ),
                  
                  conditionalPanel(
-                   condition = "input.tabs == 'R-code'",
-                   h4("R-code")
+                   condition = "input.tabs == 'Code'",
+                   h4("R-Code for creating the static and interactive plots")
                  ),
                  
                  conditionalPanel(
                    condition = "input.tabs == 'Help'",
-                   h4("Help")
+                   h4("Help me!")
                  ),
                  
                  conditionalPanel(
                    condition = "input.tabs == 'About'",
-                   h4("About")
+                   h4("About datapie")
                  )
     ),
     
@@ -161,24 +163,17 @@ datapie_shiny <- function( dataset = NA ) {
     mainPanel(width = 6,
               tabsetPanel(
                 type = "tabs",
-                tabPanel("Raw Data",
+                tabPanel("Data",
                          dataTableOutput("out_table"),
                          textOutput("message_text")),
-                tabPanel("Summary Report", 
+                tabPanel("Report", 
                          #dataTableOutput("summary_table"),
                          htmlOutput("report_html")
                 ),
                 tabPanel("Plot",
-                         mainPanel(
-                           downloadButton("download_plot_PDF",
-                                          "Download pdf of figure"),
-                           
-                           downloadButton("download_plot_Tiff",
-                                          "Download tiff of figure"),
-                           plotOutput("out_ggplot"))
-                ),
+                         mainPanel(plotOutput("out_ggplot"))),
                 tabPanel("Interactive Plot", plotlyOutput("out_plotly")),
-                tabPanel("R-code", verbatimTextOutput("out_r_code")),
+                tabPanel("Code", verbatimTextOutput("out_r_code")),
                 tabPanel("Help",
                          p("This is place holder text")),
                 tabPanel("About",
@@ -459,7 +454,7 @@ datapie_shiny <- function( dataset = NA ) {
   ######### GET DATA FROM DOI #########
   #####################################
     
-    #Initialize the output that will be displayed using the "Fetch data..." option
+    #Initialize the output that will be displayed using the "Fetch data from DOI" option
     # values$shiny_data is the object that most downstream functions will want to
     # use
     values <- reactiveValues(shiny_data = NULL)
@@ -515,7 +510,7 @@ datapie_shiny <- function( dataset = NA ) {
     }
       )
     
-    #Update the values after the "Fetch data" button is pressed and the list_shiny
+    #Update the values after the "Fetch data from DOI" button is pressed and the list_shiny
     # code is run.
     observeEvent(input$fetch_button, {
       #populate the object
@@ -531,8 +526,8 @@ datapie_shiny <- function( dataset = NA ) {
       updateSelectInput(
         session,
         "repo_file",
-        choices = c("No file selected", file_names),
-        selected = 'No file selected')
+        choices = c("No object selected", file_names),
+        selected = 'No object selected')
     })
     
     ################################################
@@ -618,7 +613,7 @@ datapie_shiny <- function( dataset = NA ) {
         } else if (input$data_input == 2) {
           
           if (is.null(list_shiny()[[input$repo_file]])) {
-            return("In order to generate a report, please select a data table in this data package DOI from the drop-down menu in the Raw Data tab.")
+            return("In order to generate a report, please select a data table in this data package DOI from the drop-down menu in the Data tab.")
           } else {
             
           report_filename <- paste0("report_", list_shiny()[[input$repo_file]][["summary_metadata"]][1, 2], ".html")
@@ -987,7 +982,7 @@ datapie_shiny <- function( dataset = NA ) {
                  "input\\$leg_ttl" = as.character(input$leg_ttl),
                  "input\\$pos_leg" = as.character(input$pos_leg))
         )
-        # Creates well-formatted R-code for output
+        # Creates well-formatted Code for output
         p <- str_replace_all(p, ",\n    \\)", "\n  \\)")
   
         p
@@ -1088,15 +1083,15 @@ datapie_shiny <- function( dataset = NA ) {
             "library(\"ggplot2\")\n\n",
             "# The code below will download data from a DOI to a temporary\n",
             "# directory on your computer. The DOI in the code below is\n",
-            "# the DOI you entered in the 'Raw Data' tab.\n",
+            "# the DOI you entered in the 'Data' tab.\n",
             "datapie::data_package_download(data.pkg.doi = '",
             input$doi,
             "')\n\n",
             "# The code below will save the data from the the DOI you\n",
-            "# entered in the 'Raw Data' tab to your current R session.\n",
+            "# entered in the 'Data' tab to your current R session.\n",
             "df_list <- datapie::data_package_read()\n\n",
             "# The code below will create a variable df to hold the data\n",
-            "# file you selected in the 'Raw Data' tab.\n",
+            "# file you selected in the 'Data' tab.\n",
             "df <- df_list$",
             input$repo_file,
             "$data\n\n",
@@ -1122,7 +1117,7 @@ datapie_shiny <- function( dataset = NA ) {
         
         # uploaded data r-code
         else {
-          paste("We do not support R-code generation from uploaded\n",
+          paste("We do not support code generation from uploaded\n",
                 "data at this time.")
           }
         })
@@ -1155,6 +1150,36 @@ datapie_shiny <- function( dataset = NA ) {
         },
         contentType = "application/tiff" # MIME type of the image
       )
+    # FIXME: Download interactive plots. These objects need to be conditionally
+    # linked to actions occuring on the interactive plot tab. This could be 
+    # done by refactoring the left pannel in two separate conditions rather
+    # than the combined approach currently used.
+    #
+    # output$download_interactive_plot_PDF <- downloadHandler(
+    #   filename <- function() {
+    #     paste("Figure_ggplotlyGUI_", Sys.time(), ".pdf", sep = "")
+    #   },
+    #   content <- function(file) {
+    #     df <- df_shiny()
+    #     p <- eval(parse(text = string_code()))
+    #     ggsave(file, p, width = width_download(),
+    #            height = height_download(), units = "cm")
+    #   },
+    #   contentType = "application/pdf" # MIME type of the image
+    # )
+    # output$download_interactive_plot_Tiff <- downloadHandler(
+    #   filename <- function() {
+    #     paste("Figure_ggplotlyGUI_", Sys.time(), ".tiff", sep = "")
+    #   },
+    #   content <- function(file) {
+    #     df <- df_shiny()
+    #     p <- eval(parse(text = string_code()))
+    #     ggsave(file, p, width = width_download(),
+    #            height = height_download(), units = "cm")
+    #   },
+    #   contentType = "application/tiff" # MIME type of the image
+    # )
+    
      output$downloadData <- downloadHandler(
        filename = function() {
          paste('data-', Sys.Date(), '.csv', sep='')
@@ -1179,7 +1204,7 @@ datapie_shiny <- function( dataset = NA ) {
        df1 <-df[[input$x_var]]
        
        if (class(df1)[1]=="numeric") {
-         sliderInput("range", "Range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
+         sliderInput("range", "X-range of interest:", min = min(df1), max = max(df1), value = c(min(df1),max(df1)))
        } else {
          h5("No scale bar for nonnumerical variable")
        }
