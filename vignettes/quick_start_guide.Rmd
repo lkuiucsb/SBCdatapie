@@ -8,57 +8,61 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+You have come to the right place! Here, we go over what you need to know to process your data and visualize a given dataset. The information herein is organized according to the tabs on this data viewer: “Data”, “Report”, “Plot”, “Interactive Plot”, “Code”, "About".
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+If you do not find the answer you are looking for on this page, please visit the “About” tab and refer to the package/viewer contacts.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+### Data:
 
-## Vignette Info
+Data loading options:
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+* Use sample data: Sample data automatically loaded when `datapie` opens.
+* Fetch data from DOI: The Digital Object Identifier (DOI) of any data package available in the [DataONE search portal](https://search.dataone.org/data), well almost. Only tables are currently supported. Other data types will be supported in the future.
+* Upload data: Upload a file from your computer. (Coming soon!)
 
-## Styles
+How it works:
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+On the left side of the application are three options:
+“Load sample data”, “Fetch data from DOI”, or “Upload text file”.
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+Load sample data - allows a user to download the example dataset provided.
 
-## Figures
+Fetch Data from DOI - a user enters a given DOI (Digital object identifier) and clicks “Fetch Data”.
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+Upload text file - by clicking “Browse” one can find and upload one of five file types: text (csv), Excel, SPSS, Strata, or SAS. Then select the delimiter (how the data is formatted within that file) based upon four options: Semicolon, Tab, Comma, or Space. Select “Submit datafile” and the data file will appear on the right. If your uploaded datafile does not appear the way you wish, you may need to create a copy of the file and edit headers or delete rows in the top of the document that may contain study information, of which is important, however this application is not designed to know how many rows to skip in any one dataset. The columns at the top of the page are from the top row of the document uploaded.
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
+One can expand or decrease the amount of rows shown on a given page with the options of 10, 25, 50 and 100.
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+Summary Report:
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+Based upon the data uploaded, click “Generate report”. On the right side of the page a summary report of the provided data will be appear.
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+The summary report will display a brief snippet of a given data table within the data package. This report provides general table-level information such as number of observations and NA’s per variable, min, max, mean, 1st quartile and 3rd quartiles for numeric variables and number of levels and distribution of levels for categorical variables. REVIEW TO MAKE SURE CORRECT… This report is limited to XXXXX variables.
 
-## More Examples
+Please note some reports can take some time to be generated. The web interface will indicate the progression of the generation of the report. - IS THIS CORRECT?
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+The processing for this report identifies several different formats of geographic coordinates and several different formats of dates/times. Please note that not all formats will be recognized.
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
+If you are satisfied with the generated report, click “Download report (HTML)”. This HTML can be saved or printed to PDF. Images within the HTML can saved individually by the user.
 
-Also a quote using `>`:
+Plot:
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+This portion of the application allows the user to create and edit plots in an easy to use format with the option to save the plot created.
+
+In the central portion of the page, a static plot is generated. On the left side of the page, the user can select the type of plot (boxplot, histogram, scatter) and the x and y variables.
+
+Based upon what plot is selected, the user can choose between a variety of options. EXPLAIN OPTIONS IN MORE DETAIL…..
+
+On the right side of the page the user is given the option to change the aesthetics of the plot. Tabs shown are: “Text”, “Theme”, “Legend”, and “Size”. Here the labels on the graph’s axes can be changed, a title may be added, font sizes can be adjusted, text can be rotated, colors selected, gridlines removed, legend edited, and the size of chart adjusted.
+
+The user is given the option to download a pdf or tiff file format of the figure.
+
+Interactive Plot:
+
+The interactive plot gives the user the same options as the plot, however is different in that….. XXXXXXXXXXXXXXX
+
+Please note datasets with greater than 100,000 points will take longer to plot and should be avoided by users. We recommend dividing up your datasets if this is the case.
+
+R-code:
+
+The R-code is enclosed for the purpose of XXXXXXXXXXXXXXXXXXXX
