@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Substitudes missing codes with NAs.
-This function performs column-wise substitution of NAs for missing values codes, if specified in attribute metadata. — use_missing_code • dummyPackageName</title>
+<title>Match data and metadata attribute names.
+This function matches indices of column names in the data and attributeName's specified in metadata. — match_names • dummyPackageName</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,11 +31,11 @@ This function performs column-wise substitution of NAs for missing values codes,
 
 
 
-<meta property="og:title" content="Substitudes missing codes with NAs.
-This function performs column-wise substitution of NAs for missing values codes, if specified in attribute metadata. — use_missing_code" />
+<meta property="og:title" content="Match data and metadata attribute names.
+This function matches indices of column names in the data and attributeName's specified in metadata. — match_names" />
 
-<meta property="og:description" content="Substitudes missing codes with NAs.
-This function performs column-wise substitution of NAs for missing values codes, if specified in attribute metadata." />
+<meta property="og:description" content="Match data and metadata attribute names.
+This function matches indices of column names in the data and attributeName's specified in metadata." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -117,20 +117,20 @@ This function performs column-wise substitution of NAs for missing values codes,
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Substitudes missing codes with NAs.
-This function performs column-wise substitution of NAs for missing values codes, if specified in attribute metadata.</h1>
+    <h1>Match data and metadata attribute names.
+This function matches indices of column names in the data and attributeName's specified in metadata.</h1>
     <small class="dont-index">Source: <a href='https://github.com/IMCR-Hackathon/datapie/blob/master/R/use_missing_code.R'><code>R/use_missing_code.R</code></a></small>
-    <div class="hidden name"><code>use_missing_code.Rd</code></div>
+    <div class="hidden name"><code>match_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Substitudes missing codes with NAs.
-This function performs column-wise substitution of NAs for missing values codes, if specified in attribute metadata.</p>
+    <p>Match data and metadata attribute names.
+This function matches indices of column names in the data and attributeName's specified in metadata.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>use_missing_code</span>(
+    <pre class="usage"><span class='fu'>match_names</span>(
     <span class='no'>entity_list</span>
     )</pre>
     
@@ -145,7 +145,7 @@ This function performs column-wise substitution of NAs for missing values codes,
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>(list) If attribute metadata is present and missing codes are specified: a list object but with NAs substituted for missing codes. Otherwise, a list object identical to input.</p>
+    <p>(vector) A numeric vector with row indices in attribute metadata to match column indices in data.</p>
     
 
   </div>

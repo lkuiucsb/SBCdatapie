@@ -4,5 +4,6 @@ pkgdown_sha: ~
 articles:
   interactive_report: interactive_report.html
   overview: overview.html
+  quick_start_guide: quick_start_guide.html
   static_report: static_report.html
 
