@@ -4,12 +4,12 @@
 \alias{classify_xy}
 \title{Detect spatial information in data columns}
 \usage{
-classify_xy(list, x_or_y)
+classify_xy(list, dim)
 }
 \arguments{
-\item{list}{A metajam list output for a single data entity}
+\item{list}{(list) A metajam list output for a single data entity.}
 
-\item{x_or_y}{"x" or "y", dimension to look for}
+\item{dim}{(character) "x" or "y", dimension to look for.}
 }
 \value{
 A logical vector

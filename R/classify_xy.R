@@ -1,20 +1,27 @@
 #'
 #' Detect spatial information in data columns
 #'
-#' @param list A metajam list output for a single data entity
-#' @param x_or_y "x" or "y", dimension to look for
+#' @param list (list) A metajam list output for a single data entity.
+#' @param dim (character) "x" or "y", dimension to look for.
 #'
 #' @return A logical vector
 #'
 
-classify_xy <- function(list, x_or_y) {
+classify_xy <- function(list, dim) {
   
   # set up conditions depending on whether we are looking for lat or lon
   
-  if (x_or_y == "x") {
-    name_matches <- paste(c("(lon){1,2}", "(lng){1,2}", "(^x){1,2}", "(x$){1,2}"), collapse = "|")
-  } else if (x_or_y == "y") {
-    name_matches <- paste(c("(lat){1,2}", "(^y){1,2}", "(y$){1,2}"), collapse = "|")
+  if (dim == "x") {
+    name_matches <-
+      paste(c("(lon){1,2}", "(lng){1,2}", "(^x){1,2}", "(x$){1,2}"),
+            collapse = "|")
+    def_matches <-
+      paste(c("longitude", "coord", "wgs", "nad83", "utm"), collapse = "|")
+  } else if (dim == "y") {
+    name_matches <-
+      paste(c("(lat){1,2}", "(^y){1,2}", "(y$){1,2}"), collapse = "|")
+    def_matches <-
+      paste(c("latitude", "coord", "wgs", "nad83", "utm"), collapse = "|")
   } else {
     stop("Please specify either x or y as criteria to classify columns.")
   }
@@ -27,15 +34,19 @@ classify_xy <- function(list, x_or_y) {
       paste(c("int", "ord", "rat"), collapse = "|")
     
     use_metadata <- function(attr_row) {
-      
       # defining condition layers
       name_cond <-
         grepl(name_matches, c(attr_row[["attributeName"]]), ignore.case = T)
+      def_cond <-
+        grepl(def_matches, c(attr_row[["attributeDefinition"]]), ignore.case = T)
       scale_cond <-
         grepl(scale_matches,
               c(attr_row[["measurementScale"]]), ignore.case = T)
       unit_cond <-
         grepl(unit_matches, c(attr_row[["unit"]]), ignore.case = T)
+      
+      # ---
+      # nested conditions
       
       if (scale_cond) {
         if (name_cond) {
@@ -62,11 +73,11 @@ classify_xy <- function(list, x_or_y) {
       range_cond_y <- min(column) >= -90 & max(column) <= 90
       
       if (name_cond & type_cond) {
-        if (x_or_y == "x") {
+        if (dim == "x") {
           if (range_cond_x) {
             return(T)
           }
-        } else if (x_or_y == "y") {
+        } else if (dim == "y") {
           if (range_cond_y) {
             return(T)
           }
