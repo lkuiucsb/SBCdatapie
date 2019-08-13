@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Report a bug you found with datapie
 title: ''
 labels: ''
 assignees: ''
@@ -12,15 +12,16 @@ If applicable, paste in the error message from the GUI and the R console.
 
 **To Reproduce**
 _How did you load the function(s)?_
-[ ] via `devtools::load_all()`
-[ ] via installing `datapie` and calling the function
-[ ] some other way, please describe
+- [ ] via `devtools::load_all()`
+- [ ] via installing `datapie` and calling the function
+- [ ] some other way, please describe: 
 
 _What DOI and data object did you encounter the bug with?_
 DOI:
 Data object:
 
 **Expected behavior**
+What did you expect to happen instead of the bug?
 
 **Screenshots**
 If applicable.
