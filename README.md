@@ -22,12 +22,15 @@ This is not intented to replace a full analysis in R or comparble statistical pa
 
 Access to data packages on DataOne member notes is provided through the package [metajam](https://github.com/NCEAS/metajam).
 
-## Install
+## Install and run
 
 ```
-# Use the development branch for the time being
+# Install from the development branch for the time being
 remotes::install_github("IMCR-Hackathon/datapie", ref = "development")
 library(datapie)
+
+# Run datapie
+datapie_shiny()
 ```
 
 ## Usage
