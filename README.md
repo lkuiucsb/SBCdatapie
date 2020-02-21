@@ -25,8 +25,9 @@ Access to data packages on DataOne member notes is provided through the package 
 ## Install
 
 ```
-remotes::install_github('IMCR-Hackathon/datapie')
-
+# Use the development branch for the time being
+remotes::install_github("IMCR-Hackathon/datapie", ref = "development")
+library(datapie)
 ```
 
 ## Usage
